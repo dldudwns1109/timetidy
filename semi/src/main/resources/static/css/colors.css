@@ -1,0 +1,84 @@
+/* 배경 색 */
+.brand-dark {
+  background-color: #0582ca;
+}
+.brand-medium {
+  background-color: #00a6fb;
+}
+.brand-light {
+  background-color: #e3f2fd;
+}
+
+.light-dark {
+  background-color: #f2f2f2;
+}
+.light {
+  background-color: #ffffff;
+}
+
+.netural {
+  background-color: #e0e0e0;
+}
+.negative {
+  background-color: #c1121f;
+}
+.positive {
+  background-color: #38b000;
+}
+
+/* 폰트 색 */
+.brand-dark-font {
+  color: #0582ca;
+}
+.brand-medium-font {
+  color: #00a6fb;
+}
+.brand-light-font {
+  color: #e3f2fd;
+}
+
+.light-dark-font {
+  color: #f2f2f2;
+}
+.light-font {
+  color: #ffffff;
+}
+
+.netural-font {
+  color: #e0e0e0;
+}
+.btn-negative {
+  color: #c1121f;
+}
+.btn-positive {
+  color: #38b000;
+}
+
+.title-font-color {
+  color: #111111;
+}
+.subtitle-font-color {
+  color: #222222;
+}
+.text-font-color {
+  color: #333333;
+}
+.text2-font-color {
+  color: #555555;
+}
+.subtext-font-color {
+  color: #777777;
+}
+.subtext2-font-color {
+  color: #f7f7f7;
+}
+
+/* 라인 색 */
+.line-base {
+  border-color: #d3d3d3;
+}
+
+/* 투명 색 */
+.opacity-40 {
+  background-color: #00000066;
+}
