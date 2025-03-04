@@ -50,11 +50,7 @@
         <div>
           <a href="#function" class="text-16 px-14 py-9">기능</a>
           <span class="line-base border-05 h-22 mx-8"></span>
-          <button
-            class="nav-btn brand-dark border-none outline-none px-14 py-9 ml-14 round-6"
-          >
-            <a href="/login" class="light-font text-16">로그인</a>
-          </button>
+          <a href="/login" class="nav-btn brand-dark border-none outline-none px-14 py-9 ml-14 round-6 light-font text-16">로그인</a>
         </div>
       </div>
     </header>
@@ -67,11 +63,7 @@
 
     <div class="flex flex-col items-center w-400 mx-auto mt-60">
       <img src="https://dummyimage.com/400x330/dddddd/ffffff" />
-      <button
-        class="nav-btn brand-dark border-none outline-none px-14 py-9 mx-auto mt-40 round-6"
-      >
-        <a href="/login" class="light-font title-18">로그인</a>
-      </button>
+      <a href="/login" class="nav-btn brand-dark border-none outline-none px-14 py-9 mx-auto mt-40 round-6 light-font title-18">로그인</a>
     </div>
 
     <img
