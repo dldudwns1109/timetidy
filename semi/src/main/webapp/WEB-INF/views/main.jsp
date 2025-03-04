@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -45,12 +46,19 @@
   <body>
     <header class="w-100p left-0 top-0 fixed light">
       <div class="flex px-120 py-15 flex justify-between items-center">
-        <img src="https://dummyimage.com/165x44/dddddd/ffffff" />
+        <img src="img/logo.png" width="165" height="44" />
 
         <div>
           <a href="#function" class="text-16 px-14 py-9">기능</a>
           <span class="line-base border-05 h-22 mx-8"></span>
-          <a href="/login" class="nav-btn brand-dark border-none outline-none px-14 py-9 ml-14 round-6 light-font text-16">로그인</a>
+          <c:choose>
+        	<c:when test="${sessionScope.email == null || sessionScope.email == ''}">
+	          <a href="/login" class="nav-btn brand-dark border-none outline-none px-14 py-9 ml-14 round-6 light-font text-16">로그인</a>
+	        </c:when>
+	          <c:otherwise>
+	          <a href="/schedule" class="nav-btn brand-dark border-none outline-none px-14 py-9 ml-14 round-6 light-font text-16">일정 열기</a>
+	        </c:otherwise>
+          </c:choose>
         </div>
       </div>
     </header>
@@ -62,27 +70,36 @@
     </p>
 
     <div class="flex flex-col items-center w-400 mx-auto mt-60">
-      <img src="https://dummyimage.com/400x330/dddddd/ffffff" />
-      <a href="/login" class="nav-btn brand-dark border-none outline-none px-14 py-9 mx-auto mt-40 round-6 light-font title-18">로그인</a>
+      <img src="img/main-banner.svg" width="400" height="330" />
+      <c:choose>
+       	<c:when test="${sessionScope.email == null || sessionScope.email == ''}">
+          <a href="/login" 
+          	 class="nav-btn brand-dark border-none outline-none px-14 py-9 mx-auto mt-40 round-6 light-font title-18">로그인</a>
+        </c:when>
+        <c:otherwise>
+          <a href="/schedule" 
+             class="nav-btn brand-dark border-none outline-none px-14 py-9 mx-auto mt-40 round-6 light-font title-18">일정 열기</a>
+        </c:otherwise>
+       </c:choose>
     </div>
 
     <img
-      src="https://dummyimage.com/1440x320/dddddd/ffffff"
-      class="w-100p mt-60"
+      src="img/wave.svg"
+      class="w-100p mt-32"
     />
 
-    <div class="relative">
+    <div class="relative overflow-hidden">
       <div class="carousel-inner anim flex w-500p">
         <div class="carousel-item flex justify-around items-center w-100p">
           <div class="flex flex-col">
-            <h1 class="title-48 title-font-color text-center mt-80">
+            <h1 class="title-48 title-font-color text-center mt-16">
               누가 일정에 참여하나요?
             </h1>
             <p class="title-20 text2-font-color text-center mt-16">
               친구를 초대하여 일정을 공유하거나 공유받으세요!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="https://dummyimage.com/400x330/dddddd/ffffff" />
+              <img src="img/banner1.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -97,7 +114,7 @@
               있습니다!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="https://dummyimage.com/400x330/dddddd/ffffff" />
+              <img src="img/banner2.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -112,7 +129,7 @@
               찾아볼 수 있습니다!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="https://dummyimage.com/400x330/dddddd/ffffff" />
+              <img src="img/banner3.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -127,7 +144,7 @@
               계획하기 쉬워집니다!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="https://dummyimage.com/400x330/dddddd/ffffff" />
+              <img src="img/banner4.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -142,7 +159,7 @@
               쉽습니다!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="https://dummyimage.com/400x330/dddddd/ffffff" />
+              <img src="img/banner5.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -163,9 +180,9 @@
       </div>
     </div>
 
-    <footer class="pb-26">
-      <div class="h-44 px-120 flex align-end">
-        <img src="https://dummyimage.com/165x44/dddddd/ffffff" />
+    <footer class="footer pb-26">
+      <div class="h-44 px-120 flex items-end">
+        <img src="img/logo.png" width="165" height="44" />
         <span class="text-14 title-font-color ml-14"
           >Copyright @ TimeTidy ALL RIGHTS RESERVED.</span
         >
