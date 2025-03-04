@@ -34,12 +34,11 @@
         <p class="title-20 subtext-font-color text-center mt-32">
           시작하려면 로그인하세요
         </p>
-        <button
-          class="flex justify-center items-center text-16 outline-none line-base border-1 light w-500 mt-40 py-9 title-font-color round-6"
-        >
-          <img src="https://dummyimage.com/18x18/dddddd/ffffff" class="mr-16" />
-          구글로 계속하기
-        </button>
+         <a href="${pageContext.request.contextPath}/oauth2/authorization/google"
+		   class="flex justify-center items-center text-16 outline-none line-base border-1 light w-500 py-9 mt-40 title-font-color round-6">
+		    <img src="https://dummyimage.com/18x18/dddddd/ffffff" class="mr-16" />
+		    구글로 계속하기
+		</a>
       </div>
       <img src="https://dummyimage.com/870x520/dddddd/ffffff" />
     </div>
