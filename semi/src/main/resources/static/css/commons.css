@@ -10,6 +10,7 @@ p {
 a {
   text-decoration: none;
   color: #111111;
+  display: inline-block;
 }
 
 /* overflow */
@@ -212,4 +213,11 @@ a {
 }
 .round-full {
   border-radius: 999px;
+}
+
+.footer {
+  background-image: url('../img/wave-s.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
 }
