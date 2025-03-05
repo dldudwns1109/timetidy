@@ -18,12 +18,18 @@ public class MemberDao {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	public int sequence() {
+		String sql = "select member_seq.nextval from member";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
 	public void insert(MemberDto memberDto) {
 		String sql = "insert into member ("
 				+ "member_id, member_name, "
 				+ "member_profile, member_email"
-				+ ") values(member_seq.nextval, ?, ?, ?)";
+				+ ") values(?, ?, ?, ?)";
 		Object[] data = {
+				memberDto.getMemberId(),
 				memberDto.getMemberName(),
 				memberDto.getMemberProfile(),
 				memberDto.getMemberEmail()

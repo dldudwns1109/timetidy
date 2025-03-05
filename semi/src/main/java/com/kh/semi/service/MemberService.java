@@ -12,11 +12,16 @@ public class MemberService {
 	@Autowired
 	private MemberDao memberDao;
 	
-	public void addMember(MemberDto memberDto) {
+	public int addMember(MemberDto memberDto) {
 		MemberDto findMember = memberDao.checkMember(
 				memberDto.getMemberEmail());
     	if (findMember == null) {
-    		memberDao.insert(memberDto);            		
+    		int memberId = memberDao.sequence();
+    		memberDto.setMemberId(memberId);
+    		memberDao.insert(memberDto);
+    		return memberId;
     	}
+    	
+    	return findMember.getMemberId();
 	}
 }
