@@ -12,6 +12,9 @@ a {
   color: #111111;
   display: inline-block;
 }
+button {
+  cursor: pointer;
+}
 
 /* overflow */
 .overflow-hidden {
@@ -41,6 +44,9 @@ a {
 .flex-col {
   flex-direction: column;
 }
+.flex-1 {
+  flex: 1;
+}
 .justify-center {
   justify-content: center;
 }
@@ -49,6 +55,9 @@ a {
 }
 .justify-around {
   justify-content: space-around;
+}
+.items-start {
+  align-items: start;
 }
 .items-center {
   align-items: center;
@@ -90,9 +99,22 @@ a {
   position: relative;
 }
 
+.none {
+  display: none;
+}
+
 /* size */
+.w-24 {
+  width: 24px;
+}
 .w-50 {
   width: 50px;
+}
+.w-80 {
+  width: 80px;
+}
+.w-260 {
+  width: 260px;
 }
 .w-400 {
   width: 400px;
@@ -112,8 +134,14 @@ a {
 .w-100v {
   width: 100vw;
 }
+.h-24 {
+  height: 24px;
+}
 .h-50 {
   height: 50px;
+}
+.h-80 {
+  height: 80px;
 }
 .h-22 {
   height: 22px;
@@ -134,12 +162,18 @@ a {
 }
 
 .anim {
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 
 /* margin */
 .ml-14 {
   margin-left: 14px;
+}
+.mr-8 {
+  margin-right: 8px;
+}
+.mr-12 {
+  margin-right: 12px;
 }
 .mr-16 {
   margin-right: 16px;
@@ -152,8 +186,14 @@ a {
   margin-left: auto;
   margin-right: auto;
 }
+.mt-6 {
+  margin-top: 6px;
+}
 .mt-16 {
   margin-top: 16px;
+}
+.mt-24 {
+  margin-top: 24px;
 }
 .mt-32 {
   margin-top: 32px;
@@ -173,15 +213,29 @@ a {
 .mt-154 {
   margin-top: 154px;
 }
+.mt-248 {
+  margin-top: 248px;
+}
 .my-80 {
   margin-top: 80px;
   margin-bottom: 80px;
 }
 
 /* padding */
+.p-0 {
+  padding: 0;
+}
+.px-8 {
+  padding-left: 8px;
+  padding-right: 8px;
+}
 .px-14 {
   padding-left: 14px;
   padding-right: 14px;
+}
+.px-16 {
+  padding-left: 16px;
+  padding-right: 16px;
 }
 .px-25 {
   padding-left: 25px;
@@ -191,12 +245,26 @@ a {
   padding-left: 120px;
   padding-right: 120px;
 }
+.pt-8 {
+  padding-top: 8px;
+}
+.pt-12 {
+  padding-top: 12px;
+}
 .pb-26 {
   padding-bottom: 26px;
+}
+.py-8 {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 .py-9 {
   padding-top: 9px;
   padding-bottom: 9px;
+}
+.py-11 {
+  padding-top: 11px;
+  padding-bottom: 11px;
 }
 .py-15 {
   padding-top: 15px;
@@ -215,9 +283,22 @@ a {
   border-radius: 999px;
 }
 
+.trans-color {
+  background-color: transparent;
+}
+
 .footer {
-  background-image: url('../img/wave-s.svg');
+  background-image: url("../img/wave-s.svg");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
+}
+
+.sidebar .plus-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.sidebar button:hover,
+.sidebar .date-title-tab:hover {
+  background-color: #e0e0e0;
 }
