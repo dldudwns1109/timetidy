@@ -168,14 +168,14 @@
         class="absolute top-50 left-50 trans-center w-80p flex justify-between"
       >
         <button
-          class="prev-btn border-none outline-none opacity-40 light-font round-full w-50 h-50"
+          class="prev-btn border-none outline-none opacity-40 light-font flex justify-center items-center round-full w-80 h-80"
         >
-          &lt;
+          <img src="img/left-arrow.svg">
         </button>
         <button
-          class="next-btn border-none outline-none opacity-40 light-font round-full w-50 h-50"
+          class="next-btn border-none outline-none opacity-40 light-font flex justify-center items-center round-full w-80 h-80"
         >
-          &gt;
+          <img src="img/right-arrow.svg">
         </button>
       </div>
     </div>
