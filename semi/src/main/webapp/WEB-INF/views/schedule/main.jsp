@@ -26,10 +26,12 @@
             $(".sidebar").css("transform", "translateX(-236px)");
             $(".content").css("transform", "translateX(-236px)");
             $(".sidebar").removeClass("light-dark");
+            $(".tab").hide();
           } else {
             $(".sidebar").css("transform", "translateX(0)");
             $(".content").css("transform", "translateX(0)");
             $(".sidebar").addClass("light-dark");
+            $(".tab").show();
           }
           isOpen = !isOpen;
         });
@@ -76,7 +78,7 @@
             </button>
           </div>
         </div>
-        <div class="pt-12">
+        <div class="tab pt-12">
           <button
             class="trans-color border-none outline-none flex items-center w-100p px-8 py-9 round-6"
           >
@@ -96,13 +98,15 @@
             <span class="title-font-color text-16">달력</span>
           </button>
         </div>
-        <div class="date-title-tab flex justify-between items-center px-8 py-11 mt-24 round-6">
-          <span class="text-font-color text-14">일정 관리</span>
-          <button
-            class="plus-btn none trans-color border-none outline-none w-24 h-24 p-0 round-6"
-          >
-            <img src="img/plus.svg" class="w-100p h-100p" />
-          </button>
+        <div class="tab">
+        	<div class="date-title-tab flex justify-between items-center px-8 py-11 mt-24 round-6">
+	        <span class="text-font-color text-14">일정 관리</span>
+	        <button
+	          class="plus-btn none trans-color border-none outline-none w-24 h-24 p-0 round-6"
+	        >
+	          <img src="img/plus.svg" class="w-100p h-100p" />
+	        </button>
+	       </div>
         </div>
       </aside>
       <div class="content anim flex flex-1 justify-center w-100p h-100v">

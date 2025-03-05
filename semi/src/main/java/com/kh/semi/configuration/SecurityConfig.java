@@ -41,9 +41,10 @@ public class SecurityConfig {
             	memberDto.setMemberName(name);
             	memberDto.setMemberProfile(profile);
             	memberDto.setMemberEmail(email);
-            	memberService.addMember(memberDto);
+            	int id = memberService.addMember(memberDto);
             	
             	HttpSession session = request.getSession();
+            	session.setAttribute("id", id);
             	session.setAttribute("email", email);
             	
             	response.sendRedirect("/schedule");
