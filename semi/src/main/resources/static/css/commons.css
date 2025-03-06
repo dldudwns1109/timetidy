@@ -321,7 +321,14 @@ button {
   background-color: #f1f1f1;
 }
 
-.sidebar button:hover,
+.sidebar .date-delete-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.sidebar .profile-btn:hover,
+.sidebar .bell-btn:hover,
+.sidebar .sidebar-btn:hover,
+.sidebar .title-tab button:hover,
 .sidebar .date-title-tab:hover {
   background-color: #e0e0e0;
 }
