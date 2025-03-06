@@ -130,6 +130,9 @@ button {
 .w-500 {
   width: 500px;
 }
+.w-80 {
+  width: 80px;
+}
 .w-80p {
   width: 80%;
 }
@@ -153,6 +156,9 @@ button {
 }
 .h-44 {
   height: 44px;
+}
+.h-80 {
+  height: 80px;
 }
 .h-100p {
   height: 100%;

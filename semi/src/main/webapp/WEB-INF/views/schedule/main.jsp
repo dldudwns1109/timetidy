@@ -5,6 +5,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="_csrf_header" content="${_csrf.headerName}" />
+	<meta name="_csrf" content="${_csrf.token}" />
     <title>timetidy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,14 +55,67 @@
         $(".profile-btn").click(function () {
           $(".account-modal").removeClass("none").addClass("flex");
         });
-
         $(".modal-close-btn").click(function () {
           $(".account-modal").removeClass("flex").addClass("none");
         });
-
         $(window).click(function (e) {
           if ($(e.target).is(".account-modal")) {
             $(".account-modal").removeClass("flex").addClass("none");
+          }
+        });
+
+        var nameValid = true;
+        $("[name=memberName]").blur(function () {
+          if (/^[가-힣][가-힣0-9]{1,9}$/.test($(this).val())) {
+            nameValid = true;
+            $(".err-msg").hide();
+          } else {
+            nameValid = false;
+            $(".err-msg").show();
+          }
+        });
+        var header = $("meta[name='_csrf_header']").attr('content');
+        var token = $("meta[name='_csrf']").attr('content');
+        $(".logout-btn").click(function () {
+          $.ajax({
+            url: "/rest/member/logout",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
+            method: "GET",
+            success: function (res) {
+              location.replace("https://accounts.google.com/logout");
+              location.replace("/loading");
+            },
+          });
+        });
+        $(".member-delete-btn").click(function () {
+            $.ajax({
+              url: "/rest/member/delete",
+              beforeSend: function(xhr){
+                  xhr.setRequestHeader(header, token);
+              },
+              method: "GET",
+              success: function (res) {
+                location.replace("https://accounts.google.com/logout");
+                location.replace("/loading");
+              },
+            });
+          });
+        $(".save-btn").click(function () {
+          if (nameValid) {
+            $.ajax({
+              url: "/rest/member/edit",
+              beforeSend: function(xhr){
+                  xhr.setRequestHeader(header, token);
+              },
+              method: "POST",
+              data: { memberName: $("[name=memberName]").val() },
+              success: function (res) {
+            	$(".profile-membername").text(res);
+                $(".account-modal").removeClass("flex").addClass("none");
+              },
+            });
           }
         });
       });
@@ -79,7 +134,7 @@
               width="26"
               height="26"
             />
-            <span class="title-font-color text-16">${name}</span>
+            <span class="profile-membername title-font-color text-16">${name}</span>
           </button>
           <div class="flex items-center">
             <button
@@ -157,28 +212,21 @@
                 <span class="subtitle-font-color text-14">이름</span>
                 <input
                   type="text"
+                  name="memberName"
                   value="${name}"
                   class="w-204 border-1 line-base outline-none mt-4 px-14 py-9 text-14 round-6"
                 />
+                <span class="err-msg none btn-negative text-12"
+                  >첫 글자 한글이며 한글 또는 숫자 2 ~ 10자입니다.</span
+                >
               </div>
-            </div>
-          </div>
-          <div class="flex flex-col mt-32">
-            <span class="subtitle-font-color text-14">이메일</span>
-            <span class="subtext-font-color text-12 mt-4">${email}</span>
-            <div class="mt-8">
-              <button
-                class="border-none outline-none px-14 py-9 text-14 subtitle-font-color netural round-6"
-              >
-                이메일 변경
-              </button>
             </div>
           </div>
           <div class="flex flex-col mt-16">
             <span class="subtitle-font-color text-14">로그아웃</span>
             <div class="mt-8">
               <button
-                class="border-none outline-none px-14 py-9 text-14 subtitle-font-color netural round-6"
+                class="logout-btn border-none outline-none px-14 py-9 text-14 subtitle-font-color netural round-6"
               >
                 로그아웃
               </button>
@@ -191,7 +239,7 @@
             >
             <div class="mt-8">
               <button
-                class="border-1 negative-b trans-color outline-none px-14 py-9 text-14 btn-negative round-6"
+                class="member-delete-btn border-1 negative-b trans-color outline-none px-14 py-9 text-14 btn-negative round-6"
               >
                 계정 탈퇴
               </button>
@@ -199,7 +247,7 @@
           </div>
           <div class="flex justify-end mt-32">
             <button
-              class="border-none outline-none brand-dark light-font px-14 py-9 text-14 round-6"
+              class="save-btn border-none outline-none brand-dark light-font px-14 py-9 text-14 round-6"
             >
               저장
             </button>

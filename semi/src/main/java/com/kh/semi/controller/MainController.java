@@ -15,4 +15,9 @@ public class MainController {
 	public String login() {
 		return "/WEB-INF/views/login.jsp";
 	}
+	
+	@GetMapping("/loading")
+	public String loading() {
+		return "/WEB-INF/views/loading.jsp";
+	}
 }

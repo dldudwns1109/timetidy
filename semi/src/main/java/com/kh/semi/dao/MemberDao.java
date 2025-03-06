@@ -37,10 +37,35 @@ public class MemberDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
+	public boolean update(MemberDto memberDto) {
+		String sql = "update member "
+				+ "set member_name = ? "
+				+ "where member_id = ? ";
+		Object[] data = {
+				memberDto.getMemberName(),
+				memberDto.getMemberId()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	public boolean delete(int memberId) {
+		String sql = "delete member where member_id = ?";
+		Object[] data = {memberId};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 	public MemberDto checkMember(String memberEmail) {
 		String sql = "select * from member "
 				+ "where member_email = ?";
 		Object[] data = {memberEmail};
+		List<MemberDto> findMember = jdbcTemplate.query(sql, memberMapper, data);
+		return findMember.isEmpty() ? null : findMember.get(0);
+	}
+	
+	public MemberDto findMember(String memberId) {
+		String sql = "select * from member "
+				+ "where member_id = ?";
+		Object[] data = {memberId};
 		List<MemberDto> findMember = jdbcTemplate.query(sql, memberMapper, data);
 		return findMember.isEmpty() ? null : findMember.get(0);
 	}
