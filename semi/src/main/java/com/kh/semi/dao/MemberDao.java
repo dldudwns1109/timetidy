@@ -19,7 +19,7 @@ public class MemberDao {
 	private MemberMapper memberMapper;
 	
 	public int sequence() {
-		String sql = "select member_seq.nextval from member";
+		String sql = "select member_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
