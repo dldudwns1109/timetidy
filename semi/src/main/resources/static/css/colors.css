@@ -77,6 +77,15 @@
 .line-base {
   border-color: #d3d3d3;
 }
+.netural-b {
+  border-color: #e0e0e0;
+}
+.negative-b {
+  border-color: #c1121f;
+}
+.positive-b {
+  border-color: #38b000;
+}
 
 /* 투명 색 */
 .opacity-40 {

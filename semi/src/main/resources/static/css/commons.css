@@ -22,6 +22,11 @@ button {
 }
 
 /* 보더 */
+.bb-1 {
+  border: 0;
+  border-bottom: 1px;
+  border-style: solid;
+}
 .border-05 {
   border-width: 0.5px;
   border-style: solid;
@@ -55,6 +60,9 @@ button {
 }
 .justify-around {
   justify-content: space-around;
+}
+.justify-end {
+  justify-content: end;
 }
 .items-start {
   align-items: start;
@@ -110,8 +118,8 @@ button {
 .w-50 {
   width: 50px;
 }
-.w-80 {
-  width: 80px;
+.w-204 {
+  width: 204px;
 }
 .w-260 {
   width: 260px;
@@ -139,9 +147,6 @@ button {
 }
 .h-50 {
   height: 50px;
-}
-.h-80 {
-  height: 80px;
 }
 .h-22 {
   height: 22px;
@@ -186,8 +191,17 @@ button {
   margin-left: auto;
   margin-right: auto;
 }
+.mt-4 {
+  margin-top: 4px;
+}
 .mt-6 {
   margin-top: 6px;
+}
+.mt-8 {
+  margin-top: 8px;
+}
+.mt-12 {
+  margin-top: 12px;
 }
 .mt-16 {
   margin-top: 16px;
@@ -224,6 +238,9 @@ button {
 /* padding */
 .p-0 {
   padding: 0;
+}
+.p-32 {
+  padding: 32px;
 }
 .px-8 {
   padding-left: 8px;
@@ -300,5 +317,9 @@ button {
 
 .sidebar button:hover,
 .sidebar .date-title-tab:hover {
+  background-color: #e0e0e0;
+}
+
+.modal-close-btn:hover {
   background-color: #e0e0e0;
 }
