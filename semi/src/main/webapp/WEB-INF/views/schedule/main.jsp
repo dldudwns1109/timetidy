@@ -17,11 +17,28 @@
     <link rel="stylesheet" href="css/commons.css" />
     <link rel="stylesheet" href="css/colors.css" />
     <link rel="stylesheet" href="css/fonts.css" />
+    <script src="js/page.js"></script>
 
     <!-- jQuery cdn -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script type="text/javascript">
+    <script type="module">
+      import { page } from "/js/page.js";
       $(function () {
+    	var header = $("meta[name='_csrf_header']").attr('content');
+        var token = $("meta[name='_csrf']").attr('content');
+    	$.ajax({
+    		url: "/rest/page/list",
+    		beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
+            method: "GET",
+            success: function(res) {
+            	$.each(res, function(idx, val) {
+            		page(val);
+            	});
+            }
+    	});
+    	  
         var isOpen = true;
         $(".sidebar-btn").click(function () {
           if (isOpen) {
@@ -74,8 +91,7 @@
             $(".err-msg").show();
           }
         });
-        var header = $("meta[name='_csrf_header']").attr('content');
-        var token = $("meta[name='_csrf']").attr('content');
+        
         $(".logout-btn").click(function () {
           $.ajax({
             url: "/rest/member/logout",
@@ -127,47 +143,7 @@
             },
             method: "POST",
             success: function (res) {
-              $(".tab")
-                .append(
-                  $("<button>")
-                    .attr("id", "page-id" + res)
-                    .addClass(
-                      "date-tab trans-color border-none outline-none flex justify-between w-100p px-8 py-9 mt-4 brand-light round-6"
-                    )
-                    .append(
-                      $("<div>")
-                        .addClass("flex items-center")
-                        .append(
-                          $("<img>")
-                            .attr("src", "img/doc.svg")
-                            .addClass("w-24 h-24 mr-8")
-                        )
-                        .append(
-                          $("<span>")
-                            .addClass("brand-medium-font text-16")
-                            .text("빈 페이지")
-                        )
-                    )
-                    .append(
-                      $("<button>")
-                        .addClass(
-                          "date-delete-btn none trans-color border-none outline-none w-24 h-24 p-0 round-6"
-                        )
-                        .append(
-                          $("<img>")
-                            .attr("src", "img/trash.svg")
-                            .addClass("w-100p h-100p")
-                        )
-                    )
-                    .hover(
-                      function () {
-                        $(this).children(".date-delete-btn").show();
-                      },
-                      function () {
-                        $(this).children(".date-delete-btn").hide();
-                      }
-                    )
-                );
+              page(res);
             },
           });
         });
