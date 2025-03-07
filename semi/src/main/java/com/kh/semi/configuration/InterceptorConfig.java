@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.kh.semi.interceptor.MemberLoginInterceptor;
+import com.kh.semi.interceptor.PageReadInterceptor;
 
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
@@ -15,11 +16,17 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	@Autowired
 	private MemberLoginInterceptor memberLoginInterceptor;
 	
+	@Autowired
+	private PageReadInterceptor pageReadInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(memberLoginInterceptor)
 				.addPathPatterns(List.of(
 						"/schedule/**"
 				));
+		
+		registry.addInterceptor(pageReadInterceptor)
+				.addPathPatterns("/schedule/{pageId:[0-9]+}");
 	}
 }
