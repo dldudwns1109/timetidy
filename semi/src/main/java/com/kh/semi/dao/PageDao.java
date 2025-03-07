@@ -34,6 +34,16 @@ public class PageDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
+	public boolean updateTitle(PageDto pageDto) {
+		String sql = "update page set page_title = ? "
+				+ "where page_id = ?";
+		Object[] data = {
+				pageDto.getPageTitle(),
+				pageDto.getPageId()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 	public boolean delete(int pageId) {
 		String sql = "delete page where page_id = ?";
 		Object[] data = {pageId};
@@ -46,5 +56,13 @@ public class PageDao {
 				+ "order by page_created_time asc";
 		Object[] data = {memberId};
 		return jdbcTemplate.query(sql, pageMapper, data);
+	}
+	
+	public PageDto detail(int pageId) {
+		String sql = "select * from page "
+				+ "where page_id = ?";
+		Object[] data = {pageId};
+		List<PageDto> list = jdbcTemplate.query(sql, pageMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 }

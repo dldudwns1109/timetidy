@@ -41,8 +41,13 @@ button {
 .border-none {
   border: none;
 }
+
+/* 아웃라인 */
 .outline-none {
   outline: none;
+}
+.outline-brand {
+  outline-color: #00a6fb;
 }
 
 /* flex */
@@ -114,6 +119,10 @@ button {
   display: none;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 /* size */
 .w-24 {
   width: 24px;
@@ -132,6 +141,9 @@ button {
 }
 .w-500 {
   width: 500px;
+}
+.w-620 {
+  width: 620px;
 }
 .w-80 {
   width: 80px;
@@ -180,6 +192,9 @@ button {
 
 .anim {
   transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+.aside-anim {
+  transition: width 0.2s ease-in-out, display 0.3s ease-in-out;
 }
 
 /* margin */
@@ -254,6 +269,12 @@ button {
 .p-0 {
   padding: 0;
 }
+.pl-8 {
+  padding-left: 8px;
+}
+.pr-14 {
+  padding-right: 14px;
+}
 .p-32 {
   padding: 32px;
 }
@@ -289,6 +310,9 @@ button {
 .pb-26 {
   padding-bottom: 26px;
 }
+.pb-64 {
+  padding-bottom: 64px;
+}
 .py-8 {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -308,6 +332,10 @@ button {
 .py-25 {
   padding-top: 25px;
   padding-bottom: 25px;
+}
+.py-64 {
+  padding-top: 64px;
+  padding-bottom: 64px;
 }
 
 /* round */
@@ -346,6 +374,16 @@ button {
   background-color: #e0e0e0;
 }
 
+/* .content::-webkit-scrollbar, */
 .date-page-tab::-webkit-scrollbar {
   display: none;
+}
+
+.job-add-btn:hover {
+  background-color: #00a6fb;
+  color: #ffffff;
+}
+
+.job-add-btn:hover img {
+  filter: invert(30%) sepia(50%) saturate(500%) hue-rotate(180deg);
 }

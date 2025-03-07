@@ -13,9 +13,9 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/commons.css" />
-    <link rel="stylesheet" href="css/colors.css" />
-    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="/css/commons.css" />
+    <link rel="stylesheet" href="/css/colors.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
 
     <!-- jQuery cdn -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -46,7 +46,7 @@
   <body>
     <header class="w-100p left-0 top-0 fixed light">
       <div class="flex px-120 py-15 flex justify-between items-center">
-        <img src="img/logo.png" width="165" height="44" />
+        <img src="/img/logo.png" width="165" height="44" />
 
         <div>
           <a href="#function" class="text-16 px-14 py-9">기능</a>
@@ -70,7 +70,7 @@
     </p>
 
     <div class="flex flex-col items-center w-400 mx-auto mt-60">
-      <img src="img/main-banner.svg" width="400" height="330" />
+      <img src="/img/main-banner.svg" width="400" height="330" />
       <c:choose>
        	<c:when test="${sessionScope.email == null || sessionScope.email == ''}">
           <a href="/login" 
@@ -84,7 +84,7 @@
     </div>
 
     <img
-      src="img/wave.svg"
+      src="/img/wave.svg"
       class="w-100p mt-32"
     />
 
@@ -99,7 +99,7 @@
               친구를 초대하여 일정을 공유하거나 공유받으세요!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="img/banner1.svg" width="400" height="330" />
+              <img src="/img/banner1.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@
               있습니다!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="img/banner2.svg" width="400" height="330" />
+              <img src="/img/banner2.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -129,7 +129,7 @@
               찾아볼 수 있습니다!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="img/banner3.svg" width="400" height="330" />
+              <img src="/img/banner3.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -144,7 +144,7 @@
               계획하기 쉬워집니다!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="img/banner4.svg" width="400" height="330" />
+              <img src="/img/banner4.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -159,7 +159,7 @@
               쉽습니다!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="img/banner5.svg" width="400" height="330" />
+              <img src="/img/banner5.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -170,19 +170,19 @@
         <button
           class="prev-btn border-none outline-none opacity-40 light-font flex justify-center items-center round-full w-80 h-80"
         >
-          <img src="img/left-arrow.svg">
+          <img src="/img/left-arrow.svg">
         </button>
         <button
           class="next-btn border-none outline-none opacity-40 light-font flex justify-center items-center round-full w-80 h-80"
         >
-          <img src="img/right-arrow.svg">
+          <img src="/img/right-arrow.svg">
         </button>
       </div>
     </div>
 
     <footer class="footer pb-26">
       <div class="h-44 px-120 flex items-end">
-        <img src="img/logo.png" width="165" height="44" />
+        <img src="/img/logo.png" width="165" height="44" />
         <span class="text-14 title-font-color ml-14"
           >Copyright @ TimeTidy ALL RIGHTS RESERVED.</span
         >

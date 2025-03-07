@@ -29,6 +29,11 @@ public class MemberService {
     	return findMember.getMemberId();
 	}
 	
+	public MemberDto loadSession(HttpSession session) {
+		String email = (String) session.getAttribute("email");
+		return memberDao.checkMember(email);
+	}
+	
 	public void disconnectSession(HttpSession session) {
 		Enumeration<String> attributeNames = session.getAttributeNames();
 
