@@ -12,12 +12,12 @@ export function page (res) {
 		      .addClass("flex items-center")
 		      .append(
 		        $("<img>")
-		          .attr("src", "img/doc.svg")
+		          .attr("src", "/img/doc.svg")
 		          .addClass("w-24 h-24 mr-8")
 		      )
 		      .append(
 		        $("<span>")
-		          .addClass("brand-medium-font text-16")
+		          .addClass("page-title brand-medium-font text-16")
 		          .text(res.pageTitle)
 		      )
 		  )
@@ -28,9 +28,27 @@ export function page (res) {
 		      )
 		      .append(
 		        $("<img>")
-		          .attr("src", "img/trash.svg")
+		          .attr("src", "/img/trash.svg")
 		          .addClass("w-100p h-100p")
 		      )
+			  .click(function (e) {
+				e.stopPropagation();
+	  			$.ajax({
+	  				url: "/rest/page/delete",
+	  				beforeSend: function(xhr) {
+	  					xhr.setRequestHeader(header, token);
+	  				},
+	  				method: "POST",
+	  				data: { 
+	  					pageId: $(this)
+	  								.closest(".date-tab")
+	  								.data("id") 
+	  				},
+	  				success: function(res) {
+	              		$("[data-id=" + res + "]").remove();
+	  				}
+	  			});
+            })
 		  )
 		  .hover(
 		    function () {
@@ -41,21 +59,8 @@ export function page (res) {
 		    }
 		  )
 		  .click(function () {
-			$.ajax({
-				url: "/rest/page/delete",
-				beforeSend: function(xhr) {
-					xhr.setRequestHeader(header, token);
-				},
-				method: "POST",
-				data: { 
-					pageId: $(this)
-								.closest(".date-tab")
-								.data("id") 
-				},
-				success: function(res) {
-            		$("[data-id=" + res + "]").remove();
-				}
-			});
+            location.replace("/schedule/" + 
+				$(this).closest(".date-tab").data("id"));
           })
 	  );
 }

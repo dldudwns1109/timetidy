@@ -12,9 +12,9 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/commons.css" />
-    <link rel="stylesheet" href="css/colors.css" />
-    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="/css/commons.css" />
+    <link rel="stylesheet" href="/css/colors.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
 
     <!-- jQuery cdn -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="loading flex flex-col justify-center items-center w-100p h-100v">
-      <img src="img/logo.png" width="165" height="44" />
+      <img src="/img/logo.png" width="165" height="44" />
 	  <p class="text-16 title-font-color mt-16">로딩 중...</p>
 	</div>
   </body>
