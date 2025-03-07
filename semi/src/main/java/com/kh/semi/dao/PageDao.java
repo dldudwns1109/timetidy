@@ -1,5 +1,7 @@
 package com.kh.semi.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -30,5 +32,13 @@ public class PageDao {
 				pageDto.getPageMemberId()
 		};
 		jdbcTemplate.update(sql, data);
+	}
+	
+	public List<PageDto> list(int memberId) {
+		String sql = "select * from page "
+				+ "where page_member_id = ? "
+				+ "order by page_created_time asc";
+		Object[] data = {memberId};
+		return jdbcTemplate.query(sql, pageMapper, data);
 	}
 }
