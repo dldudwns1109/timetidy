@@ -34,6 +34,12 @@ public class PageDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
+	public boolean delete(int pageId) {
+		String sql = "delete page where page_id = ?";
+		Object[] data = {pageId};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 	public List<PageDto> list(int memberId) {
 		String sql = "select * from page "
 				+ "where page_member_id = ? "

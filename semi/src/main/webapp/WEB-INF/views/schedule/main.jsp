@@ -209,6 +209,7 @@
               <img src="img/plus.svg" class="w-100p h-100p" />
             </button>
           </div>
+          <div class="date-page-tab overflow-scroll-y h-664"></div>
         </div>
       </aside>
       <div class="content anim flex flex-1 justify-center w-100p h-100v">

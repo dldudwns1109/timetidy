@@ -1,5 +1,7 @@
 export function page (res) {
-	$(".tab").append(
+	var header = $("meta[name='_csrf_header']").attr('content');
+    var token = $("meta[name='_csrf']").attr('content');
+	$(".date-page-tab").append(
 		$("<button>")
 		  .attr("data-id", res.pageId)
 		  .addClass(
@@ -38,5 +40,22 @@ export function page (res) {
 		      $(this).children(".date-delete-btn").hide();
 		    }
 		  )
+		  .click(function () {
+			$.ajax({
+				url: "/rest/page/delete",
+				beforeSend: function(xhr) {
+					xhr.setRequestHeader(header, token);
+				},
+				method: "POST",
+				data: { 
+					pageId: $(this)
+								.closest(".date-tab")
+								.data("id") 
+				},
+				success: function(res) {
+            		$("[data-id=" + res + "]").remove();
+				}
+			});
+          })
 	  );
 }

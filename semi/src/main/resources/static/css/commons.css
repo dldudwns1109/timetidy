@@ -20,6 +20,9 @@ button {
 .overflow-hidden {
   overflow: hidden;
 }
+.overflow-scroll-y {
+  overflow-y: scroll;
+}
 
 /* 보더 */
 .bb-1 {
@@ -160,6 +163,9 @@ button {
 .h-80 {
   height: 80px;
 }
+.h-664 {
+  height: 664px;
+}
 .h-100p {
   height: 100%;
 }
@@ -236,6 +242,9 @@ button {
 .mt-248 {
   margin-top: 248px;
 }
+.mb-16 {
+  margin-bottom: 100px;
+}
 .my-80 {
   margin-top: 80px;
   margin-bottom: 80px;
@@ -273,6 +282,9 @@ button {
 }
 .pt-12 {
   padding-top: 12px;
+}
+.pb-16 {
+  padding-bottom: 16px;
 }
 .pb-26 {
   padding-bottom: 26px;
@@ -317,10 +329,7 @@ button {
   background-repeat: no-repeat;
 }
 
-.sidebar .plus-btn:hover {
-  background-color: #f1f1f1;
-}
-
+.sidebar .plus-btn:hover,
 .sidebar .date-delete-btn:hover {
   background-color: #f1f1f1;
 }
@@ -335,4 +344,8 @@ button {
 
 .modal-close-btn:hover {
   background-color: #e0e0e0;
+}
+
+.date-page-tab::-webkit-scrollbar {
+  display: none;
 }
