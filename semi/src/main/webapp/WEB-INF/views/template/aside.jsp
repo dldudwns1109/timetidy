@@ -24,7 +24,7 @@
   </div>
   <div class="title-tab pt-12">
     <button
-      class="trans-color border-none outline-none flex items-center w-100p px-8 py-9 round-6"
+      class="search-btn trans-color border-none outline-none flex items-center w-100p px-8 py-9 round-6"
     >
       <img src="/img/search.svg" class="mr-8" width="24" height="24" />
       <span class="title-font-color text-16">검색</span>

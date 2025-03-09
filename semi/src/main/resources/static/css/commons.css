@@ -145,6 +145,9 @@ button {
 .w-620 {
   width: 620px;
 }
+.w-650 {
+  width: 650px;
+}
 .w-80 {
   width: 80px;
 }
@@ -174,6 +177,12 @@ button {
 }
 .h-80 {
   height: 80px;
+}
+.h-361 {
+  height: 361px;
+}
+.h-450 {
+  height: 450px;
 }
 .h-664 {
   height: 664px;
@@ -269,6 +278,9 @@ button {
 .p-0 {
   padding: 0;
 }
+.p-16 {
+  padding: 16px;
+}
 .pl-8 {
   padding-left: 8px;
 }
@@ -312,6 +324,10 @@ button {
 }
 .pb-64 {
   padding-bottom: 64px;
+}
+.py-4 {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 .py-8 {
   padding-top: 8px;
@@ -386,4 +402,12 @@ button {
 
 .job-add-btn:hover img {
   filter: invert(30%) sepia(50%) saturate(500%) hue-rotate(180deg);
+}
+
+.search-hist-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.search-hist-delete-btn:hover {
+  background-color: #f1f1f1;
 }

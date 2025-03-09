@@ -4,11 +4,11 @@
 <div
    class="account-modal none justify-center items-center fixed left-0 top-0 w-100p h-100p opacity-40"
  >
-   <div class="light top-50 left-50 w-400 round-6">
-     <div class="flex justify-between px-16 py-11 bb-1 line-base">
+   <div class="light w-400 round-6">
+     <div class="flex justify-between items-center px-16 py-11 bb-1 line-base">
        <span class="title-font-color text-16">계정</span>
        <button
-         class="modal-close-btn trans-color border-none outline-none w-24 h-24 p-0 round-6"
+         class="account-modal-close-btn trans-color border-none outline-none w-24 h-24 p-0 round-6"
        >
          <img src="/img/close.svg" class="w-100p h-100p" />
        </button>
