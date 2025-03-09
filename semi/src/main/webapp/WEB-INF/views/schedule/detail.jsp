@@ -83,6 +83,7 @@
       </div>
     </div>
     <jsp:include page="/WEB-INF/views/template/account-modal.jsp" />
+    <jsp:include page="/WEB-INF/views/template/search-modal.jsp" />
   </body>
 </html>
 
