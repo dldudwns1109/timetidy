@@ -122,6 +122,10 @@ button {
   display: none;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .hidden {
   visibility: hidden;
 }
@@ -129,6 +133,9 @@ button {
 /* size */
 .w-24 {
   width: 24px;
+}
+.w-26 {
+  width: 26px;
 }
 .w-50 {
   width: 50px;
@@ -168,6 +175,9 @@ button {
 }
 .h-24 {
   height: 24px;
+}
+.h-26 {
+  height: 26px;
 }
 .h-50 {
   height: 50px;
@@ -269,6 +279,9 @@ button {
 .mt-248 {
   margin-top: 248px;
 }
+.mb-8 {
+  margin-bottom: 8px;
+}
 .mb-16 {
   margin-bottom: 100px;
 }
@@ -293,9 +306,17 @@ button {
 .p-32 {
   padding: 32px;
 }
+.px-4 {
+  padding-left: 4px;
+  padding-right: 4px;
+}
 .px-8 {
   padding-left: 8px;
   padding-right: 8px;
+}
+.px-12 {
+  padding-left: 12px;
+  padding-right: 12px;
 }
 .px-14 {
   padding-left: 14px;
@@ -332,6 +353,10 @@ button {
   padding-top: 4px;
   padding-bottom: 4px;
 }
+.py-6 {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
 .py-8 {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -339,6 +364,10 @@ button {
 .py-9 {
   padding-top: 9px;
   padding-bottom: 9px;
+}
+.py-10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .py-11 {
   padding-top: 11px;
@@ -398,7 +427,8 @@ button {
   display: none;
 }
 
-.job-add-btn:hover {
+.job-add-btn:hover,
+.social-add-btn:hover {
   background-color: #00a6fb;
   color: #ffffff;
 }

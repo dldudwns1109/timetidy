@@ -30,7 +30,7 @@
       <span class="title-font-color text-16">검색</span>
     </button>
     <button
-      class="trans-color border-none outline-none flex items-center w-100p px-8 py-9 mt-6 round-6"
+      class="social-btn trans-color border-none outline-none flex items-center w-100p px-8 py-9 mt-6 round-6"
     >
       <img src="/img/social.svg" class="mr-8" width="24" height="24" />
       <span class="title-font-color text-16">소셜</span>
