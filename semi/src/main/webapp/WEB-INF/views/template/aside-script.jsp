@@ -208,5 +208,9 @@
         });
   	  }
     });
+
+	$(".social-btn").click(function() {
+	  location.href = "/schedule/social/list";
+	});
   });
 </script>

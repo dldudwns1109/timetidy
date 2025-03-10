@@ -28,8 +28,7 @@ public class ScheduleController {
 	private PageDao pageDao;
 	
 	@GetMapping("")
-	public String schedule(@AuthenticationPrincipal OAuth2User oAuth2User,
-			Model model, HttpSession session) throws IOException {
+	public String schedule(Model model, HttpSession session) throws IOException {
 		model.addAttribute("name", memberService.loadSession(session)
 											.getMemberName());
 		model.addAttribute("picture", memberService.loadSession(session)
@@ -57,5 +56,23 @@ public class ScheduleController {
 				.getMemberProfile());
 		model.addAttribute("query", query);
 		return "/WEB-INF/views/schedule/search.jsp";
+	}
+	
+	@GetMapping("/social/list")
+	public String socialList(Model model, HttpSession session) {
+		model.addAttribute("name", memberService.loadSession(session)
+				.getMemberName());
+		model.addAttribute("picture", memberService.loadSession(session)
+				.getMemberProfile());
+		return "/WEB-INF/views/schedule/social/list.jsp";
+	}
+	
+	@GetMapping("/social/add")
+	public String socialAdd(Model model, HttpSession session) {
+		model.addAttribute("name", memberService.loadSession(session)
+				.getMemberName());
+		model.addAttribute("picture", memberService.loadSession(session)
+				.getMemberProfile());
+		return "/WEB-INF/views/schedule/social/add.jsp";
 	}
 }
