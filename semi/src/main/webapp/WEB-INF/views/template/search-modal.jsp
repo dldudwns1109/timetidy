@@ -11,10 +11,12 @@
       		placeholder="일정 내용을 검색하세요"
       		class="keyword-input flex-1 outline-none border-none p-0 text-16 title-font-color" >
     </div>
-    <div class="search-hist h-361 p-16 overflow-scroll-y">
+    <div class="search-hist h-361 p-16 overflow-auto">
       <span class="text-12 subtitle-font-color">최근 검색</span>
       <div class="search-hist-content">
-      	
+      </div>
+      <div class="no-search-result none mt-12">
+      	<span class="text-14 title-font-color">최근 검색 결과가 없습니다.</span>
       </div>
     </div>
   </div>

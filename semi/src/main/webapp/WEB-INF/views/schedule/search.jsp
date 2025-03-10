@@ -31,6 +31,20 @@
 	   		  },
 	   		  method: "GET",
 	   		  success: function(res) {
+	   			if (res.length == 0) {
+	   				$(".page-result").append(
+	   						$("<div>")
+	   							.addClass("flex flex-col items-center")
+	   							.append($("<img>")
+	   										.addClass("w-260")
+	   										.attr("src", "/img/no-result.svg")
+	   							)
+	   							.append($("<span>")
+	   									.addClass("mt-24 text-16 title-font-color")
+   										.text('"'+keyword+'"과(와) 일치하는 일정이 없습니다.')))
+   							.removeClass("mt-32")
+   							.addClass("flex justify-center mt-154")
+	   			}
 	   		    $.each(res, function(idx, val) {
 	   		    	$(".page-result").append(
 	   		    			$("<button>")
@@ -55,10 +69,12 @@
   <body>
     <div class="flex items-start">
       <jsp:include page="/WEB-INF/views/template/aside.jsp" />
-      <div class="content anim overflow-scroll-y flex flex-1 justify-center w-100p h-100v">
+      <div class="content anim overflow-auto flex flex-1 justify-center w-100p h-100v">
       	<div class="page-content w-620 py-64">
 	      <span class="title-24 title-font-color">검색 결과 : "${query}"</span>
-	      <div class="page-result mt-32"></div>
+	      <div class="page-result mt-32">
+	      	
+	      </div>
         </div>
       </div>
     </div>

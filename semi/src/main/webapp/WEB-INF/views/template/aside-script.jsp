@@ -145,6 +145,7 @@
         },
 		method: "GET",
 		success: function (res) {
+		  if (res.length == 0) $(".no-search-result").show();
 		  $.each(res, function(idx, val) {
 			$(".search-hist-content")
 				.append(

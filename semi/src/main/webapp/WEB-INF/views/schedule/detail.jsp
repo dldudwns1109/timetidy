@@ -64,7 +64,7 @@
   <body>
     <div class="flex items-start">
       <jsp:include page="/WEB-INF/views/template/aside.jsp" />
-      <div class="content anim overflow-scroll-y flex flex-1 justify-center w-100p h-100v">
+      <div class="content anim overflow-auto flex flex-1 justify-center w-100p h-100v">
         <div class="page-content w-620 py-64">
 	      pageId : ${pageDto.pageId} <br>
           <input value="${pageDto.pageTitle}"

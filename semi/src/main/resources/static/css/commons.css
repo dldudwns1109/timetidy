@@ -23,6 +23,9 @@ button {
 .overflow-scroll-y {
   overflow-y: scroll;
 }
+.overflow-auto {
+  overflow: auto;
+}
 
 /* 보더 */
 .bb-1 {
