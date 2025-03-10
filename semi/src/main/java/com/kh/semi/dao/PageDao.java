@@ -65,4 +65,15 @@ public class PageDao {
 		List<PageDto> list = jdbcTemplate.query(sql, pageMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	public List<PageDto> search(PageDto pageDto) {
+		String sql = "select * from page "
+				+ "where instr(page_title, ?) > 0 "
+				+ "and page_member_id = ?";
+		Object[] data = {
+				pageDto.getPageTitle(),
+				pageDto.getPageMemberId()
+		};
+		return jdbcTemplate.query(sql, pageMapper, data);
+	}
 }

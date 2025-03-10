@@ -404,7 +404,8 @@ button {
   filter: invert(30%) sepia(50%) saturate(500%) hue-rotate(180deg);
 }
 
-.search-hist-btn:hover {
+.search-hist-btn:hover,
+.page-result-btn:hover {
   background-color: #e0e0e0;
 }
 
