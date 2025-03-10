@@ -168,7 +168,7 @@
 								  method: "POST",
 								  data: {keyword: val.searchHistoryKeyword},
 								  success: function(res) {
-									$("[data-keyword=" + res + "]").remove();
+									$('[data-keyword="' + res + '"]').remove();
 								  },
 								});
 							  })
@@ -190,7 +190,7 @@
     });
 	
 	$(".keyword-input").keydown(function (e) {
-  	  if (e.key == "Enter") {
+  	  if (e.keyCode == 13) {
         $.ajax({
       	  url: "/rest/search/add",
       	  beforeSend: function (xhr) {
@@ -202,6 +202,7 @@
 			$(".keyword-input").val("");
 			$(".search-hist-content").empty();
 			$(".search-modal").removeClass("flex").addClass("none");
+			location.href = "/schedule/search?query=" + res;
       	  },
         });
   	  }

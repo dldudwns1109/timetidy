@@ -10,10 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dao.PageDao;
-import com.kh.semi.dto.MemberDto;
 import com.kh.semi.service.MemberService;
 
 import jakarta.servlet.http.HttpSession;
@@ -47,5 +46,16 @@ public class ScheduleController {
 											.getMemberProfile());
 		model.addAttribute("pageDto", pageDao.detail(pageId));
 		return "/WEB-INF/views/schedule/detail.jsp";
+	}
+	
+	@GetMapping("/search")
+	public String search(@RequestParam String query,
+			Model model, HttpSession session) {
+		model.addAttribute("name", memberService.loadSession(session)
+				.getMemberName());
+		model.addAttribute("picture", memberService.loadSession(session)
+				.getMemberProfile());
+		model.addAttribute("query", query);
+		return "/WEB-INF/views/schedule/search.jsp";
 	}
 }
