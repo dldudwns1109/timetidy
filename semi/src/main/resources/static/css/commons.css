@@ -474,3 +474,8 @@ button {
 .reject-btn:hover span {
   color: #ffffff;
 }
+
+.social-delete-btn:hover {
+  background-color: #c1121f;
+  color: #ffffff;
+}
