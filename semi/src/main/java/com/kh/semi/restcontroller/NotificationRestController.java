@@ -52,6 +52,30 @@ public class NotificationRestController {
 		socialDao.insert(socialDto);
 	}
 	
+	@PostMapping("/accept")
+	public void accept(@RequestParam int senderId, HttpSession session) {
+		NotificationDto notificationDto = new NotificationDto();
+		notificationDto.setNotificationSenderId(senderId);
+		notificationDto.setNotificationReceiverId((int) session.getAttribute("id"));
+		notificationDao.delete(notificationDto);
+
+		notificationDto.setNotificationSenderId((int) session.getAttribute("id"));
+		notificationDto.setNotificationReceiverId(senderId);
+		notificationDao.delete(notificationDto);
+		
+		socialDao.update(senderId);
+		MemberDto memberDto = memberDao.findMember(senderId);
+		SocialDto socialDto = new SocialDto();
+		socialDto.setSocialId(socialDao.sequence());
+		socialDto.setSocialSelfId((int) session.getAttribute("id"));
+		socialDto.setSocialRelativeId(senderId);
+		socialDto.setSocialName(memberDto.getMemberName());
+		socialDto.setSocialProfile(memberDto.getMemberProfile());
+		socialDto.setSocialEmail(memberDto.getMemberEmail());
+		socialDto.setSocialPendingState("n");
+		socialDao.insert(socialDto);
+	}
+	
 	@PostMapping("/reject")
 	public void reject(@RequestParam int senderId, HttpSession session) {
 		NotificationDto notificationDto = new NotificationDto();
