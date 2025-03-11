@@ -110,6 +110,10 @@
       }
     });
 
+	$(".bell-btn").click(function() {
+	  location.href = "/schedule/notification";
+	});
+
 	$(".date-title-tab").hover(
       function () {
         $(".plus-btn").show();

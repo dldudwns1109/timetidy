@@ -47,6 +47,15 @@ public class ScheduleController {
 		return "/WEB-INF/views/schedule/detail.jsp";
 	}
 	
+	@GetMapping("/notification")
+	public String notification(Model model, HttpSession session) {
+		model.addAttribute("name", memberService.loadSession(session)
+				.getMemberName());
+		model.addAttribute("picture", memberService.loadSession(session)
+				.getMemberProfile());
+		return "/WEB-INF/views/schedule/notification.jsp";
+	}
+	
 	@GetMapping("/search")
 	public String search(@RequestParam String query,
 			Model model, HttpSession session) {

@@ -50,4 +50,9 @@ public class MemberRestController {
 		memberDao.delete(id);
 		memberService.disconnectSession(session);
 	}
+	
+	@GetMapping("/find")
+	public MemberDto find(@RequestParam int memberId) {
+		return memberDao.findMember(memberId);
+	}
 }

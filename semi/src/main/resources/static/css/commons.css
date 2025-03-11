@@ -294,11 +294,23 @@ button {
 .p-0 {
   padding: 0;
 }
+.p-6 {
+  padding: 6px;
+}
 .p-16 {
   padding: 16px;
 }
+.pl-4 {
+  padding-left: 4px;
+}
 .pl-8 {
   padding-left: 8px;
+}
+.pr-8 {
+  padding-right: 8px;
+}
+.pr-12 {
+  padding-right: 12px;
 }
 .pr-14 {
   padding-right: 14px;
@@ -313,6 +325,9 @@ button {
 .px-8 {
   padding-left: 8px;
   padding-right: 8px;
+}
+.pl-6 {
+  padding-left: 6px;
 }
 .px-12 {
   padding-left: 12px;
@@ -444,4 +459,18 @@ button {
 
 .search-hist-delete-btn:hover {
   background-color: #f1f1f1;
+}
+
+.accept-btn:hover {
+  background-color: #38b000;
+}
+.accept-btn:hover span {
+  color: #ffffff;
+}
+
+.reject-btn:hover {
+  background-color: #c1121f;
+}
+.reject-btn:hover span {
+  color: #ffffff;
 }
