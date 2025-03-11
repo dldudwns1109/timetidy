@@ -24,7 +24,7 @@ public class SocialDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
-	public boolean insert(SocialDto socialDto) {
+	public void insert(SocialDto socialDto) {
 		String sql = "insert into social ("
 				+ "social_id, social_self_id, social_relative_id, "
 				+ "social_name, social_profile, social_email, social_pending_state"
@@ -38,6 +38,13 @@ public class SocialDao {
 				socialDto.getSocialEmail(),
 				socialDto.getSocialPendingState()
 		};
+		jdbcTemplate.update(sql, data);
+	}
+	
+	public boolean delete(int senderId) {
+		String sql = "delete social "
+				+ "where social_self_id = ?";
+		Object[] data = {senderId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	

@@ -37,6 +37,18 @@ public class NotificationDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
+	public boolean delete(NotificationDto notificationDto) {
+		String sql = "delete notification "
+				+ "where notification_job_id is null "
+				+ "and notification_sender_id = ? "
+				+ "and notification_receiver_id = ?";
+		Object[] data = {
+				notificationDto.getNotificationSenderId(),
+				notificationDto.getNotificationReceiverId()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 	public List<NotificationDto> list(int receiverId) {
 		String sql = "select * from notification "
 				+ "where notification_receiver_id = ? "
