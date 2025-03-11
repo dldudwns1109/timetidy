@@ -41,6 +41,14 @@ public class SocialDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
+	public boolean update(int senderId) {
+		String sql = "update social "
+				+ "set social_pending_state = 'n'"
+				+ "where social_self_id = ?";
+		Object[] data = {senderId};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 	public boolean delete(int senderId) {
 		String sql = "delete social "
 				+ "where social_self_id = ?";
@@ -51,7 +59,9 @@ public class SocialDao {
 	public List<MemberSocialDto> searchMemberList(MemberSocialDto memberSocialDto) {
 		String sql = "select * from member_social "
 				+ "where instr(member_name, ?) > 0 "
-				+ "and social_self_id = ?";
+				+ "and social_self_id = ? "
+				+ "and (social_pending_state is null "
+				+ "or social_pending_state = 'y')";
 		Object[] data = {
 				memberSocialDto.getMemberName(),
 				memberSocialDto.getSocialSelfId()
