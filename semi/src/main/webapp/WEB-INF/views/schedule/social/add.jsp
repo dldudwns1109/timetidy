@@ -65,9 +65,27 @@
                 				.append(
                 					$("<div>")
                 						.append($("<button>")
+                									.attr("data-id", val.memberId)
+                									.attr("data-state", val.socialPendingState == null ? false : true)
                 									.addClass("trans-color border-1 px-12 py-6 round-6 text-16 subtext-font-color " 
                 											+ (val.socialPendingState == null ? "brand-b social-add-btn" : "line-base"))
-                									.text(val.socialPendingState == null ? "추가" : "대기중"))
+                									.text(val.socialPendingState == null ? "추가" : "대기중")
+                									.click(function() {
+                										if (!$(this).data("state")) {
+                											$.ajax({
+                												url: "/rest/notification/add",
+                												beforeSend: function (xhr) {
+                								        		  xhr.setRequestHeader(header, token);
+                								        		},
+                								        		method: "POST",
+                								        		data: {receiverId: $(this).data("id")},
+                								        		success: function (res) {
+                								        			location.reload();
+                								        		},
+                											})
+                										}
+                									})
+                						)
                 				)
         				)
         			})

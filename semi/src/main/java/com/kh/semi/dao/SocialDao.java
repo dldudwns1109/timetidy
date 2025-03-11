@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.MemberSocialDto;
+import com.kh.semi.dto.SocialDto;
 import com.kh.semi.mapper.MemberSocialMapper;
 
 @Repository
@@ -17,6 +18,28 @@ public class SocialDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	public int sequence() {
+		String sql = "select social_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	public boolean insert(SocialDto socialDto) {
+		String sql = "insert into social ("
+				+ "social_id, social_self_id, social_relative_id, "
+				+ "social_name, social_profile, social_email, social_pending_state"
+				+ ") values(?, ?, ?, ?, ?, ?, ?)";
+		Object[] data = {
+				socialDto.getSocialId(),
+				socialDto.getSocialSelfId(),
+				socialDto.getSocialRelativeId(),
+				socialDto.getSocialName(),
+				socialDto.getSocialProfile(),
+				socialDto.getSocialEmail(),
+				socialDto.getSocialPendingState()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 	
 	public List<MemberSocialDto> searchMemberList(MemberSocialDto memberSocialDto) {
 		String sql = "select * from member_social "

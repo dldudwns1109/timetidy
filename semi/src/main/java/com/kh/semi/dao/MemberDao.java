@@ -62,7 +62,7 @@ public class MemberDao {
 		return findMember.isEmpty() ? null : findMember.get(0);
 	}
 	
-	public MemberDto findMember(String memberId) {
+	public MemberDto findMember(int memberId) {
 		String sql = "select * from member "
 				+ "where member_id = ?";
 		Object[] data = {memberId};
