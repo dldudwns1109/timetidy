@@ -9,9 +9,13 @@ import org.springframework.stereotype.Repository;
 import com.kh.semi.dto.MemberSocialDto;
 import com.kh.semi.dto.SocialDto;
 import com.kh.semi.mapper.MemberSocialMapper;
+import com.kh.semi.mapper.SocialMapper;
 
 @Repository
 public class SocialDao {
+	
+	@Autowired
+	private SocialMapper socialMapper;
 	
 	@Autowired
 	private MemberSocialMapper memberSocialMapper;
@@ -54,6 +58,37 @@ public class SocialDao {
 				+ "where social_self_id = ?";
 		Object[] data = {senderId};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	public boolean deleteRelative(SocialDto socialDto) {
+		String sql = "delete social "
+				+ "where social_self_id = ? "
+				+ "and social_relative_id = ?";
+		Object[] data = {
+				socialDto.getSocialSelfId(),
+				socialDto.getSocialRelativeId()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	public List<SocialDto> socialList(int selfId) {
+		String sql = "select * from social "
+				+ "where social_self_id = ? "
+				+ "and social_pending_state = 'n'";
+		Object[] data = {selfId};
+		return jdbcTemplate.query(sql, socialMapper, data);
+	}
+	
+	public List<SocialDto> socialSearchList(SocialDto socialDto) {
+		String sql = "select * from social "
+				+ "where instr(social_name, ?) > 0"
+				+ "and social_self_id = ? "
+				+ "and social_pending_state = 'n'";
+		Object[] data = {
+				socialDto.getSocialName(),
+				socialDto.getSocialSelfId()
+		};
+		return jdbcTemplate.query(sql, socialMapper, data);
 	}
 	
 	public List<MemberSocialDto> searchMemberList(MemberSocialDto memberSocialDto) {
