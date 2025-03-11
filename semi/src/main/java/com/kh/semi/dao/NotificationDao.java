@@ -1,5 +1,7 @@
 package com.kh.semi.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -33,5 +35,13 @@ public class NotificationDao {
 				notificationDto.getNotificationMessage()
 		};
 		jdbcTemplate.update(sql, data);
+	}
+	
+	public List<NotificationDto> list(int receiverId) {
+		String sql = "select * from notification "
+				+ "where notification_receiver_id = ? "
+				+ "order by notification_created_time desc";
+		Object[] data = {receiverId};
+		return jdbcTemplate.query(sql, notificationMapper, data);
 	}
 }
