@@ -52,6 +52,16 @@ public class NotificationRestController {
 		socialDao.insert(socialDto);
 	}
 	
+	@PostMapping("/reject")
+	public void reject(@RequestParam int senderId, HttpSession session) {
+		NotificationDto notificationDto = new NotificationDto();
+		notificationDto.setNotificationSenderId(senderId);
+		notificationDto.setNotificationReceiverId((int) session.getAttribute("id"));
+		notificationDao.delete(notificationDto);
+		
+		socialDao.delete(senderId);
+	}
+	
 	@GetMapping("/list")
 	public List<NotificationDto> list(HttpSession session) {
 		return notificationDao.list((int) session.getAttribute("id"));

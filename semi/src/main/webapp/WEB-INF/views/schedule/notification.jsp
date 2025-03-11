@@ -90,6 +90,22 @@
     	    	    				        		}, function(e) {
     	    	    				        			$(this).find("img").attr("src", "/img/close-negative.svg");
     	    	    				        		})
+    	    	    				        		.click(function() {
+    	    	    				        			var notificationTab = $(this).closest(".notification-tab");
+    	    	    				        			if (notificationTab.data("job-id") == undefined) {
+    	    	    				        				$.ajax({
+    	    	    				        					url: "/rest/notification/reject",
+    	    	    				        					beforeSend: function (xhr) {
+    	    	    				        	    	    	  xhr.setRequestHeader(header, token);
+    	    	    				        	    	    	},
+    	    	    				        	    	    	method: "POST",
+    	    	    				        	    	    	data: {senderId: notificationTab.data("id")},
+    	    	    				        	    	    	success: function(res) {
+    	    	    				        	    	    		notificationTab.remove();
+    	    	    				        	    	    	},
+    	    	    				        				})
+    	    	    				        			}
+    	    	    				        		})
     	    	    				        		)
     	    	    				    )
     	    	    				);
