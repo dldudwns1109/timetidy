@@ -16,7 +16,7 @@ public class JobMapper implements RowMapper<JobDto> {
 		return JobDto.builder()
 				.jobId(rs.getInt("job_id"))
 				.jobPageId(rs.getInt("job_page_id"))
-				.jobPageTitle(rs.getString("job_title"))
+				.jobTitle(rs.getString("job_title"))
 				.jobHostId(rs.getInt("job_host_id"))
 				.jobParticipant1Id((Integer) rs.getObject("job_participant1_id"))
 				.jobParticipant2Id((Integer) rs.getObject("job_participant2_id"))

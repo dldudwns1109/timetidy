@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class JobDto {
 	private int jobId;
 	private int jobPageId;
-	private String jobPageTitle;
+	private String jobTitle;
 	private int jobHostId;
 	private Integer jobParticipant1Id;
 	private Integer jobParticipant2Id;
