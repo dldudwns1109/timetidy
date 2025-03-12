@@ -66,6 +66,8 @@
      						.append($("<input>")
      									.attr("placeholder", "제목")
      									.addClass("job-title-input border-none outline-none text-16 title-font-color"))
+     						.append($("<div>")
+     									.addClass("job-participant mt-8"))
      						.append($("<textarea>")
      									.attr("placeholder", "내용을 작성하세요...")
      									.attr("rows", 2)
@@ -81,7 +83,124 @@
      															.addClass("mr-4"))
      													.append($("<span>")
      															.text("소셜")
-     															.addClass("text-14 subtext-font-color")))
+     															.addClass("text-14 subtext-font-color"))
+     													.click(function () {
+     														var buttonOffset = $(this).offset();
+												    	    var buttonHeight = $(this).outerHeight();
+     														$.ajax({
+     															url: "/rest/social/list",
+     															beforeSend: function (xhr) {
+     												    		  xhr.setRequestHeader(header, token);
+     												    		},
+     												    		method: "GET",
+     												    		success: function (res) {
+     												    		  $(".social-dropdown").show();
+     												    		  $(".social-dropdown-content").empty();
+     												    		  
+     												    		  var currParticipants = [];
+     												    		  $.each($(".job-participant").children(), function(idx, val) {
+  												    			    currParticipants.push($(val).data("id"))
+ 		  												    	  });
+     												    		  
+     												    		  if (currParticipants.length) {
+     												    			 $.each(res, function(idx, val) {
+     												    			   var isExist = false;
+     												    			   $.each(currParticipants, function (idx, val2) {
+     												    				  if (val.socialRelativeId == val2) {
+     												    					  isExist = true;
+     												    				  }
+     												    			   })
+     												    			   if (!isExist) {
+     												    				  $(".social-dropdown-content").append(
+	          												    					$("<button>").append(
+	     		        			       	     											$("<img>")
+	     		        			       	     												.attr("src", val.socialProfile)
+	     		        			       	     												.addClass("w-26 h-26 round-full mr-8")
+	     		        			       	     										  ).append(
+	     		        			       	     											$("<span>").text(val.socialName)
+	     		        			       	     										  ).addClass("social-tab-btn trans-color border-none outline-none flex items-center w-100p px-8 py-9 round-6"
+	     		        			       	     										  ).attr("data-id", val.socialRelativeId
+	     		        			       	     										  ).click(function () {
+	     		        			       	     											$(".social-dropdown").hide();
+	     		        			       	     											$(".job-participant").append(
+	     		        			       	     												$("<div>")
+	     		        			       	     													.attr("data-id", val.socialRelativeId)
+	     		        			       	     													.addClass("participant-tab px-8 py-9 mr-8 light-dark inline-block round-6")
+	     		        			       	     													.append($("<img>")
+	     		        			       	     															.attr("src", val.socialProfile)
+	     		        			       	     															.addClass("w-26 h-26 round-full mr-8 vertical-center"))
+	     		        			       	     													.append($("<span>")
+	     		        			       	     															.text(val.socialName)
+	     		        			       	     															.addClass("text-16 title-font-color vertical-center mr-4"))
+	     		        			       	     													.append($("<button>")
+	     		        			       	     															.addClass("trans-color border-none outline-none vertical-center w-24 h-24 p-0")
+	     		        			       	     															.append($("<img>")
+	     		        			       	     																		.attr("src", "/img/close.svg"))
+	     		        			       	     															.click(function () {
+	     		        			       	     																$(this).closest(".participant-tab").remove();
+	     		        			       	     															}))
+	     		        			       	     											)
+	     		        			       	     										  })
+	          												    			  
+	             												    		).css({
+	            												    	          top: buttonOffset.top + buttonHeight - 2,
+	            												    	          left: buttonOffset.left,
+	            												    	        })
+     												    			   }
+       	     												   	  	 })
+     												    		  } else {
+     												    			 $.each(res, function(idx, val) {
+     												    				$(".social-dropdown-content").append(
+          												    					$("<button>").append(
+     		        			       	     											$("<img>")
+     		        			       	     												.attr("src", val.socialProfile)
+     		        			       	     												.addClass("w-26 h-26 round-full mr-8")
+     		        			       	     										  ).append(
+     		        			       	     											$("<span>").text(val.socialName)
+     		        			       	     										  ).addClass("social-tab-btn trans-color border-none outline-none flex items-center w-100p px-8 py-9 round-6"
+     		        			       	     										  ).attr("data-id", val.socialRelativeId
+     		        			       	     										  ).click(function () {
+     		        			       	     											$(".social-dropdown").hide();
+     		        			       	     											$(".job-participant").append(
+     		        			       	     												$("<div>")
+     		        			       	     													.attr("data-id", val.socialRelativeId)
+     		        			       	     													.addClass("participant-tab px-8 py-9 mr-8 light-dark inline-block round-6")
+     		        			       	     													.append($("<img>")
+     		        			       	     															.attr("src", val.socialProfile)
+     		        			       	     															.addClass("w-26 h-26 round-full mr-8 vertical-center"))
+     		        			       	     													.append($("<span>")
+     		        			       	     															.text(val.socialName)
+     		        			       	     															.addClass("text-16 title-font-color vertical-center mr-4"))
+     		        			       	     													.append($("<button>")
+     		        			       	     															.addClass("trans-color border-none outline-none vertical-center w-24 h-24 p-0")
+     		        			       	     															.append($("<img>")
+     		        			       	     																		.attr("src", "/img/close.svg"))
+     		        			       	     															.click(function () {
+    	     		        			       	     														$(this).closest(".participant-tab").remove();
+    	     		        			       	     													}))
+     		        			       	     											)
+     		        			       	     										  })
+          												    			  
+             												    		).css({
+            												    	          top: buttonOffset.top + buttonHeight - 2,
+            												    	          left: buttonOffset.left,
+            												    	        })
+         	     												   	 })
+     												    		  }
+     												    		  
+     												    		  if (!res.length || currParticipants.length == res.length) {
+     												    			 $(".social-dropdown-content").append(
+     												    					 $("<span>").addClass("text-14 subtext-font-color").text("추가할 소셜 목록이 없습니다."))
+     												    		  }
+       	     												   	  
+	       	     												  $(window).click(function (e) {
+		       	     											    if ($(e.target).is(".social-dropdown")) {
+		       	     											      $(".social-dropdown").hide();
+		       	     											    }
+		       	     											  });
+     												    		},
+     														})
+     													}))
      										.append($("<button>")
      													.addClass("flex items-center border-1 line-base round-6 trans-color outline-none py-4 pl-6 pr-8 mr-8")
  														.append($("<img>")
@@ -91,7 +210,7 @@
  																.text("날짜")
  																.addClass("text-14 subtext-font-color")))
      										.append($("<button>")
-     													.addClass("flex items-center border-1 line-base round-6 trans-color outline-none py-4 pl-6 pr-8 mr-8")
+     													.addClass("flex items-center border-1 line-base round-6 trans-color outline-none py-4 pl-6 pr-8")
 														.append($("<img>")
 																.attr("src", "/img/location.svg")
 																.addClass("mr-4"))
@@ -122,7 +241,7 @@
 															}
 														})
      										.append($("<button>")
-     													.addClass("flex items-center border-1 brand-b round-6 trans-color outline-none py-6 pl-6 pr-8 mr-8")
+     													.addClass("flex items-center border-1 brand-b round-6 trans-color outline-none py-6 pl-6 pr-8")
 														.append($("<img>")
 																.attr("src", "/img/plus.svg")
 																.addClass("mr-4"))
@@ -138,7 +257,6 @@
       <jsp:include page="/WEB-INF/views/template/aside.jsp" />
       <div class="content anim overflow-auto flex flex-1 justify-center w-100p h-100v">
         <div class="page-content w-620 py-64">
-	      pageId : ${pageDto.pageId} <br>
           <input value="${pageDto.pageTitle}"
           		 placeholder="${pageDto.pageTitle}" 
           		 class="title-input w-100p border-none outline-brand px-14 py-9 title-32 title-font-color" >
@@ -156,6 +274,13 @@
     </div>
     <jsp:include page="/WEB-INF/views/template/account-modal.jsp" />
     <jsp:include page="/WEB-INF/views/template/search-modal.jsp" />
+    <div
+	   class="social-dropdown none justify-center items-center fixed left-0 top-0 w-100p h-100p"
+	 >
+	   <div class="social-dropdown-content absolute light inline-block border-1 line-base round-6 p-6">
+	     
+	   </div>
+	 </div>
   </body>
 </html>
 
