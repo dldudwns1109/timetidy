@@ -50,15 +50,87 @@
             },
     	  );
     	  
-    	  $(".job-add-btn").hover(
-   			function() {
-   			  $(".job-add-btn img").attr("src", "/img/plus-hover.svg");
-   			},
-   			function() {
-     		  $(".job-add-btn img").attr("src", "/img/plus.svg");
-     		},
-   		  );
-      })
+    	  $(".job-add-btn")
+    	  	.hover(
+   				function() {
+   			  		$(".job-add-btn img").attr("src", "/img/plus-hover.svg");
+   				},
+   				function() {
+     		 		 $(".job-add-btn img").attr("src", "/img/plus.svg");
+     			},)
+     		.click(function () {
+     			$(".job-add-area").hide();
+     			$(".job-content").append(
+     					$("<div>")
+     						.addClass("job-input flex flex-col p-16 line-base border-1 round-6")
+     						.append($("<input>")
+     									.attr("placeholder", "제목")
+     									.addClass("job-title-input border-none outline-none text-16 title-font-color"))
+     						.append($("<textarea>")
+     									.attr("placeholder", "내용을 작성하세요...")
+     									.attr("rows", 2)
+     									.addClass("job-content-input border-none outline-none text-14 subtitle-font-color mt-8"))
+     						.append($("<div>")
+     								.addClass("flex justify-between")
+     								.append($("<div>")
+     										.addClass("flex")
+     										.append($("<button>")
+     													.addClass("flex items-center border-1 line-base round-6 trans-color outline-none py-4 pl-6 pr-8 mr-8")
+     													.append($("<img>")
+     															.attr("src", "/img/user.svg")
+     															.addClass("mr-4"))
+     													.append($("<span>")
+     															.text("소셜")
+     															.addClass("text-14 subtext-font-color")))
+     										.append($("<button>")
+     													.addClass("flex items-center border-1 line-base round-6 trans-color outline-none py-4 pl-6 pr-8 mr-8")
+ 														.append($("<img>")
+ 																.attr("src", "/img/s-date.svg")
+ 																.addClass("mr-4"))
+ 														.append($("<span>")
+ 																.text("날짜")
+ 																.addClass("text-14 subtext-font-color")))
+     										.append($("<button>")
+     													.addClass("flex items-center border-1 line-base round-6 trans-color outline-none py-4 pl-6 pr-8 mr-8")
+														.append($("<img>")
+																.attr("src", "/img/location.svg")
+																.addClass("mr-4"))
+														.append($("<span>")
+																.text("장소")
+																.addClass("text-14 subtext-font-color"))))
+     								.append($("<div>")
+     										.addClass("flex")
+     										.append($("<button>")
+     													.addClass("flex items-center border-1 negative-b round-6 trans-color outline-none py-6 pl-6 pr-8 mr-8")
+														.append($("<img>")
+																.attr("src", "/img/close.svg")
+																.addClass("mr-4"))
+														.append($("<span>")
+																.text("취소")
+																.addClass("text-16 subtext-font-color")))
+														.click(function () {
+															var isDelete = true;
+															var jobInput = $(this).closest(".job-input");
+															if (jobInput.children(".job-title-input").val().length ||
+																	jobInput.children(".job-content-input").val().length) {
+																isDelete = window.confirm("저장하지 않은 변경사항을 삭제하시겠습니까?");
+															}
+															
+															if (isDelete) {
+																jobInput.remove();
+																$(".job-add-area").show();
+															}
+														})
+     										.append($("<button>")
+     													.addClass("flex items-center border-1 brand-b round-6 trans-color outline-none py-6 pl-6 pr-8 mr-8")
+														.append($("<img>")
+																.attr("src", "/img/plus.svg")
+																.addClass("mr-4"))
+														.append($("<span>")
+																.text("추가")
+																.addClass("text-16 subtext-font-color"))))))
+		    })
+      });
     </script>
   </head>
   <body>
