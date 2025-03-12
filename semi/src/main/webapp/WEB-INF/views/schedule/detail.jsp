@@ -358,44 +358,90 @@
 															var endtimeVal = $(".end-time-input").val();
 															var startTimestamp = null;
 															var endTimestamp = null;
-															if (datetimeType == "time") {
+															function timeToTimestamp(timeVal) {
 																var currDate = new Date();
 																
-																var year = currDate.getFullYear();
-												                var month = String(currDate.getMonth() + 1).padStart(2, '0');  // 월은 0부터 시작
-												                var day = String(currDate.getDate()).padStart(2, '0');
-												                var formattedDate = year + '-' + month + '-' + day;
-												                
-												                var [startHours, startMinutes] = starttimeVal.split(":");
-												                var formattedTime = startHours + ':' + startMinutes;
-												                
-												                startTimestamp = formattedDate + ' ' + formattedTime + ':00.000';
-												                
-												                console.log(startTimestamp);
+																return currDate.getFullYear() + "-" +
+																		String(currDate.getMonth() + 1).padStart(2, '0') + "-" +
+																		String(currDate.getDate()).padStart(2, '0') + " " +
+																		timeVal.split(":")[0] + ":" +
+																		timeVal.split(":")[1] + ":00.000";
 															}
-															console.log()
-															$.ajax({
-																url: "/rest/job/add",
-																beforeSend: function (xhr) {
-	     												    	  xhr.setRequestHeader(header, token);
-	     												    	},
-	     												    	method: "POST",
-	     												    	data: {
-	     												    		jobPageId: pageId,
-	     												    		jobTitle: $(".job-title-input").val(),
-	     												    		jobParticipant1Id: participantsId[0],
-	     												    		jobParticipant2Id: participantsId[1],
-	     												    		jobParticipant3Id: participantsId[2],
-	     												    		jobStartTime: startTimestamp,
-// 	     												    		jobEndTime: endTimestamp,
-	     												    		jobPlace: $(".place-input").val(),
-	     												    		jobDescription: $(".job-content-input").val(),
-	     												    	},
-// 																data: {jobStartTime: startTimestamp},
-	     												    	success: function (res) {
-	     												    		console.log(res)
-	     												    	},
-															})
+															function dateToTimestamp(timeVal, isStart) {
+																console.log(timeVal);
+																console.log((isStart ? " 00:00:00.000" : " 23:59:59.000"));
+																return timeVal + (isStart ? " 00:00:00.000" : " 23:59:59.000");
+															}
+															function datetimeToTimestamp(timeVal) {
+																var [date, time] = timeVal.split("T");
+																return date + " " + time + ":00.000";
+															}
+															if (datetimeType == "date" || endtimeVal != "") {
+																if (datetimeType == "time") {
+																	startTimestamp = timeToTimestamp(starttimeVal);
+																	endTimestamp = timeToTimestamp(endtimeVal);
+																} else if (datetimeType == "datetime-local") {
+																	startTimestamp = datetimeToTimestamp(starttimeVal);
+																	endTimestamp = datetimeToTimestamp(endtimeVal);
+																} else if (endtimeVal == "") {
+																	startTimestamp = dateToTimestamp(starttimeVal, true);
+																	endTimestamp = dateToTimestamp(starttimeVal, false);
+																	console.log(startTimestamp)
+																	console.log(endTimestamp)
+																} else {
+																	startTimestamp = dateToTimestamp(starttimeVal, true);
+																	endTimestamp = dateToTimestamp(endtimeVal, false);
+																}
+																$.ajax({
+																	url: "/rest/job/add",
+																	beforeSend: function (xhr) {
+		     												    	  xhr.setRequestHeader(header, token);
+		     												    	},
+		     												    	method: "POST",
+		     												    	data: {
+		     												    		jobPageId: pageId,
+		     												    		jobTitle: $(".job-title-input").val(),
+		     												    		jobParticipant1Id: participantsId[0],
+		     												    		jobParticipant2Id: participantsId[1],
+		     												    		jobParticipant3Id: participantsId[2],
+		     												    		jobStartTime: startTimestamp,
+		     												    		jobEndTime: endTimestamp,
+		     												    		jobPlace: $(".place-input").val(),
+		     												    		jobDescription: $(".job-content-input").val(),
+		     												    	},
+		     												    	success: function (res) {
+		     												    		console.log(res)
+		     												    	},
+																})
+															} else {
+																if (datetimeType == "time") {
+																	startTimestamp = timeToTimestamp(starttimeVal);
+																	console.log(startTimestamp);
+																} else {
+																	startTimestamp = datetimeToTimestamp(starttimeVal);
+																}
+																$.ajax({
+																	url: "/rest/job/add",
+																	beforeSend: function (xhr) {
+		     												    	  xhr.setRequestHeader(header, token);
+		     												    	},
+		     												    	method: "POST",
+		     												    	data: {
+		     												    		jobPageId: pageId,
+		     												    		jobTitle: $(".job-title-input").val(),
+		     												    		jobParticipant1Id: participantsId[0],
+		     												    		jobParticipant2Id: participantsId[1],
+		     												    		jobParticipant3Id: participantsId[2],
+		     												    		jobStartTime: startTimestamp,
+		     												    		jobPlace: $(".place-input").val(),
+		     												    		jobDescription: $(".job-content-input").val(),
+		     												    	},
+		     												    	success: function (res) {
+		     												    		console.log(res)
+		     												    	},
+																})
+															}
+															
 														})))))
 		    })
       });
