@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="/css/colors.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <jsp:include page="/WEB-INF/views/template/aside-script.jsp" />
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${appkey}&libraries=services"
+    ></script>
     <script type="text/javascript">
       $(function() {
     	  var header = $("meta[name='_csrf_header']").attr("content");
@@ -67,9 +71,11 @@
      									.attr("placeholder", "제목")
      									.addClass("job-title-input border-none outline-none text-16 title-font-color"))
      						.append($("<div>")
-     									.addClass("job-participant mt-8"))
+     									.addClass("job-participant"))
      						.append($("<div>")
-     									.addClass("job-datetime mt-16"))
+     									.addClass("job-datetime"))
+     						.append($("<div>")
+ 									.addClass("job-place flex flex-col"))
      						.append($("<textarea>")
      									.attr("placeholder", "내용을 작성하세요...")
      									.attr("rows", 2)
@@ -141,7 +147,7 @@
 	     		        			       	     															.click(function () {
 	     		        			       	     																$(this).closest(".participant-tab").remove();
 	     		        			       	     															}))
-	     		        			       	     											)
+	     		        			       	     											).addClass("mt-8")
 	     		        			       	     										  })
 	          												    			  
 	             												    		).css({
@@ -180,7 +186,7 @@
      		        			       	     															.click(function () {
     	     		        			       	     														$(this).closest(".participant-tab").remove();
     	     		        			       	     													}))
-     		        			       	     											)
+     		        			       	     											).addClass("mt-8")
      		        			       	     										  })
           												    			  
              												    		).css({
@@ -230,6 +236,7 @@
 												    	    $(".datetime-tab-btn").click(function (e) {
 												    	    	$(".datetime-dropdown").hide();
 												    	    	$(".job-datetime").empty();
+												    	    	$(".job-datetime").addClass("mt-16");
 												    	    	if ($(e.target).data("id") == 1) {
 												    	    		$(".job-datetime").append(
 												    	    				$("<span>").text("날짜 입력").addClass("text-12 text2-font-color")
@@ -267,7 +274,43 @@
 																.addClass("mr-4"))
 														.append($("<span>")
 																.text("장소")
-																.addClass("text-14 subtext-font-color"))))
+																.addClass("text-14 subtext-font-color"))
+														.click(function () {
+															$(".job-place").empty();
+															$(".job-place").addClass("mt-16");
+															$(".job-place").append(
+																	$("<span>").text("장소 입력").addClass("text-12 text2-font-color")
+										    	    				).append(
+										    	    					$("<input>").addClass("place-input mt-8 line-base border-1 outline-none round-6 px-8 py-4")
+										    	    				).append($("<div>").addClass("map none round-6 mt-8"))
+										    	    		var container = $(".map")[0];
+															
+															var options = {
+													          center: new kakao.maps.LatLng(37.566395, 126.987778),
+													          level: 3,
+													        };
+															
+															var map = new kakao.maps.Map(container, options);
+															
+															$(".place-input").on("blur", function() {
+																var address = $(this).val();
+																
+																var geocoder = new kakao.maps.services.Geocoder();
+																
+																geocoder.addressSearch(address, function (res, status) {
+																	if (status === kakao.maps.services.Status.OK) {
+																		var location = new kakao.maps.LatLng(res[0].y, res[0].x);
+															            var marker = new kakao.maps.Marker({
+															              map: map,
+															              position: location,
+															            });
+															            
+															            map.setCenter(location);
+															            $(".map").show();
+																	}
+																})
+															})
+														})))
      								.append($("<div>")
      										.addClass("flex")
      										.append($("<button>")

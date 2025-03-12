@@ -19,6 +19,11 @@ textarea {
   resize: none;
 }
 
+.map {
+  width: 100%;
+  height: 300px;
+}
+
 /* overflow */
 .overflow-hidden {
   overflow: hidden;

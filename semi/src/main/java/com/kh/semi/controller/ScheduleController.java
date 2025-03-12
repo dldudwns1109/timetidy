@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.semi.configuration.KakaomapAppkeyProperties;
 import com.kh.semi.dao.PageDao;
 import com.kh.semi.service.MemberService;
 
@@ -26,6 +27,9 @@ public class ScheduleController {
 	
 	@Autowired
 	private PageDao pageDao;
+	
+	@Autowired
+	private KakaomapAppkeyProperties kakaomapAppkeyProperties;
 	
 	@GetMapping("")
 	public String schedule(Model model, HttpSession session) throws IOException {
@@ -44,6 +48,8 @@ public class ScheduleController {
 		model.addAttribute("picture", memberService.loadSession(session)
 											.getMemberProfile());
 		model.addAttribute("pageDto", pageDao.detail(pageId));
+		model.addAttribute("appkey", kakaomapAppkeyProperties.getAppkey());
+		
 		return "/WEB-INF/views/schedule/detail.jsp";
 	}
 	
