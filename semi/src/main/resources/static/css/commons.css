@@ -447,7 +447,8 @@ textarea {
 }
 
 .modal-close-btn:hover,
-.social-tab-btn:hover {
+.social-tab-btn:hover,
+.datetime-tab-btn:hover {
   background-color: #e0e0e0;
 }
 
