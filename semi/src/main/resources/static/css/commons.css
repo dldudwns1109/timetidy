@@ -15,6 +15,9 @@ a {
 button {
   cursor: pointer;
 }
+textarea {
+  resize: none;
+}
 
 /* overflow */
 .overflow-hidden {
@@ -222,6 +225,9 @@ button {
 /* margin */
 .ml-14 {
   margin-left: 14px;
+}
+.mr-4 {
+  margin-right: 4px;
 }
 .mr-8 {
   margin-right: 8px;
