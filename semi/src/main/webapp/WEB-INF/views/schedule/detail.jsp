@@ -68,6 +68,8 @@
      									.addClass("job-title-input border-none outline-none text-16 title-font-color"))
      						.append($("<div>")
      									.addClass("job-participant mt-8"))
+     						.append($("<div>")
+     									.addClass("job-datetime mt-16"))
      						.append($("<textarea>")
      									.attr("placeholder", "내용을 작성하세요...")
      									.attr("rows", 2)
@@ -208,7 +210,56 @@
  																.addClass("mr-4"))
  														.append($("<span>")
  																.text("날짜")
- 																.addClass("text-14 subtext-font-color")))
+ 																.addClass("text-14 subtext-font-color"))
+ 														.click(function () {
+ 															var buttonOffset = $(this).offset();
+												    	    var buttonHeight = $(this).outerHeight();
+												    	    $(".datetime-dropdown").show();
+												    	    $(".datetime-dropdown-content")
+												    	    	.css({
+											    	          		top: buttonOffset.top + buttonHeight - 2,
+											    	          		left: buttonOffset.left,
+											    	        	})
+											    	        	
+											    	        $(window).click(function (e) {
+		       	     											if ($(e.target).is(".datetime-dropdown")) {
+		       	     											  $(".datetime-dropdown").hide();
+		       	     											}
+		       	     										});
+												    	    
+												    	    $(".datetime-tab-btn").click(function (e) {
+												    	    	$(".datetime-dropdown").hide();
+												    	    	$(".job-datetime").empty();
+												    	    	if ($(e.target).data("id") == 1) {
+												    	    		$(".job-datetime").append(
+												    	    				$("<span>").text("날짜 입력").addClass("text-12 text2-font-color")
+												    	    				).append(
+												    	    					$("<div>")
+												    	    						.append($("<input>").attr("type", "time").addClass("mr-8"))
+												    	    						.append($("<span>").text("~").addClass("mr-8"))
+												    	    						.append($("<input>").attr("type", "time"))
+												    	    						.addClass("mt-8"))
+												    	    	} else if ($(e.target).data("id") == 2) {
+												    	    		$(".job-datetime").append(
+												    	    				$("<span>").text("날짜 입력").addClass("text-12 text2-font-color")
+												    	    				).append(
+												    	    					$("<div>")
+												    	    						.append($("<input>").attr("type", "date").addClass("mr-8"))
+												    	    						.append($("<span>").text("~").addClass("mr-8"))
+												    	    						.append($("<input>").attr("type", "date"))
+												    	    						.addClass("mt-8"))
+												    	    	} else {
+												    	    		$(".job-datetime").append(
+												    	    				$("<span>").text("날짜 입력").addClass("text-12 text2-font-color")
+												    	    				).append(
+												    	    					$("<div>")
+												    	    						.append($("<input>").attr("type", "datetime-local").addClass("start-time-input mr-8"))
+												    	    						.append($("<span>").text("~").addClass("mr-8").addClass("end-time-input"))
+												    	    						.append($("<input>").attr("type", "datetime-local"))
+												    	    						.addClass("mt-8"))
+												    	    	}
+												    	    })
+ 														}))
      										.append($("<button>")
      													.addClass("flex items-center border-1 line-base round-6 trans-color outline-none py-4 pl-6 pr-8")
 														.append($("<img>")
@@ -279,6 +330,15 @@
 	 >
 	   <div class="social-dropdown-content absolute light inline-block border-1 line-base round-6 p-6">
 	     
+	   </div>
+	 </div>
+	 <div
+	   class="datetime-dropdown none justify-center items-center fixed left-0 top-0 w-100p h-100p"
+	 >
+	   <div class="datetime-dropdown-content absolute light flex flex-col border-1 line-base round-6 p-6">
+	     <button data-id="1" class="datetime-tab-btn trans-color border-none outline-none text-16 title-font-color round-6 px-4 py-6">시간</button>
+	     <button data-id="2" class="datetime-tab-btn trans-color border-none outline-none text-16 title-font-color round-6 px-4 py-6">기간</button>
+	     <button data-id="3" class="datetime-tab-btn trans-color border-none outline-none text-16 title-font-color round-6 px-4 py-6">시간 + 기간</button>
 	   </div>
 	 </div>
   </body>
