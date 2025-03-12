@@ -129,25 +129,29 @@
 	     		        			       	     										  ).addClass("social-tab-btn trans-color border-none outline-none flex items-center w-100p px-8 py-9 round-6"
 	     		        			       	     										  ).attr("data-id", val.socialRelativeId
 	     		        			       	     										  ).click(function () {
-	     		        			       	     											$(".social-dropdown").hide();
-	     		        			       	     											$(".job-participant").append(
-	     		        			       	     												$("<div>")
-	     		        			       	     													.attr("data-id", val.socialRelativeId)
-	     		        			       	     													.addClass("participant-tab px-8 py-9 mr-8 light-dark inline-block round-6")
-	     		        			       	     													.append($("<img>")
-	     		        			       	     															.attr("src", val.socialProfile)
-	     		        			       	     															.addClass("w-26 h-26 round-full mr-8 vertical-center"))
-	     		        			       	     													.append($("<span>")
-	     		        			       	     															.text(val.socialName)
-	     		        			       	     															.addClass("text-16 title-font-color vertical-center mr-4"))
-	     		        			       	     													.append($("<button>")
-	     		        			       	     															.addClass("trans-color border-none outline-none vertical-center w-24 h-24 p-0")
-	     		        			       	     															.append($("<img>")
-	     		        			       	     																		.attr("src", "/img/close.svg"))
-	     		        			       	     															.click(function () {
-	     		        			       	     																$(this).closest(".participant-tab").remove();
-	     		        			       	     															}))
-	     		        			       	     											).addClass("mt-8")
+	     		        			       	     											if (currParticipants.length < 3) {
+		     		        			       	     											$(".social-dropdown").hide();
+		     		        			       	     											$(".job-participant").append(
+		     		        			       	     												$("<div>")
+		     		        			       	     													.attr("data-id", val.socialRelativeId)
+		     		        			       	     													.addClass("participant-tab px-8 py-9 mr-8 light-dark inline-block round-6")
+		     		        			       	     													.append($("<img>")
+		     		        			       	     															.attr("src", val.socialProfile)
+		     		        			       	     															.addClass("w-26 h-26 round-full mr-8 vertical-center"))
+		     		        			       	     													.append($("<span>")
+		     		        			       	     															.text(val.socialName)
+		     		        			       	     															.addClass("text-16 title-font-color vertical-center mr-4"))
+		     		        			       	     													.append($("<button>")
+		     		        			       	     															.addClass("trans-color border-none outline-none vertical-center w-24 h-24 p-0")
+		     		        			       	     															.append($("<img>")
+		     		        			       	     																		.attr("src", "/img/close.svg"))
+		     		        			       	     															.click(function () {
+		     		        			       	     																$(this).closest(".participant-tab").remove();
+		     		        			       	     															}))
+		     		        			       	     											).addClass("mt-8")	
+	     		        			       	     											} else {
+	     		        			       	     												alert("최대 3명까지만 일정 공유가 가능합니다");
+	     		        			       	     											}
 	     		        			       	     										  })
 	          												    			  
 	             												    		).css({
@@ -242,18 +246,18 @@
 												    	    				$("<span>").text("날짜 입력").addClass("text-12 text2-font-color")
 												    	    				).append(
 												    	    					$("<div>")
-												    	    						.append($("<input>").attr("type", "time").addClass("mr-8"))
+												    	    						.append($("<input>").attr("type", "time").addClass("start-time-input mr-8"))
 												    	    						.append($("<span>").text("~").addClass("mr-8"))
-												    	    						.append($("<input>").attr("type", "time"))
+												    	    						.append($("<input>").attr("type", "time").addClass("end-time-input"))
 												    	    						.addClass("mt-8"))
 												    	    	} else if ($(e.target).data("id") == 2) {
 												    	    		$(".job-datetime").append(
 												    	    				$("<span>").text("날짜 입력").addClass("text-12 text2-font-color")
 												    	    				).append(
 												    	    					$("<div>")
-												    	    						.append($("<input>").attr("type", "date").addClass("mr-8"))
+												    	    						.append($("<input>").attr("type", "date").addClass("start-time-input mr-8"))
 												    	    						.append($("<span>").text("~").addClass("mr-8"))
-												    	    						.append($("<input>").attr("type", "date"))
+												    	    						.append($("<input>").attr("type", "date").addClass("end-time-input"))
 												    	    						.addClass("mt-8"))
 												    	    	} else {
 												    	    		$(".job-datetime").append(
@@ -261,8 +265,8 @@
 												    	    				).append(
 												    	    					$("<div>")
 												    	    						.append($("<input>").attr("type", "datetime-local").addClass("start-time-input mr-8"))
-												    	    						.append($("<span>").text("~").addClass("mr-8").addClass("end-time-input"))
-												    	    						.append($("<input>").attr("type", "datetime-local"))
+												    	    						.append($("<span>").text("~").addClass("mr-8"))
+												    	    						.append($("<input>").attr("type", "datetime-local").addClass("end-time-input"))
 												    	    						.addClass("mt-8"))
 												    	    	}
 												    	    })
@@ -322,6 +326,7 @@
 																.text("취소")
 																.addClass("text-16 subtext-font-color")))
 														.click(function () {
+															console.log('dsadsa')
 															var isDelete = true;
 															var jobInput = $(this).closest(".job-input");
 															if (jobInput.children(".job-title-input").val().length ||
@@ -341,7 +346,57 @@
 																.addClass("mr-4"))
 														.append($("<span>")
 																.text("추가")
-																.addClass("text-16 subtext-font-color"))))))
+																.addClass("text-16 subtext-font-color"))
+														.click(function(e) {
+															e.stopPropagation();
+															var participantsId = []; 
+															$.each($(".job-participant").children(), function (idx, val) {
+																participantsId.push($(val).data("id"))
+															})
+															var datetimeType = $(".start-time-input").attr("type");
+															var starttimeVal = $(".start-time-input").val();
+															var endtimeVal = $(".end-time-input").val();
+															var startTimestamp = null;
+															var endTimestamp = null;
+															if (datetimeType == "time") {
+																var currDate = new Date();
+																
+																var year = currDate.getFullYear();
+												                var month = String(currDate.getMonth() + 1).padStart(2, '0');  // 월은 0부터 시작
+												                var day = String(currDate.getDate()).padStart(2, '0');
+												                var formattedDate = year + '-' + month + '-' + day;
+												                
+												                var [startHours, startMinutes] = starttimeVal.split(":");
+												                var formattedTime = startHours + ':' + startMinutes;
+												                
+												                startTimestamp = formattedDate + ' ' + formattedTime + ':00.000';
+												                
+												                console.log(startTimestamp);
+															}
+															console.log()
+															$.ajax({
+																url: "/rest/job/add",
+																beforeSend: function (xhr) {
+	     												    	  xhr.setRequestHeader(header, token);
+	     												    	},
+	     												    	method: "POST",
+	     												    	data: {
+	     												    		jobPageId: pageId,
+	     												    		jobTitle: $(".job-title-input").val(),
+	     												    		jobParticipant1Id: participantsId[0],
+	     												    		jobParticipant2Id: participantsId[1],
+	     												    		jobParticipant3Id: participantsId[2],
+	     												    		jobStartTime: startTimestamp,
+// 	     												    		jobEndTime: endTimestamp,
+	     												    		jobPlace: $(".place-input").val(),
+	     												    		jobDescription: $(".job-content-input").val(),
+	     												    	},
+// 																data: {jobStartTime: startTimestamp},
+	     												    	success: function (res) {
+	     												    		console.log(res)
+	     												    	},
+															})
+														})))))
 		    })
       });
     </script>
