@@ -27,6 +27,134 @@
     	  var header = $("meta[name='_csrf_header']").attr("content");
     	  var token = $("meta[name='_csrf']").attr("content");
     	  var pageId = ${pageDto.pageId}
+    	  $.ajax({
+    		  url: "/rest/job/list",
+    		  beforeSend: function (xhr) {
+    		    xhr.setRequestHeader(header, token);
+    		  },
+    		  method: "GET",
+    		  data: {pageId: pageId},
+    		  success: function(res) {
+    		    $.each(res, function(idx, val) {
+    		    	$(".job-content").append(
+				    			$("<div>")
+				    				.attr("data-id", val.jobId)
+		     						.addClass("job-tab flex flex-col p-16 mb-16 line-base border-1 round-6")
+		     						.append($("<span>")
+		     									.text(val.jobTitle)
+		     									.addClass("text-20 title-font-color"))
+		     						.append($("<div>")
+		     									.append($("<div>").addClass("job-participants-tab"))
+						     					).append($("<div>")
+				     									.addClass("flex flex-col mt-16")
+				     									.append(
+				     											$("<span>")
+						     									.text("날짜")
+						     									.addClass("text-12 subtitle-font-color"))
+				     									.append(
+				     											$("<div>")
+				     												.addClass("datetime-tab mt-8")
+				     												.append($("<span>")
+									     									.text(new Date(val.jobStartTime).toLocaleString())
+									     									.addClass("text-12 text-font-color"))))
+		     						.append($("<div>").addClass("job-place-tab"))
+		     						.append($("<div>").addClass("job-description-tab"))
+				    		)
+				    		
+				    		if (val.jobParticipant1Id != null || val.jobParticipant2Id != null || val.jobParticipant3Id != null) {
+				    			var participantsTab = $("<div>")
+									.addClass("flex flex-col mt-16")
+ 									.append(
+ 											$("<span>")
+	     									.text("참여자")
+	     									.addClass("text-12 subtitle-font-color"))
+ 									.append($("<div>").addClass("participants-tab"));
+				    			$(".job-participants-tab").append(participantsTab);
+				    			
+				    			var participantsId = [
+			    		    		val.jobParticipant1Id,
+			    		    		val.jobParticipant2Id,
+			    		    		val.jobParticipant3Id
+			    		    	]
+			    		    	$.each(participantsId, function (idx, val2) {
+			    		    		$.ajax({
+			    		    			url: "/rest/social/find",
+			    		    			beforeSend: function (xhr) {
+			    		        		  xhr.setRequestHeader(header, token);
+			    		        		},
+			    		        		method: "GET",
+			    		        		data: {socialId: val2},
+			    		        		success: function(res) {
+			    		        			var participantTab = $("<div>")
+			    		        				.addClass("flex items-center mr-8 mt-8")
+												.append($("<img>").attr("src", res.socialProfile)
+													.addClass("w-26 h-26 round-full inline-block mr-8"))
+													.append($("<span>").text(res.socialName).addClass("text-16 title-font-color"));
+			    		        			$(".participants-tab").append(participantTab);
+			    		        		},
+			    		    		})
+			    		    	})
+				    		}
+				    		
+				    		if (val.jobEndTime != null) {
+        		    		var endTimeTab = $("<span>")
+    							.text("~ " + new Date(val.jobEndTime).toLocaleString())
+    								.addClass("text-12 text-font-color mt-8 ml-8");
+        		    		$('[data-id="' + val.jobId + '"] .datetime-tab').append(endTimeTab);
+        		    	}
+    		    	
+    		    		if (val.jobPlace != null) {
+    		    			var place = $("<div>")
+								.addClass("flex flex-col mt-8")
+									.append(
+											$("<span>")
+     									.text("장소")
+     									.addClass("text-12 subtitle-font-color"))
+									.append(
+											$("<span>")
+     									.text(val.jobPlace)
+     									.addClass("job-place-address text-12 text-font-color mt-8"))
+									.append(
+											$("<div>")
+     									.addClass("map mt-8 round-6"));
+    		    			
+    		    			$(".job-place-tab").append(place);
+    		    			var container = $('[data-id="' + val.jobId + '"] .map')[0];
+    						
+    						var options = {
+    				          center: new kakao.maps.LatLng(37.566395, 126.987778),
+    				          level: 3,
+    				        };
+    						
+    						var map = new kakao.maps.Map(container, options);
+    						
+    						var address = $('[data-id="' + val.jobId + '"] .job-place-address').text();
+    						
+    						var geocoder = new kakao.maps.services.Geocoder();
+    						
+    						geocoder.addressSearch(address, function (res, status) {
+    							if (status === kakao.maps.services.Status.OK) {
+    								var location = new kakao.maps.LatLng(res[0].y, res[0].x);
+    					            var marker = new kakao.maps.Marker({
+    					              map: map,
+    					              position: location,
+    					            });
+    					            
+    					            map.setCenter(location);
+    							}
+    						})
+    		    		}
+    		    		
+    		    		if (val.jobDescription != null) {
+    		    			var jobDescription = $("<p>")
+								.text(val.jobDescription)
+									.addClass("text-14 text-font-color mt-8");
+    		    			$(".job-description-tab").append(jobDescription);
+    		    		}
+    		    })
+    		  },
+    	  })
+    	  
     	  $(".title-input").blur(function() {
     		$.ajax({
     			url: "/rest/page/updateTitle",
@@ -415,7 +543,75 @@
 		     												    		jobDescription: $(".job-content-input").val(),
 		     												    	},
 		     												    	success: function (res) {
-		     												    		console.log(res)
+		     												    		$(".job-input").remove();
+		     												    		$(".job-add-area").show();
+		     												    		$(".job-content").append(
+		     												    			$("<div>")
+		     												    				.attr("data-id", res.jobId)
+		     										     						.addClass("job-tab flex flex-col p-16 mb-16 line-base border-1 round-6")
+		     										     						.append($("<span>")
+		     										     									.text(res.jobTitle)
+		     										     									.addClass("text-20 title-font-color"))
+		     										     						.append($("<div>")
+		     										     									.addClass("flex flex-col mt-16")
+		     										     									.append(
+		     										     											$("<span>")
+				     										     									.text("날짜")
+				     										     									.addClass("text-12 subtitle-font-color"))
+		     										     									.append(
+		     										     											$("<div>")
+		     										     												.addClass("mt-8")
+		     										     												.append($("<span>")
+		    				     										     									.text(new Date(res.jobStartTime).toLocaleString())
+		    				     										     									.addClass("text-12 text-font-color mr-8"))
+		    				     										     							.append($("<span>")
+		    				     										     									.text("~")
+		    				     										     									.addClass("text-12 text-font-color mr-8"))
+		    				     										     							.append($("<span>")
+		    				     										     									.text(new Date(res.jobEndTime).toLocaleString())
+		    				     										     									.addClass("text-12 text-font-color"))))
+		     										     						.append($("<div>")
+	     										     									.addClass("flex flex-col mt-8")
+	     										     									.append(
+	     										     											$("<span>")
+			     										     									.text("장소")
+			     										     									.addClass("text-12 subtitle-font-color"))
+	     										     									.append(
+	     										     											$("<span>")
+			     										     									.text(res.jobPlace)
+			     										     									.addClass("job-place-address text-12 text-font-color mt-8"))
+	     										     									.append(
+	     										     											$("<div>")
+			     										     									.addClass("map mt-8 round-6")))
+		     										     						.append($("<p>")
+		     										     									.text(res.jobDescription)
+		     										     									.addClass("text-14 text-font-color mt-8"))
+		     												    		)
+		     												    		var container = $('[data-id="' + res.jobId + '"] .map')[0];
+		     												    		console.log(container);
+		    															
+																		var options = {
+																          center: new kakao.maps.LatLng(37.566395, 126.987778),
+																          level: 3,
+																        };
+																		
+																		var map = new kakao.maps.Map(container, options);
+																		
+																		var address = $('[data-id="' + res.jobId + '"] .job-place-address').text();
+																		
+																		var geocoder = new kakao.maps.services.Geocoder();
+																		
+																		geocoder.addressSearch(address, function (res, status) {
+																			if (status === kakao.maps.services.Status.OK) {
+																				var location = new kakao.maps.LatLng(res[0].y, res[0].x);
+																	            var marker = new kakao.maps.Marker({
+																	              map: map,
+																	              position: location,
+																	            });
+																	            
+																	            map.setCenter(location);
+																			}
+																		})
 		     												    	},
 																})
 															} else {
@@ -478,7 +674,6 @@
 		     										     									.addClass("text-14 text-font-color mt-8"))
 		     												    		)
 		     												    		var container = $('[data-id="' + res.jobId + '"] .map')[0];
-		     												    		console.log(container);
 		    															
 																		var options = {
 																          center: new kakao.maps.LatLng(37.566395, 126.987778),

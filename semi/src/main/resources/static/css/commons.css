@@ -235,6 +235,9 @@ textarea {
 }
 
 /* margin */
+.ml-8 {
+  margin-left: 8px;
+}
 .ml-14 {
   margin-left: 14px;
 }
@@ -425,6 +428,10 @@ textarea {
 }
 .round-full {
   border-radius: 999px;
+}
+
+.z-999 {
+  z-index: 999;
 }
 
 .trans-color {

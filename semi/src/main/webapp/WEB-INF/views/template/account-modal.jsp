@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <div
-   class="account-modal none justify-center items-center fixed left-0 top-0 w-100p h-100p opacity-40"
+   class="account-modal none z-999 justify-center items-center fixed left-0 top-0 w-100p h-100p opacity-40"
  >
    <div class="light w-400 round-6">
      <div class="flex justify-between items-center px-16 py-11 bb-1 line-base">

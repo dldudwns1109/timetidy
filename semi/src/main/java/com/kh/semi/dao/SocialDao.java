@@ -71,7 +71,15 @@ public class SocialDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	public SocialDto findSocial(SocialDto socialDto) {
+	public SocialDto findSocial(int socialId) {
+		String sql = "select * from social "
+				+ "where social_id = ? ";
+		Object[] data = {socialId};
+		List<SocialDto> list = jdbcTemplate.query(sql, socialMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	public SocialDto findSocialDetail(SocialDto socialDto) {
 		String sql = "select * from social "
 				+ "where social_self_id = ? "
 				+ "and social_relative_id = ?";
