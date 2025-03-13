@@ -1,5 +1,7 @@
 package com.kh.semi.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -59,5 +61,12 @@ public class JobDao {
 				jobDto.getJobId()
 		};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	public List<JobDto> list(int pageId) {
+		String sql = "select * from job "
+				+ "where job_page_id = ?";
+		Object[] data = {pageId};
+		return jdbcTemplate.query(sql, jobMapper, data);
 	}
 }

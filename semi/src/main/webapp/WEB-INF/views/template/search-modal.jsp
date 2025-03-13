@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <div
-	class="search-modal none justify-center items-center fixed left-0 top-0 w-100p h-100p opacity-40"
+	class="search-modal z-999 none justify-center items-center fixed left-0 top-0 w-100p h-100p opacity-40"
 >
   <div class="light w-650 h-450 round-6">
     <div class="flex items-center p-16 bb-1 line-base">

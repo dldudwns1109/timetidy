@@ -94,7 +94,7 @@ public class NotificationRestController {
 		SocialDto socialDto = new SocialDto();
 		socialDto.setSocialSelfId(senderId);
 		socialDto.setSocialRelativeId((int) session.getAttribute("id"));
-		SocialDto findSocialDto = socialDao.findSocial(socialDto);
+		SocialDto findSocialDto = socialDao.findSocialDetail(socialDto);
 		for (int i = 1; i <= 3; i++) {
 			if (jobDao.existParticiapantId(jobId, i) == null) {
 				JobDto jobDto = new JobDto();

@@ -38,6 +38,11 @@ public class SocialRestController {
 		return socialDao.socialList((int) session.getAttribute("id"));
 	}
 	
+	@GetMapping("/find")
+	public SocialDto find(@RequestParam int socialId) {
+		return socialDao.findSocial(socialId);
+	}
+	
 	@GetMapping("/search-list")
 	public List<SocialDto> searchList(@RequestParam String keyword, HttpSession session) {
 		SocialDto socialDto = new SocialDto();
