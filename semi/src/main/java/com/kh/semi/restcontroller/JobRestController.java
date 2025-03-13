@@ -35,22 +35,25 @@ public class JobRestController {
 				jobDto.getJobParticipant3Id() == null 
 					? -1 : jobDto.getJobParticipant3Id()
 		);
+		int jobId = jobDao.sequence();
+		jobDto.setJobId(jobId);
+		jobDto.setJobHostId((int) session.getAttribute("id"));
+		jobDto.setJobParticipant1Id(null);
+		jobDto.setJobParticipant2Id(null);
+		jobDto.setJobParticipant3Id(null);
+		jobDao.insert(jobDto);
+		
 		for (Integer jobParticipantId : jobParticipantsId) {
 			if (jobParticipantId < 0) break;
 			NotificationDto notificationDto = new NotificationDto();
 			notificationDto.setNotificationId(notificationDao.sequence());
+			notificationDto.setNotificationJobId(Integer.valueOf(jobId));
 			notificationDto.setNotificationSenderId((int) session.getAttribute("id"));
 			notificationDto.setNotificationReceiverId(jobParticipantId);
 			notificationDto.setNotificationMessage("님이 일정에 초대했습니다. 일정을 수락하시겠습니까?");
 			notificationDao.insert(notificationDto);
 		}
 		
-		jobDto.setJobId(jobDao.sequence());
-		jobDto.setJobHostId((int) session.getAttribute("id"));
-		jobDto.setJobParticipant1Id(null);
-		jobDto.setJobParticipant2Id(null);
-		jobDto.setJobParticipant3Id(null);
-		jobDao.insert(jobDto);
 		return jobDto;
 	}
 }

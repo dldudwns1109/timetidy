@@ -18,9 +18,12 @@ public class JobMapper implements RowMapper<JobDto> {
 				.jobPageId(rs.getInt("job_page_id"))
 				.jobTitle(rs.getString("job_title"))
 				.jobHostId(rs.getInt("job_host_id"))
-				.jobParticipant1Id((Integer) rs.getObject("job_participant1_id"))
-				.jobParticipant2Id((Integer) rs.getObject("job_participant2_id"))
-				.jobParticipant3Id((Integer) rs.getObject("job_participant3_id"))
+				.jobParticipant1Id(rs.getObject("job_participant1_id") != null ? 
+            			rs.getInt("job_participant1_id") : null)
+				.jobParticipant2Id(rs.getObject("job_participant2_id") != null ? 
+            			rs.getInt("job_participant2_id") : null)
+				.jobParticipant3Id(rs.getObject("job_participant3_id") != null ? 
+            			rs.getInt("job_participant3_id") : null)
 				.jobStartTime(rs.getTimestamp("job_start_time"))
 				.jobEndTime(rs.getTimestamp("job_end_time"))
 				.jobPlace(rs.getString("job_place"))
