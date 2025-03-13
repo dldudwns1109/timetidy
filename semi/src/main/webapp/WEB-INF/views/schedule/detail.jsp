@@ -287,7 +287,7 @@
 										    	    				).append(
 										    	    					$("<input>").addClass("place-input mt-8 line-base border-1 outline-none round-6 px-8 py-4")
 										    	    				).append($("<div>").addClass("map none round-6 mt-8"))
-										    	    		var container = $(".map")[0];
+										    	    		var container = $(".job-input .map")[0];
 															
 															var options = {
 													          center: new kakao.maps.LatLng(37.566395, 126.987778),
@@ -441,7 +441,67 @@
 		     												    		jobDescription: $(".job-content-input").val(),
 		     												    	},
 		     												    	success: function (res) {
-		     												    		console.log(res)
+		     												    		$(".job-input").remove();
+		     												    		$(".job-add-area").show();
+		     												    		$(".job-content").append(
+		     												    			$("<div>")
+		     												    				.attr("data-id", res.jobId)
+		     										     						.addClass("job-tab flex flex-col p-16 mb-16 line-base border-1 round-6")
+		     										     						.append($("<span>")
+		     										     									.text(res.jobTitle)
+		     										     									.addClass("text-20 title-font-color"))
+		     										     						.append($("<div>")
+		     										     									.addClass("flex flex-col mt-16")
+		     										     									.append(
+		     										     											$("<span>")
+				     										     									.text("날짜")
+				     										     									.addClass("text-12 subtitle-font-color"))
+		     										     									.append(
+		     										     											$("<span>")
+				     										     									.text(new Date(res.jobStartTime).toLocaleString())
+				     										     									.addClass("text-12 text-font-color mt-8")))
+		     										     						.append($("<div>")
+	     										     									.addClass("flex flex-col mt-8")
+	     										     									.append(
+	     										     											$("<span>")
+			     										     									.text("장소")
+			     										     									.addClass("text-12 subtitle-font-color"))
+	     										     									.append(
+	     										     											$("<span>")
+			     										     									.text(res.jobPlace)
+			     										     									.addClass("job-place-address text-12 text-font-color mt-8"))
+	     										     									.append(
+	     										     											$("<div>")
+			     										     									.addClass("map mt-8 round-6")))
+		     										     						.append($("<p>")
+		     										     									.text(res.jobDescription)
+		     										     									.addClass("text-14 text-font-color mt-8"))
+		     												    		)
+		     												    		var container = $('[data-id="' + res.jobId + '"] .map')[0];
+		     												    		console.log(container);
+		    															
+																		var options = {
+																          center: new kakao.maps.LatLng(37.566395, 126.987778),
+																          level: 3,
+																        };
+																		
+																		var map = new kakao.maps.Map(container, options);
+																		
+																		var address = $('[data-id="' + res.jobId + '"] .job-place-address').text();
+																		
+																		var geocoder = new kakao.maps.services.Geocoder();
+																		
+																		geocoder.addressSearch(address, function (res, status) {
+																			if (status === kakao.maps.services.Status.OK) {
+																				var location = new kakao.maps.LatLng(res[0].y, res[0].x);
+																	            var marker = new kakao.maps.Marker({
+																	              map: map,
+																	              position: location,
+																	            });
+																	            
+																	            map.setCenter(location);
+																			}
+																		})
 		     												    	},
 																})
 															}
