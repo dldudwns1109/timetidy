@@ -216,5 +216,9 @@
 	$(".social-btn").click(function() {
 	  location.href = "/schedule/social/list";
 	});
+
+	$(".calendar-btn").click(function() {
+	  location.href = "/schedule/calendar";
+	});
   });
 </script>

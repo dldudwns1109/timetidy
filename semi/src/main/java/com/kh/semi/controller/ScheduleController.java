@@ -90,4 +90,13 @@ public class ScheduleController {
 				.getMemberProfile());
 		return "/WEB-INF/views/schedule/social/add.jsp";
 	}
+	
+	@GetMapping("/calendar")
+	public String calendar(Model model, HttpSession session) {
+		model.addAttribute("name", memberService.loadSession(session)
+				.getMemberName());
+		model.addAttribute("picture", memberService.loadSession(session)
+				.getMemberProfile());
+		return "/WEB-INF/views/schedule/calendar.jsp";
+	}
 }
