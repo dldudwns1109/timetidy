@@ -326,7 +326,6 @@
 																.text("취소")
 																.addClass("text-16 subtext-font-color")))
 														.click(function () {
-															console.log('dsadsa')
 															var isDelete = true;
 															var jobInput = $(this).closest(".job-input");
 															if (jobInput.children(".job-title-input").val().length ||
@@ -349,6 +348,14 @@
 																.addClass("text-16 subtext-font-color"))
 														.click(function(e) {
 															e.stopPropagation();
+															if ($(".job-title-input").val() == "") {
+																alert("제목을 추가해주세요");
+																return;
+															} else if ($(".start-time-input").val() == "" || 
+																	$(".start-time-input").val() == undefined) {
+																alert("시작 시간을 추가해주세요");
+																return;
+															}
 															var participantsId = []; 
 															$.each($(".job-participant").children(), function (idx, val) {
 																participantsId.push($(val).data("id"))
@@ -368,8 +375,6 @@
 																		timeVal.split(":")[1] + ":00.000";
 															}
 															function dateToTimestamp(timeVal, isStart) {
-																console.log(timeVal);
-																console.log((isStart ? " 00:00:00.000" : " 23:59:59.000"));
 																return timeVal + (isStart ? " 00:00:00.000" : " 23:59:59.000");
 															}
 															function datetimeToTimestamp(timeVal) {
@@ -416,7 +421,6 @@
 															} else {
 																if (datetimeType == "time") {
 																	startTimestamp = timeToTimestamp(starttimeVal);
-																	console.log(startTimestamp);
 																} else {
 																	startTimestamp = datetimeToTimestamp(starttimeVal);
 																}
