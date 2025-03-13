@@ -12,14 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.semi.dao.JobDao;
 import com.kh.semi.dao.NotificationDao;
+import com.kh.semi.dao.SocialDao;
 import com.kh.semi.dto.JobDto;
 import com.kh.semi.dto.NotificationDto;
+import com.kh.semi.dto.SocialDto;
 
 import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/rest/job")
 public class JobRestController {
+	
+	@Autowired
+	private SocialDao socialDao;
 	
 	@Autowired
 	private NotificationDao notificationDao;
@@ -62,5 +67,16 @@ public class JobRestController {
 	@GetMapping("/list")
 	public List<JobDto> list(@RequestParam int pageId) {
 		return jobDao.list(pageId);
+	}
+	
+	@GetMapping("/calendar-list")
+	public List<JobDto> calendarList(HttpSession session) {
+		SocialDto socialDto = socialDao.findSocialRelative((int) session.getAttribute("id"));
+		JobDto jobDto = new JobDto();
+		jobDto.setJobHostId((int) session.getAttribute("id"));
+		jobDto.setJobParticipant1Id(socialDto.getSocialId());
+		jobDto.setJobParticipant2Id(socialDto.getSocialId());
+		jobDto.setJobParticipant3Id(socialDto.getSocialId());
+		return jobDao.personalList(jobDto);
 	}
 }
