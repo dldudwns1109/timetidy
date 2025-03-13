@@ -25,11 +25,13 @@ public class NotificationDao {
 	
 	public void insert(NotificationDto notificationDto) {
 		String sql = "insert into notification ("
-				+ "notification_id, notification_sender_id, "
-				+ "notification_receiver_id, notification_message"
-				+ ") values (?, ?, ?, ?)";
+				+ "notification_id, notification_job_id, "
+				+ "notification_sender_id, notification_receiver_id, "
+				+ "notification_message"
+				+ ") values (?, ?, ?, ?, ?)";
 		Object[] data = {
 				notificationDto.getNotificationId(),
+				notificationDto.getNotificationJobId(),
 				notificationDto.getNotificationSenderId(),
 				notificationDto.getNotificationReceiverId(),
 				notificationDto.getNotificationMessage()
@@ -43,6 +45,19 @@ public class NotificationDao {
 				+ "and notification_sender_id = ? "
 				+ "and notification_receiver_id = ?";
 		Object[] data = {
+				notificationDto.getNotificationSenderId(),
+				notificationDto.getNotificationReceiverId()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	public boolean deleteJob(NotificationDto notificationDto) {
+		String sql = "delete notification "
+				+ "where notification_job_id = ? "
+				+ "and notification_sender_id = ? "
+				+ "and notification_receiver_id = ?";
+		Object[] data = {
+				notificationDto.getNotificationJobId(),
 				notificationDto.getNotificationSenderId(),
 				notificationDto.getNotificationReceiverId()
 		};

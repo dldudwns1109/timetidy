@@ -89,6 +89,21 @@
     	    	    				        	    	    		notificationTab.remove();
     	    	    				        	    	    	},
     	    	    				        				})
+    	    	    				        			} else {
+    	    	    				        				$.ajax({
+    	    	    				        					url: "/rest/notification/accept-date",
+    	    	    				        					beforeSend: function (xhr) {
+      	    	    				        	    	    	  xhr.setRequestHeader(header, token);
+      	    	    				        	    	    	},
+      	    	    				        	    	    	method: "POST",
+      	    	    				        	    	    	data: {
+      	    	    				        	    	    		senderId: notificationTab.data("id"),
+      	    	    				        	    	    		jobId: notificationTab.data("job-id"),
+      	    	    				        	    	    	},
+      	    	    				        	    	    	success: function(res) {
+      	    	    				        	    	    		notificationTab.remove();
+      	    	    				        	    	    	}
+    	    	    				        				})
     	    	    				        			}
     	    	    				        		})
     	    	    				        		)

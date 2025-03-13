@@ -40,4 +40,24 @@ public class JobDao {
 		};
 		jdbcTemplate.update(sql, data);
 	}
+	
+	public Integer existParticiapantId(int jobId, int participantNum) {
+		String sql = "select job_participant#1_id from job "
+				+ "where job_id = ?";
+		sql = sql.replace("#1", String.valueOf(participantNum));
+		Object[] data = {jobId};
+		return jdbcTemplate.queryForObject(sql, Integer.class, data);
+	}
+	
+	public boolean updateParticipantId(JobDto jobDto, int participantNum) {
+		String sql = "update job "
+				+ "set job_participant#1_id = ? "
+				+ "where job_id = ?";
+		sql = sql.replace("#1", String.valueOf(participantNum));
+		Object[] data = {
+				jobDto.getJobParticipant1Id(),
+				jobDto.getJobId()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 }
