@@ -324,6 +324,9 @@ textarea {
 .p-16 {
   padding: 16px;
 }
+.p-32 {
+  pdading: 32px;
+}
 .pl-4 {
   padding-left: 4px;
 }
@@ -495,6 +498,16 @@ textarea {
   background-color: #38b000;
 }
 .accept-btn:hover span {
+  color: #ffffff;
+}
+
+.job-update-btn:hover {
+  background-color: #00a6fb;
+  color: #ffffff;
+}
+
+.job-delete-btn:hover {
+  background-color: #c1121f;
   color: #ffffff;
 }
 

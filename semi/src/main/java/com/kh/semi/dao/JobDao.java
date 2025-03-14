@@ -43,6 +43,12 @@ public class JobDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
+	public boolean delete(int jobId) {
+		String sql = "delete job where job_id = ?";
+		Object[] data = {jobId};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 	public Integer existParticiapantId(int jobId, int participantNum) {
 		String sql = "select job_participant#1_id from job "
 				+ "where job_id = ?";
