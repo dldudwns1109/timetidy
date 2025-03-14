@@ -19,8 +19,8 @@ public class PageReadInterceptor implements HandlerInterceptor {
 	private PageDao pageDao;
 	
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+	public boolean preHandle(HttpServletRequest request, 
+			HttpServletResponse response, Object handler) throws Exception {
 		String requestURI = request.getRequestURI();
 		
 		String[] parts = requestURI.split("/");

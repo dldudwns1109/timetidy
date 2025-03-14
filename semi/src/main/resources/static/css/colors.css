@@ -15,6 +15,9 @@
 .light {
   background-color: #ffffff;
 }
+.trans-color {
+  background-color: transparent;
+}
 
 .netural {
   background-color: #e0e0e0;

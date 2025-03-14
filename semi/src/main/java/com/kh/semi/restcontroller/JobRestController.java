@@ -43,8 +43,9 @@ public class JobRestController {
 					? -1 : jobDto.getJobParticipant3Id()
 		);
 		int jobId = jobDao.sequence();
+		int selfId = (int) session.getAttribute("id");
 		jobDto.setJobId(jobId);
-		jobDto.setJobHostId((int) session.getAttribute("id"));
+		jobDto.setJobHostId(selfId);
 		jobDto.setJobParticipant1Id(null);
 		jobDto.setJobParticipant2Id(null);
 		jobDto.setJobParticipant3Id(null);
@@ -55,7 +56,7 @@ public class JobRestController {
 			NotificationDto notificationDto = new NotificationDto();
 			notificationDto.setNotificationId(notificationDao.sequence());
 			notificationDto.setNotificationJobId(Integer.valueOf(jobId));
-			notificationDto.setNotificationSenderId((int) session.getAttribute("id"));
+			notificationDto.setNotificationSenderId(selfId);
 			notificationDto.setNotificationReceiverId(jobParticipantId);
 			notificationDto.setNotificationMessage("님이 일정에 초대했습니다. 일정을 수락하시겠습니까?");
 			notificationDao.insert(notificationDto);
@@ -87,10 +88,10 @@ public class JobRestController {
 	
 	@GetMapping("/calendar-list")
 	public List<JobDto> calendarList(HttpSession session) {
-		List<JobDto> jobList = jobDao.hostList((int) session.getAttribute("id"));
+		int selfId = (int) session.getAttribute("id");
+		List<JobDto> jobList = jobDao.hostList(selfId);
 		
-		for (SocialDto socialDto: 
-			socialDao.socialRelativeList((int) session.getAttribute("id"))) {
+		for (SocialDto socialDto: socialDao.socialRelativeList(selfId)) {
 			for (JobDto jobDto: 
 				jobDao.participantList(socialDto.getSocialId())) {
 				jobList.add(jobDto);
