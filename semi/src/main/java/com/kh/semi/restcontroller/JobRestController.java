@@ -71,12 +71,16 @@ public class JobRestController {
 	
 	@GetMapping("/calendar-list")
 	public List<JobDto> calendarList(HttpSession session) {
-		SocialDto socialDto = socialDao.findSocialRelative((int) session.getAttribute("id"));
-		JobDto jobDto = new JobDto();
-		jobDto.setJobHostId((int) session.getAttribute("id"));
-		jobDto.setJobParticipant1Id(socialDto.getSocialId());
-		jobDto.setJobParticipant2Id(socialDto.getSocialId());
-		jobDto.setJobParticipant3Id(socialDto.getSocialId());
-		return jobDao.personalList(jobDto);
+		List<JobDto> jobList = jobDao.hostList((int) session.getAttribute("id"));
+		
+		for (SocialDto socialDto: 
+			socialDao.findSocialRelative((int) session.getAttribute("id"))) {
+			for (JobDto jobDto: 
+				jobDao.participantList(socialDto.getSocialId())) {
+				jobList.add(jobDto);
+			}
+		}
+		
+		return jobList;
 	}
 }

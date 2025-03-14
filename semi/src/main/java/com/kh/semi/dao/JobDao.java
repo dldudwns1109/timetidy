@@ -70,18 +70,19 @@ public class JobDao {
 		return jdbcTemplate.query(sql, jobMapper, data);
 	}
 	
-	public List<JobDto> personalList(JobDto jobDto) {
+	public List<JobDto> hostList(int hostId) {
 		String sql = "select * from job "
-				+ "where job_host_id = ? "
-				+ "or job_participant1_id = ? "
+				+ "where job_host_id = ?";
+		Object[] data = {hostId};
+		return jdbcTemplate.query(sql, jobMapper, data);
+	}
+	
+	public List<JobDto> participantList(int socialId) {
+		String sql = "select * from job "
+				+ "where job_participant1_id = ? "
 				+ "or job_participant2_id = ? "
 				+ "or job_participant3_id = ?";
-		Object[] data = {
-				jobDto.getJobHostId(),
-				jobDto.getJobParticipant1Id(),
-				jobDto.getJobParticipant2Id(),
-				jobDto.getJobParticipant3Id()
-		};
+		Object[] data = {socialId, socialId, socialId};
 		return jdbcTemplate.query(sql, jobMapper, data);
 	}
 }
