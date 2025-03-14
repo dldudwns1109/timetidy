@@ -59,6 +59,30 @@
 									     									.addClass("text-12 text-font-color"))))
 		     						.append($("<div>").addClass("job-place-tab"))
 		     						.append($("<div>").addClass("job-description-tab"))
+		     						.hover(function () {
+		     							$(this).closest(".job-tab").append(
+		     									$("<div>").append(
+		     											$("<button>").text("수정").addClass("job-update-btn trans-color border-1 brand-b px-8 py-6 text-16 subtext-font-color round-6 mr-8"))
+		     											.append(
+				     											$("<button>").text("삭제").addClass("job-delete-btn trans-color border-1 negative-b px-8 py-6 text-16 subtext-font-color round-6")
+				     												.click(function () {
+				     													var jobTab = $(this).closest(".job-tab");
+				     													$.ajax({
+				     														url: "/rest/job/delete",
+				     														beforeSend: function (xhr) {
+				     											    		  xhr.setRequestHeader(header, token);
+				     											    		},
+				     											    		method: "POST",
+				     											    		data: {jobId: jobTab.data("id")},
+				     											    		success: function () {
+				     											    			jobTab.remove();
+				     											    		},
+				     													})
+				     												}))
+				     									.addClass("update-delete-btn flex justify-end mt-16"))
+		     						}, function () {
+		     							$(".update-delete-btn").remove();
+		     						})
 				    		)
 				    		
 				    		if (val.jobParticipant1Id != null || val.jobParticipant2Id != null || val.jobParticipant3Id != null) {
@@ -77,22 +101,24 @@
 			    		    		val.jobParticipant3Id
 			    		    	]
 			    		    	$.each(participantsId, function (idx, val2) {
-			    		    		$.ajax({
-			    		    			url: "/rest/social/find",
-			    		    			beforeSend: function (xhr) {
-			    		        		  xhr.setRequestHeader(header, token);
-			    		        		},
-			    		        		method: "GET",
-			    		        		data: {socialId: val2},
-			    		        		success: function(res) {
-			    		        			var participantTab = $("<div>")
-			    		        				.addClass("flex items-center mr-8 mt-8")
-												.append($("<img>").attr("src", res.socialProfile)
-													.addClass("w-26 h-26 round-full inline-block mr-8"))
-													.append($("<span>").text(res.socialName).addClass("text-16 title-font-color"));
-			    		        			$(".participants-tab").append(participantTab);
-			    		        		},
-			    		    		})
+			    		    		if (val2 != null) {
+			    		    			$.ajax({
+				    		    			url: "/rest/social/find",
+				    		    			beforeSend: function (xhr) {
+				    		        		  xhr.setRequestHeader(header, token);
+				    		        		},
+				    		        		method: "GET",
+				    		        		data: {socialId: val2},
+				    		        		success: function(res) {
+				    		        			var participantTab = $("<div>")
+				    		        				.addClass("flex items-center mr-8 mt-8")
+													.append($("<img>").attr("src", res.socialProfile)
+														.addClass("w-26 h-26 round-full inline-block mr-8"))
+														.append($("<span>").text(res.socialName).addClass("text-16 title-font-color"));
+				    		        			$(".participants-tab").append(participantTab);
+				    		        		},
+				    		    		})
+			    		    		}
 			    		    	})
 				    		}
 				    		
@@ -519,8 +545,6 @@
 																} else if (endtimeVal == "") {
 																	startTimestamp = dateToTimestamp(starttimeVal, true);
 																	endTimestamp = dateToTimestamp(starttimeVal, false);
-																	console.log(startTimestamp)
-																	console.log(endTimestamp)
 																} else {
 																	startTimestamp = dateToTimestamp(starttimeVal, true);
 																	endTimestamp = dateToTimestamp(endtimeVal, false);
@@ -588,7 +612,6 @@
 		     										     									.addClass("text-14 text-font-color mt-8"))
 		     												    		)
 		     												    		var container = $('[data-id="' + res.jobId + '"] .map')[0];
-		     												    		console.log(container);
 		    															
 																		var options = {
 																          center: new kakao.maps.LatLng(37.566395, 126.987778),

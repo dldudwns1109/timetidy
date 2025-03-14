@@ -64,6 +64,11 @@ public class JobRestController {
 		return jobDto;
 	}
 	
+	@PostMapping("/delete")
+	public void delete(@RequestParam int jobId) {
+		jobDao.delete(jobId);
+	}
+	
 	@GetMapping("/list")
 	public List<JobDto> list(@RequestParam int pageId) {
 		return jobDao.list(pageId);

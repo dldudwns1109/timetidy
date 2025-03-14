@@ -70,9 +70,6 @@
   	            
   	            $(".event-title").text(event.title);
   	      		$(".event-host").text(event.extendedProps.host);
-//   	            $(".event-participant1").text(event.extendedProps.participant1);
-//   	          	$(".event-participant2").text(event.extendedProps.participant2);
-//   	        	$(".event-participant3").text(event.extendedProps.participant3);
   	        	$(".event-start").text(new Date(event.start).toLocaleString());
   	        	$(".event-end").text(event.end != null ? ("~ " + new Date(event.end).toLocaleString()) : null);
   	            $(".event-location").text(event.location);
@@ -168,7 +165,7 @@
 	      <div class="calendar w-1000 py-64"></div>
 	
 	      <div class="event-modal none z-999 justify-center items-center fixed left-0 top-0 w-100p h-100p opacity-20">
-	      	<div class="light w-620 p-16 round-6 inline-block">
+	      	<div class="light w-620 p-32 round-6 inline-block">
 	        <div>
 	          <span class="event-title title-20 title-font-color"></span>
 	          <div class="mt-16">
