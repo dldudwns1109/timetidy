@@ -79,14 +79,6 @@ public class SocialDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	public SocialDto findSocialRelative(int socialRelativeId) {
-		String sql = "select * from social "
-				+ "where social_relative_id = ? ";
-		Object[] data = {socialRelativeId};
-		List<SocialDto> list = jdbcTemplate.query(sql, socialMapper, data);
-		return list.isEmpty() ? null : list.get(0);
-	}
-	
 	public SocialDto findSocialDetail(SocialDto socialDto) {
 		String sql = "select * from social "
 				+ "where social_self_id = ? "
@@ -97,6 +89,13 @@ public class SocialDao {
 		};
 		List<SocialDto> list = jdbcTemplate.query(sql, socialMapper, data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	public List<SocialDto> findSocialRelative(int socialRelativeId) {
+		String sql = "select * from social "
+				+ "where social_relative_id = ?";
+		Object[] data = {socialRelativeId};
+		return jdbcTemplate.query(sql, socialMapper, data);
 	}
 	
 	public List<SocialDto> socialList(int selfId) {

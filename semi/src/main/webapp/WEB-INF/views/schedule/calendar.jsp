@@ -49,55 +49,54 @@
     </style>
     <jsp:include page="/WEB-INF/views/template/aside-script.jsp" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
     <script type="text/javascript">
     	$(function () {
-    		var header = $("meta[name='_csrf_header']").attr("content");
-      	  	var token = $("meta[name='_csrf']").attr("content");
+    	  var header = $("meta[name='_csrf_header']").attr("content");
+      	  var token = $("meta[name='_csrf']").attr("content");
       	  var calendar = $(".calendar").fullCalendar({
-  	          events: [
-  	            {
-  	              title: "Meeting with John",
-  	              start: "2025-01-28T10:00:00",
-  	              end: "2025-01-29T12:00:00",
-  	              description: "Discuss project details",
-  	              location: "제주도 푸른 곳",
-  	              extendedProps: {
-  	                participants1: 1,
-  	                participants2: 2,
-  	                participants3: 3,
-  	              },
-  	            },
-  	            {
-  	              title: "Meeting with John",
-  	              start: "2025-02-28T10:00:00",
-  	              end: "2025-02-28T12:00:00",
-  	              description: "Discuss project details",
-  	            },
-  	            {
-  	              title: "Lunch with Sarah",
-  	              start: "2025-03-01T13:00:00",
-  	              end: "2025-03-01T14:00:00",
-  	              description: "Casual lunch",
-  	            },
-  	            {
-  	              title: "Conference Call",
-  	              start: "2025-03-02T09:00:00",
-  	              end: "2025-03-02T10:00:00",
-  	              description: "Monthly conference call",
-  	            },
-  	          ],
+  	          events: function (start, end, timezone, callback) {
+  	        	$.ajax({
+  	      	  		url: "/rest/job/calendar-list",
+  	      	  		beforeSend: function (xhr) {
+  	    		      xhr.setRequestHeader(header, token);
+  	    		  	},
+  	    		  	method: "GET",
+  	    		  	success: function (res) {
+  	    		  		console.log(res)
+  	    		  		var events = res.map(function (event) {
+  	    		  			return {
+  	    		  				title: event.jobTitle,
+  	    		  				start: moment(new Date(event.jobStartTime)).tz("Asia/Seoul", true).format(),
+  	    		  				end: moment(new Date(event.jobEndTime)).tz("Asia/Seoul", true).format(),
+  	    		  				location: event.jobPlace,
+  	    		  				description: event.jobDescription,
+  	    		  				extendedProps: {
+  	    		  					host: event.jobHostId,
+  	    		  					participant1: event.jobParticipant1Id,
+  	    		  					participant2: event.jobParticipant2Id,
+  	    		  					participant3: event.jobParticipant3Id,
+  	    		  				},
+  	    		  			};
+  	    		  		})
+  	    		  		callback(events);
+  	    		  	},
+  	      	  	})
+  	          },
   	          dayClick: function (date, jsEvent, view) {
   	        	  
   	          },
-
   	          eventClick: function (event) {
   	            $(".event-modal").show();
   	            
   	            $(".event-title").text(event.title);
   	            $(".event-description").text(event.description);
   	            $(".event-location").text(event.location);
-  	            $(".event-participants1").text(event.extendedProps.participants1);
+  	      		$(".event-host").text(event.extendedProps.host);
+  	            $(".event-participant1").text(event.extendedProps.participant1);
+  	          	$(".event-participant2").text(event.extendedProps.participant2);
+  	        	$(".event-participant3").text(event.extendedProps.participant3);
   	          },
   	        });
 
@@ -117,9 +116,12 @@
 	    <div class="event-modal">
 	      <h3>Event Details</h3>
 	      <p>Title: <span class="event-title"></span></p>
+	      <p>host: <span class="event-host"></span></p>
+	      <p>participants1: <span class="event-participant1"></span></p>
+	      <p>participants2: <span class="event-participant2"></span></p>
+	      <p>participants3: <span class="event-participant3"></span></p>
 	      <p>Description: <span class="event-description"></span></p>
 	      <p>Location: <span class="event-location"></span></p>
-	      <p>participants1: <span class="event-participants1"></span></p>
 	      <button type="button" class="close-btn">Close</button>
 	    </div>
       </div>
