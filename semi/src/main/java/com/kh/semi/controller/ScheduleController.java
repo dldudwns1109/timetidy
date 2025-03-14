@@ -97,6 +97,7 @@ public class ScheduleController {
 				.getMemberName());
 		model.addAttribute("picture", memberService.loadSession(session)
 				.getMemberProfile());
+		model.addAttribute("appkey", kakaomapAppkeyProperties.getAppkey());
 		return "/WEB-INF/views/schedule/calendar.jsp";
 	}
 }
