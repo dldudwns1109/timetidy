@@ -43,6 +43,33 @@ public class JobDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
+	public JobDto find(int jobId) {
+		String sql = "select * from job "
+				+ "where job_id = ?";
+		Object[] data = {jobId};
+		List<JobDto> list = jdbcTemplate.query(sql, jobMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	public boolean update(JobDto jobDto) {
+		String sql = "update job "
+				+ "set job_title = ?, "
+				+ "job_start_time = ?, "
+				+ "job_end_time = ?, "
+				+ "job_place = ?,"
+				+ "job_description = ? "
+				+ "where job_id = ?";
+		Object[] data = {
+				jobDto.getJobTitle(),
+				jobDto.getJobStartTime(),
+				jobDto.getJobEndTime(),
+				jobDto.getJobPlace(),
+				jobDto.getJobDescription(),
+				jobDto.getJobId()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 	public boolean delete(int jobId) {
 		String sql = "delete job where job_id = ?";
 		Object[] data = {jobId};
@@ -71,7 +98,8 @@ public class JobDao {
 	
 	public List<JobDto> list(int pageId) {
 		String sql = "select * from job "
-				+ "where job_page_id = ?";
+				+ "where job_page_id = ? "
+				+ "order by job_id asc";
 		Object[] data = {pageId};
 		return jdbcTemplate.query(sql, jobMapper, data);
 	}
