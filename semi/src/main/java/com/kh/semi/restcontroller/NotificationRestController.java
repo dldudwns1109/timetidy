@@ -17,6 +17,8 @@ import com.kh.semi.dto.JobDto;
 import com.kh.semi.dto.MemberDto;
 import com.kh.semi.dto.NotificationDto;
 import com.kh.semi.dto.SocialDto;
+import com.kh.semi.service.NotificationService;
+import com.kh.semi.service.SocialService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -28,72 +30,54 @@ public class NotificationRestController {
 	private NotificationDao notificationDao;
 	
 	@Autowired
-	private MemberDao memberDao;
-	
-	@Autowired
 	private SocialDao socialDao;
 	
 	@Autowired
 	private JobDao jobDao;
 	
+	@Autowired
+	private NotificationService notificationService;
+	
+	@Autowired
+	private SocialService socialService;
+	
 	@PostMapping("/add")
 	public void add(@RequestParam int receiverId, HttpSession session) {
+		int selfId = (int) session.getAttribute("id");
 		NotificationDto notificationDto = new NotificationDto();
 		notificationDto.setNotificationId(notificationDao.sequence());
 		notificationDto.setNotificationJobId(null);
-		notificationDto.setNotificationSenderId((int) session.getAttribute("id"));
+		notificationDto.setNotificationSenderId(selfId);
 		notificationDto.setNotificationReceiverId(receiverId);
 		notificationDto.setNotificationMessage("님이 친구 추가를 요청하셨습니다. 수락하시겠습니까?");
 		notificationDao.insert(notificationDto);
 		
-		MemberDto memberDto = memberDao.findMember(receiverId);
-		SocialDto socialDto = new SocialDto();
-		socialDto.setSocialId(socialDao.sequence());
-		socialDto.setSocialSelfId((int) session.getAttribute("id"));
-		socialDto.setSocialRelativeId(receiverId);
-		socialDto.setSocialName(memberDto.getMemberName());
-		socialDto.setSocialProfile(memberDto.getMemberProfile());
-		socialDto.setSocialEmail(memberDto.getMemberEmail());
-		socialDto.setSocialPendingState("y");
-		socialDao.insert(socialDto);
+		socialService.addSocial(selfId, receiverId, true);
 	}
 	
 	@PostMapping("/accept")
 	public void accept(@RequestParam int senderId, HttpSession session) {
-		NotificationDto notificationDto = new NotificationDto();
-		notificationDto.setNotificationSenderId(senderId);
-		notificationDto.setNotificationReceiverId((int) session.getAttribute("id"));
-		notificationDao.delete(notificationDto);
-
-		notificationDto.setNotificationSenderId((int) session.getAttribute("id"));
-		notificationDto.setNotificationReceiverId(senderId);
-		notificationDao.delete(notificationDto);
+		int selfId = (int) session.getAttribute("id");
+		notificationService.deleteNotification(senderId, selfId);
+		notificationService.deleteNotification(selfId, senderId);
 		
 		socialDao.update(senderId);
-		MemberDto memberDto = memberDao.findMember(senderId);
-		SocialDto socialDto = new SocialDto();
-		socialDto.setSocialId(socialDao.sequence());
-		socialDto.setSocialSelfId((int) session.getAttribute("id"));
-		socialDto.setSocialRelativeId(senderId);
-		socialDto.setSocialName(memberDto.getMemberName());
-		socialDto.setSocialProfile(memberDto.getMemberProfile());
-		socialDto.setSocialEmail(memberDto.getMemberEmail());
-		socialDto.setSocialPendingState("n");
-		socialDao.insert(socialDto);
+		socialService.addSocial(selfId, senderId, false);
 	}
 	
 	@PostMapping("/accept-date")
 	public void acceptDate(@RequestParam int senderId,
 							@RequestParam int jobId, HttpSession session) {
+		int selfId = (int) session.getAttribute("id");
 		NotificationDto notificationDto = new NotificationDto();
 		notificationDto.setNotificationJobId(jobId);
 		notificationDto.setNotificationSenderId(senderId);
-		notificationDto.setNotificationReceiverId((int) session.getAttribute("id"));
+		notificationDto.setNotificationReceiverId(selfId);
 		notificationDao.deleteJob(notificationDto);
 		
 		SocialDto socialDto = new SocialDto();
 		socialDto.setSocialSelfId(senderId);
-		socialDto.setSocialRelativeId((int) session.getAttribute("id"));
+		socialDto.setSocialRelativeId(selfId);
 		SocialDto findSocialDto = socialDao.findSocialDetail(socialDto);
 		for (int i = 1; i <= 3; i++) {
 			if (jobDao.existParticiapantId(jobId, i) == null) {

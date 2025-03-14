@@ -19,12 +19,21 @@ textarea {
   resize: none;
 }
 
+/* 카카오맵 */
 .map {
   width: 100%;
   height: 300px;
 }
 
-/* overflow */
+/* 푸터 */
+.footer {
+  background-image: url("../img/wave-s.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* over-flow */
 .overflow-hidden {
   overflow: hidden;
 }
@@ -35,7 +44,10 @@ textarea {
   overflow: auto;
 }
 
-/* 보더 */
+/* border */
+.border-none {
+  border: none;
+}
 .bb-1 {
   border: 0;
   border-bottom: 1px;
@@ -49,16 +61,23 @@ textarea {
   border-width: 1px;
   border-style: solid;
 }
-.border-none {
-  border: none;
-}
 
-/* 아웃라인 */
+/* outline */
 .outline-none {
   outline: none;
 }
 .outline-brand {
   outline-color: #00a6fb;
+}
+
+/* none */
+.none {
+  display: none;
+}
+
+/* inline-block */
+.inline-block {
+  display: inline-block;
 }
 
 /* flex */
@@ -92,10 +111,11 @@ textarea {
 .items-end {
   align-items: end;
 }
+
+/* align */
 .text-center {
   text-align: center;
 }
-
 .vertical-center {
   vertical-align: middle;
 }
@@ -130,19 +150,13 @@ textarea {
   position: relative;
 }
 
-.none {
-  display: none;
-}
-
-.inline-block {
-  display: inline-block;
-}
-
+/* visibility */
 .hidden {
   visibility: hidden;
 }
 
 /* size */
+
 .w-24 {
   width: 24px;
 }
@@ -151,6 +165,9 @@ textarea {
 }
 .w-50 {
   width: 50px;
+}
+.w-80 {
+  width: 80px;
 }
 .w-100 {
   width: 100px;
@@ -176,9 +193,6 @@ textarea {
 .w-1000 {
   width: 1000px;
 }
-.w-80 {
-  width: 80px;
-}
 .w-80p {
   width: 80%;
 }
@@ -191,20 +205,20 @@ textarea {
 .w-100v {
   width: 100vw;
 }
+.h-22 {
+  height: 22px;
+}
 .h-24 {
   height: 24px;
 }
 .h-26 {
   height: 26px;
 }
-.h-50 {
-  height: 50px;
-}
-.h-22 {
-  height: 22px;
-}
 .h-44 {
   height: 44px;
+}
+.h-50 {
+  height: 50px;
 }
 .h-80 {
   height: 80px;
@@ -230,6 +244,7 @@ textarea {
   transform: translate(-50%, -50%);
 }
 
+/* 애니메이션 */
 .anim {
   transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
@@ -325,10 +340,13 @@ textarea {
   padding: 16px;
 }
 .p-32 {
-  pdading: 32px;
+  padding: 32px;
 }
 .pl-4 {
   padding-left: 4px;
+}
+.pl-6 {
+  padding-left: 6px;
 }
 .pl-8 {
   padding-left: 8px;
@@ -342,9 +360,6 @@ textarea {
 .pr-14 {
   padding-right: 14px;
 }
-.p-32 {
-  padding: 32px;
-}
 .px-4 {
   padding-left: 4px;
   padding-right: 4px;
@@ -352,9 +367,6 @@ textarea {
 .px-8 {
   padding-left: 8px;
   padding-right: 8px;
-}
-.pl-6 {
-  padding-left: 6px;
 }
 .px-12 {
   padding-left: 12px;
@@ -436,26 +448,21 @@ textarea {
   border-radius: 999px;
 }
 
+/* z-index */
 .z-999 {
   z-index: 999;
 }
 
-.trans-color {
-  background-color: transparent;
+/* scroll-bar */
+.date-page-tab::-webkit-scrollbar {
+  display: none;
 }
 
-.footer {
-  background-image: url("../img/wave-s.svg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
+/* hover */
 .sidebar .plus-btn:hover,
 .sidebar .date-delete-btn:hover {
   background-color: #f1f1f1;
 }
-
 .sidebar .profile-btn:hover,
 .sidebar .bell-btn:hover,
 .sidebar .sidebar-btn:hover,
@@ -463,61 +470,46 @@ textarea {
 .sidebar .date-title-tab:hover {
   background-color: #e0e0e0;
 }
-
 .modal-close-btn:hover,
 .social-tab-btn:hover,
 .datetime-tab-btn:hover {
   background-color: #e0e0e0;
 }
-
-/* .content::-webkit-scrollbar, */
-.date-page-tab::-webkit-scrollbar {
-  display: none;
-}
-
 .job-add-btn:hover,
 .social-add-btn:hover {
   background-color: #00a6fb;
   color: #ffffff;
 }
-
 .job-add-btn:hover img {
   filter: invert(30%) sepia(50%) saturate(500%) hue-rotate(180deg);
 }
-
 .search-hist-btn:hover,
 .page-result-btn:hover {
   background-color: #e0e0e0;
 }
-
 .search-hist-delete-btn:hover {
   background-color: #f1f1f1;
 }
-
 .accept-btn:hover {
   background-color: #38b000;
 }
 .accept-btn:hover span {
   color: #ffffff;
 }
-
 .job-update-btn:hover {
   background-color: #00a6fb;
   color: #ffffff;
 }
-
 .job-delete-btn:hover {
   background-color: #c1121f;
   color: #ffffff;
 }
-
 .reject-btn:hover {
   background-color: #c1121f;
 }
 .reject-btn:hover span {
   color: #ffffff;
 }
-
 .social-delete-btn:hover {
   background-color: #c1121f;
   color: #ffffff;
