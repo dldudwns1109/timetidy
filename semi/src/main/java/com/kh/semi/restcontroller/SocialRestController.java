@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.semi.dao.SocialDao;
 import com.kh.semi.dto.MemberSocialDto;
 import com.kh.semi.dto.SocialDto;
+import com.kh.semi.service.SocialService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,26 +22,25 @@ public class SocialRestController {
 	@Autowired
 	private SocialDao socialDao;
 	
+	@Autowired
+	private SocialService socialService;
+	
 	@GetMapping("/delete")
 	public int delete(@RequestParam int relativeId, HttpSession session) {
-		SocialDto socialDto = new SocialDto();
-		socialDto.setSocialSelfId((int) session.getAttribute("id"));
-		socialDto.setSocialRelativeId(relativeId);
-		socialDao.deleteRelative(socialDto);
-		socialDto.setSocialSelfId(relativeId);
-		socialDto.setSocialRelativeId((int) session.getAttribute("id"));
-		socialDao.deleteRelative(socialDto);
+		int selfId = (int) session.getAttribute("id");
+		socialService.deleteSocial(selfId, relativeId);
+		socialService.deleteSocial(relativeId, selfId);
 		return relativeId;
-	}
-	
-	@GetMapping("/list")
-	public List<SocialDto> list(HttpSession session) {
-		return socialDao.socialList((int) session.getAttribute("id"));
 	}
 	
 	@GetMapping("/find")
 	public SocialDto find(@RequestParam int socialId) {
 		return socialDao.findSocial(socialId);
+	}
+	
+	@GetMapping("/list")
+	public List<SocialDto> list(HttpSession session) {
+		return socialDao.socialList((int) session.getAttribute("id"));
 	}
 	
 	@GetMapping("/search-list")

@@ -13,10 +13,10 @@ import com.kh.semi.mapper.NotificationMapper;
 public class NotificationDao {
 
 	@Autowired
-	private NotificationMapper notificationMapper;
-	
-	@Autowired
 	private JdbcTemplate jdbcTemplate;
+
+	@Autowired
+	private NotificationMapper notificationMapper;
 	
 	public int sequence() {
 		String sql = "select notification_seq.nextval from dual";

@@ -24,15 +24,11 @@ public class PageRestController {
 
 	@PostMapping("/add")
 	public PageDto add(HttpSession session) {
-		int pageId = pageDao.sequence();
-		int memberId = (int) session.getAttribute("id");
-		
 		PageDto pageDto = new PageDto();
-		pageDto.setPageId(pageId);
-		pageDto.setPageMemberId(memberId);
+		pageDto.setPageId(pageDao.sequence());
+		pageDto.setPageMemberId((int) session.getAttribute("id"));
 		pageDto.setPageTitle("빈 페이지");
 		pageDao.insert(pageDto);
-		
 		return pageDto;
 	}
 	
@@ -50,7 +46,6 @@ public class PageRestController {
 	
 	@GetMapping("/list")
 	public List<PageDto> list(HttpSession session) {
-		int memberId = (int) session.getAttribute("id");
-		return pageDao.list(memberId);
+		return pageDao.list((int) session.getAttribute("id"));
 	}
 }

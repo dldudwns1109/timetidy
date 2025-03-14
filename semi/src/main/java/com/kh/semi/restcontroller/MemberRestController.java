@@ -30,10 +30,8 @@ public class MemberRestController {
 	@PostMapping("/edit")
 	public String edit(@RequestParam String memberName,
 			HttpSession session) {
-		int id = (int) session.getAttribute("id");
-		
 		MemberDto memberDto = new MemberDto();
-		memberDto.setMemberId(id);
+		memberDto.setMemberId((int) session.getAttribute("id"));
 		memberDto.setMemberName(memberName);
 		memberDao.update(memberDto);
 		return memberName;
@@ -46,8 +44,7 @@ public class MemberRestController {
 	
 	@GetMapping("/delete")
 	public void delete(HttpSession session) {
-		int id = (int) session.getAttribute("id");
-		memberDao.delete(id);
+		memberDao.delete((int) session.getAttribute("id"));
 		memberService.disconnectSession(session);
 	}
 	

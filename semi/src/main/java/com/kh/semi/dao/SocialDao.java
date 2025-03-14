@@ -15,13 +15,13 @@ import com.kh.semi.mapper.SocialMapper;
 public class SocialDao {
 	
 	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	@Autowired
 	private SocialMapper socialMapper;
 	
 	@Autowired
 	private MemberSocialMapper memberSocialMapper;
-	
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
 	
 	public int sequence() {
 		String sql = "select social_seq.nextval from dual";
@@ -91,7 +91,7 @@ public class SocialDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	public List<SocialDto> findSocialRelative(int socialRelativeId) {
+	public List<SocialDto> socialRelativeList(int socialRelativeId) {
 		String sql = "select * from social "
 				+ "where social_relative_id = ?";
 		Object[] data = {socialRelativeId};

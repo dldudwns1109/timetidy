@@ -50,20 +50,20 @@ public class PageDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	public List<PageDto> list(int memberId) {
-		String sql = "select * from page "
-				+ "where page_member_id = ? "
-				+ "order by page_created_time asc";
-		Object[] data = {memberId};
-		return jdbcTemplate.query(sql, pageMapper, data);
-	}
-	
 	public PageDto detail(int pageId) {
 		String sql = "select * from page "
 				+ "where page_id = ?";
 		Object[] data = {pageId};
 		List<PageDto> list = jdbcTemplate.query(sql, pageMapper, data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	public List<PageDto> list(int memberId) {
+		String sql = "select * from page "
+				+ "where page_member_id = ? "
+				+ "order by page_created_time asc";
+		Object[] data = {memberId};
+		return jdbcTemplate.query(sql, pageMapper, data);
 	}
 	
 	public List<PageDto> search(PageDto pageDto) {

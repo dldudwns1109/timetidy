@@ -13,10 +13,10 @@ import com.kh.semi.mapper.JobMapper;
 public class JobDao {
 
 	@Autowired
-	private JobMapper jobMapper;
+	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private JobMapper jobMapper;
 	
 	public int sequence() {
 		String sql = "select job_seq.nextval from dual";
@@ -41,14 +41,6 @@ public class JobDao {
 				jobDto.getJobDescription()
 		};
 		jdbcTemplate.update(sql, data);
-	}
-	
-	public JobDto find(int jobId) {
-		String sql = "select * from job "
-				+ "where job_id = ?";
-		Object[] data = {jobId};
-		List<JobDto> list = jdbcTemplate.query(sql, jobMapper, data);
-		return list.isEmpty() ? null : list.get(0);
 	}
 	
 	public boolean update(JobDto jobDto) {
@@ -94,6 +86,14 @@ public class JobDao {
 				jobDto.getJobId()
 		};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	public JobDto detail(int jobId) {
+		String sql = "select * from job "
+				+ "where job_id = ?";
+		Object[] data = {jobId};
+		List<JobDto> list = jdbcTemplate.query(sql, jobMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	
 	public List<JobDto> list(int pageId) {
