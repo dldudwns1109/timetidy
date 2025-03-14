@@ -97,7 +97,9 @@
   		            });
   		            
   		            map.setCenter(location);
-  				}
+  				} else {
+					$('.job-place-tab').remove();
+				}
   			})
   			
   			$(".organizer").empty();
@@ -185,7 +187,7 @@
 	                <span class="event-end text-12 text-font-color"></span>
 	              </div>
 	            </div>
-	          <div class="mt-8">
+	          <div class="job-place-tab mt-8">
 	            <span class="text-12 subtitle-font-color">장소</span>
 	            <div>
 	              <span class="event-location text-12 text-font-color"></span>

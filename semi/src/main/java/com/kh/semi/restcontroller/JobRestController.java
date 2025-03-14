@@ -64,6 +64,17 @@ public class JobRestController {
 		return jobDto;
 	}
 	
+	@GetMapping("/find")
+	public JobDto find(@RequestParam int jobId) {
+		return jobDao.find(jobId);
+	}
+	
+	@PostMapping("/update")
+	public JobDto update(@ModelAttribute JobDto jobDto) {
+		jobDao.update(jobDto);
+		return jobDto;
+	}
+	
 	@PostMapping("/delete")
 	public void delete(@RequestParam int jobId) {
 		jobDao.delete(jobId);
