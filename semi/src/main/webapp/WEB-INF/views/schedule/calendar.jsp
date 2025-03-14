@@ -21,36 +21,14 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css"
       rel="stylesheet"
     />
-    <style>
-      .calendar {
-        margin: 50px auto;
-      }
-
-      .event-modal {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: white;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 9999;
-        width: 400px;
-      }
-
-      .event-modal h3 {
-        margin-top: 0;
-      }
-
-      .event-modal button {
-        margin-top: 10px;
-      }
-    </style>
     <jsp:include page="/WEB-INF/views/template/aside-script.jsp" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${appkey}&libraries=services"
+    ></script>
     <script type="text/javascript">
     	$(function () {
     	  var header = $("meta[name='_csrf_header']").attr("content");
@@ -88,47 +66,146 @@
   	        	  
   	          },
   	          eventClick: function (event) {
-  	            $(".event-modal").show();
+  	            $(".event-modal").removeClass("none").addClass("flex");
   	            
   	            $(".event-title").text(event.title);
-  	            $(".event-description").text(event.description);
-  	            $(".event-location").text(event.location);
   	      		$(".event-host").text(event.extendedProps.host);
-  	            $(".event-participant1").text(event.extendedProps.participant1);
-  	          	$(".event-participant2").text(event.extendedProps.participant2);
-  	        	$(".event-participant3").text(event.extendedProps.participant3);
+//   	            $(".event-participant1").text(event.extendedProps.participant1);
+//   	          	$(".event-participant2").text(event.extendedProps.participant2);
+//   	        	$(".event-participant3").text(event.extendedProps.participant3);
+  	        	$(".event-start").text(new Date(event.start).toLocaleString());
+  	        	$(".event-end").text(event.end != null ? ("~ " + new Date(event.end).toLocaleString()) : null);
+  	            $(".event-location").text(event.location);
+  	            $(".event-description").text(event.description);
+  	            
+  	          var container = $('.map')[0];
+  			
+  			var options = {
+  	          center: new kakao.maps.LatLng(37.566395, 126.987778),
+  	          level: 3,
+  	        };
+  			
+  			var map = new kakao.maps.Map(container, options);
+  			
+  			var address = $('.event-location').text();
+  			
+  			var geocoder = new kakao.maps.services.Geocoder();
+  			
+  			geocoder.addressSearch(address, function (res, status) {
+  				if (status === kakao.maps.services.Status.OK) {
+  					var location = new kakao.maps.LatLng(res[0].y, res[0].x);
+  		            var marker = new kakao.maps.Marker({
+  		              map: map,
+  		              position: location,
+  		            });
+  		            
+  		            map.setCenter(location);
+  				}
+  			})
+  			
+  			$(".organizer").empty();
+  			$.ajax({
+	    			url: "/rest/member/find",
+	    			beforeSend: function (xhr) {
+	        		  xhr.setRequestHeader(header, token);
+	        		},
+	        		method: "GET",
+	        		data: {memberId: event.extendedProps.host},
+	        		success: function(res) {
+	        			$(".organizer").append(
+	        					$("<div>")
+	        				.addClass("flex items-center mr-8 mt-8")
+						.append($("<img>").attr("src", res.memberProfile)
+							.addClass("w-26 h-26 round-full inline-block mr-8"))
+							.append($("<span>").text(res.memberName).addClass("text-16 title-font-color")))
+	        		},
+	    		})
+  			
+  			var participantsId = [
+  				event.extendedProps.participant1,
+  				event.extendedProps.participant2,
+  				event.extendedProps.participant3
+  			];
+  			
+  			$(".participants").empty();
+  			$.each(participantsId, function (idx, val2) {
+  				if (val2 != null) {
+  					$.ajax({
+   		    			url: "/rest/social/find",
+   		    			beforeSend: function (xhr) {
+   		        		  xhr.setRequestHeader(header, token);
+   		        		},
+   		        		method: "GET",
+   		        		data: {socialId: val2},
+   		        		success: function(res) {
+   		        			$(".participants").append(
+   		        					$("<div>")
+   		        				.addClass("flex items-center mr-8 mt-8")
+								.append($("<img>").attr("src", res.socialProfile)
+									.addClass("w-26 h-26 round-full inline-block mr-8"))
+									.append($("<span>").text(res.socialName).addClass("text-16 title-font-color")))
+   		        		},
+   		    		})
+  				}
+   		    	})
   	          },
   	        });
-
-  	        $(".close-btn").click(function () {
-  	          $(".event-modal").hide();
-  	        });
-    		
+  	        
+  	      $(window).click(function (e) {
+  	        if ($(e.target).is(".event-modal")) {
+  	          $(".event-modal").removeClass("flex").addClass("none");
+  	        }
+  	      });
     	})
     </script>
   </head>
   <body>
-    <div class="flex items-start">
-      <jsp:include page="/WEB-INF/views/template/aside.jsp" />
-      <div class="content anim flex flex-1 justify-center items-center w-100p h-100v">
-	    <div class="calendar w-1000"></div>
+	  <div class="flex items-start">
+	    <jsp:include page="/WEB-INF/views/template/aside.jsp" />
+	    <div
+	      class="content anim flex flex-1 justify-center items-center w-100p h-100v"
+	    >
+	      <div class="calendar w-1000 py-64"></div>
 	
-	    <div class="event-modal">
-	      <h3>Event Details</h3>
-	      <p>Title: <span class="event-title"></span></p>
-	      <p>host: <span class="event-host"></span></p>
-	      <p>participants1: <span class="event-participant1"></span></p>
-	      <p>participants2: <span class="event-participant2"></span></p>
-	      <p>participants3: <span class="event-participant3"></span></p>
-	      <p>Description: <span class="event-description"></span></p>
-	      <p>Location: <span class="event-location"></span></p>
-	      <button type="button" class="close-btn">Close</button>
-	    </div>
-      </div>
-    </div>
-    <jsp:include page="/WEB-INF/views/template/account-modal.jsp" />
-    <jsp:include page="/WEB-INF/views/template/search-modal.jsp" />
-  </body>
+	      <div class="event-modal none z-999 justify-center items-center fixed left-0 top-0 w-100p h-100p opacity-20">
+	      	<div class="light w-620 p-16 round-6 inline-block">
+	        <div>
+	          <span class="event-title title-20 title-font-color"></span>
+	          <div class="mt-16">
+	              <span class="text-12 subtitle-font-color">주최자</span>
+	              <div class="organizer">
+	              </div>
+	            </div>
+	          <div class="mt-8">
+	              <span class="text-12 subtitle-font-color">참여자</span>
+	              <div class="participants">
+	              </div>
+	            </div>
+	            <div class="mt-8">
+	              <span class="text-12 subtitle-font-color">날짜</span>
+	              <div>
+	                <span class="event-start text-12 text-font-color"></span>
+	                <span class="event-end text-12 text-font-color"></span>
+	              </div>
+	            </div>
+	          <div class="mt-8">
+	            <span class="text-12 subtitle-font-color">장소</span>
+	            <div>
+	              <span class="event-location text-12 text-font-color"></span>
+	            </div>
+	            <div class="map mt-8 round-6"></div>
+	          </div>
+	          <div class="mt-16">
+	            <span class="event-description text-14 text-font-color"></span>
+	          </div>
+	        </div>
+	      </div>
+	      </div>
+	  </div>
+	  </div>
+	  <jsp:include page="/WEB-INF/views/template/account-modal.jsp" />
+	  <jsp:include page="/WEB-INF/views/template/search-modal.jsp" />
+	</body>
 </html>
 
 
