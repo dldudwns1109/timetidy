@@ -59,14 +59,6 @@ public class SearchHistoryDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	public List<SearchHistoryDto> list(int memberId) {
-		String sql = "select * from search_history "
-				+ "where search_history_member_id = ? "
-				+ "order by search_history_created_time desc";
-		Object[] data = {memberId};
-		return jdbcTemplate.query(sql, searchHistoryMapper, data);
-	}
-	
 	public SearchHistoryDto detail(SearchHistoryDto searchHistoryDto) {
 		String sql = "select * from search_history "
 				+ "where search_history_keyword = ? "
@@ -77,5 +69,13 @@ public class SearchHistoryDao {
 		};
 		List<SearchHistoryDto> list = jdbcTemplate.query(sql, searchHistoryMapper, data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	public List<SearchHistoryDto> list(int memberId) {
+		String sql = "select * from search_history "
+				+ "where search_history_member_id = ? "
+				+ "order by search_history_created_time desc";
+		Object[] data = {memberId};
+		return jdbcTemplate.query(sql, searchHistoryMapper, data);
 	}
 }

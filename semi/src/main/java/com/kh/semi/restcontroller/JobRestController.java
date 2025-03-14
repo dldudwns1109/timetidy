@@ -66,7 +66,7 @@ public class JobRestController {
 	
 	@GetMapping("/find")
 	public JobDto find(@RequestParam int jobId) {
-		return jobDao.find(jobId);
+		return jobDao.detail(jobId);
 	}
 	
 	@PostMapping("/update")
@@ -90,7 +90,7 @@ public class JobRestController {
 		List<JobDto> jobList = jobDao.hostList((int) session.getAttribute("id"));
 		
 		for (SocialDto socialDto: 
-			socialDao.findSocialRelative((int) session.getAttribute("id"))) {
+			socialDao.socialRelativeList((int) session.getAttribute("id"))) {
 			for (JobDto jobDto: 
 				jobDao.participantList(socialDto.getSocialId())) {
 				jobList.add(jobDto);

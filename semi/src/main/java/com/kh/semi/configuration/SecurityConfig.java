@@ -19,9 +19,9 @@ public class SecurityConfig {
 	
 	@Autowired
 	private MemberService memberService;
-	
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/**").permitAll()
