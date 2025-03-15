@@ -21,11 +21,15 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script type="text/javascript">
       $(function () {
-        $(".nav-btn").click(function () {
-          window.location.href = "/login";
+        $(".login-nav-btn").click(function () {
+          location.href = "/login";
         });
 
-        let currIdx = 0;
+        $(".schedule-nav-btn").click(function () {
+          location.href = "/schedule";
+        });
+
+        var currIdx = 0;
         var itemCnt = $(".carousel-item").length;
         $(".prev-btn").click(function () {
           currIdx > 0 ? currIdx-- : (currIdx = itemCnt - 1);
@@ -52,12 +56,22 @@
           <a href="#function" class="text-16 px-14 py-9">기능</a>
           <span class="line-base border-05 h-22 mx-8"></span>
           <c:choose>
-        	<c:when test="${sessionScope.email == null || sessionScope.email == ''}">
-	          <a href="/login" class="nav-btn brand-dark border-none outline-none px-14 py-9 ml-14 round-6 light-font text-16">로그인</a>
-	        </c:when>
-	          <c:otherwise>
-	          <a href="/schedule" class="nav-btn brand-dark border-none outline-none px-14 py-9 ml-14 round-6 light-font text-16">일정 열기</a>
-	        </c:otherwise>
+            <c:when
+              test="${sessionScope.email == null || sessionScope.email == ''}"
+            >
+              <button
+                class="login-nav-btn brand-dark border-none outline-none px-14 py-9 ml-14 round-6 light-font text-16"
+              >
+                로그인
+              </button>
+            </c:when>
+            <c:otherwise>
+              <button
+                class="schedule-nav-btn brand-dark border-none outline-none px-14 py-9 ml-14 round-6 light-font text-16"
+              >
+                일정 열기
+              </button>
+            </c:otherwise>
           </c:choose>
         </div>
       </div>
@@ -72,21 +86,26 @@
     <div class="flex flex-col items-center w-400 mx-auto mt-60">
       <img src="/img/main-banner.svg" width="400" height="330" />
       <c:choose>
-       	<c:when test="${sessionScope.email == null || sessionScope.email == ''}">
-          <a href="/login" 
-          	 class="nav-btn brand-dark border-none outline-none px-14 py-9 mx-auto mt-40 round-6 light-font title-18">로그인</a>
+        <c:when
+          test="${sessionScope.email == null || sessionScope.email == ''}"
+        >
+          <button
+            class="login-nav-btn brand-dark border-none outline-none px-14 py-9 mx-auto mt-40 round-6 light-font title-18"
+          >
+            로그인
+          </button>
         </c:when>
         <c:otherwise>
-          <a href="/schedule" 
-             class="nav-btn brand-dark border-none outline-none px-14 py-9 mx-auto mt-40 round-6 light-font title-18">일정 열기</a>
+          <button
+            class="schedule-nav-btn brand-dark border-none outline-none px-14 py-9 mx-auto mt-40 round-6 light-font title-18"
+          >
+            일정 열기
+          </button>
         </c:otherwise>
-       </c:choose>
+      </c:choose>
     </div>
 
-    <img
-      src="/img/wave.svg"
-      class="w-100p mt-32"
-    />
+    <img src="/img/wave.svg" class="w-100p mt-32" />
 
     <div class="relative overflow-hidden">
       <div class="carousel-inner anim flex w-500p">
@@ -99,7 +118,7 @@
               친구를 초대하여 일정을 공유하거나 공유받으세요!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="/img/banner1.svg" width="400" height="330" />
+              <img src="/img/carousel-item1.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -114,7 +133,7 @@
               있습니다!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="/img/banner2.svg" width="400" height="330" />
+              <img src="/img/carousel-item2.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -129,7 +148,7 @@
               찾아볼 수 있습니다!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="/img/banner3.svg" width="400" height="330" />
+              <img src="/img/carousel-item3.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -144,7 +163,7 @@
               계획하기 쉬워집니다!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="/img/banner4.svg" width="400" height="330" />
+              <img src="/img/carousel-item4.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -159,7 +178,7 @@
               쉽습니다!
             </p>
             <div class="flex flex-col items-center w-400 mx-auto my-80">
-              <img src="/img/banner5.svg" width="400" height="330" />
+              <img src="/img/carousel-item5.svg" width="400" height="330" />
             </div>
           </div>
         </div>
@@ -170,12 +189,12 @@
         <button
           class="prev-btn border-none outline-none opacity-40 light-font flex justify-center items-center round-full w-80 h-80"
         >
-          <img src="/img/left-arrow.svg">
+          <img src="/img/left-arrow.svg" />
         </button>
         <button
           class="next-btn border-none outline-none opacity-40 light-font flex justify-center items-center round-full w-80 h-80"
         >
-          <img src="/img/right-arrow.svg">
+          <img src="/img/right-arrow.svg" />
         </button>
       </div>
     </div>
@@ -190,4 +209,3 @@
     </footer>
   </body>
 </html>
-
