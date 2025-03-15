@@ -18,7 +18,14 @@
 
     <!-- jQuery cdn -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script type="text/javascript"></script>
+    <script type="text/javascript">
+      $(function () {
+        $(".google-login-btn").click(function () {
+          location.href =
+            "${pageContext.request.contextPath}/oauth2/authorization/google";
+        });
+      });
+    </script>
   </head>
   <body>
     <header class="w-100p left-0 top-0 fixed light">
@@ -34,14 +41,14 @@
         <p class="title-20 subtext-font-color text-center mt-32">
           시작하려면 로그인하세요
         </p>
-         <a href="${pageContext.request.contextPath}/oauth2/authorization/google"
-		   class="flex justify-center items-center text-16 outline-none line-base border-1 light w-500 py-9 mt-40 title-font-color round-6">
-		    <img src="/img/google.svg" class="mr-16" width="18" height="18"/>
-		    구글로 계속하기
-		</a>
+        <button
+          class="google-login-btn flex justify-center items-center text-16 outline-none line-base border-1 light w-500 py-9 mt-40 title-font-color round-6"
+        >
+          <img src="/img/google.svg" class="mr-16" width="18" height="18" />
+          구글로 계속하기
+        </button>
       </div>
       <img src="/img/login-banner.svg" width="870" height="520" />
     </div>
   </body>
 </html>
-    
