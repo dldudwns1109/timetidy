@@ -12,11 +12,11 @@ public class ExceptionControllerAdvice {
 	
 	@ExceptionHandler(NotFoundException.class)
 	public String notFound(NotFoundException e) {
-		return "/WEB-INF/views/exception/notfound.jsp";
+		return "/WEB-INF/views/exception/not-found.jsp";
 	}
 	
 	@ExceptionHandler(NoAuthorizationException.class)
 	public String noAuthorization(NoAuthorizationException e) {
-		return "/WEB-INF/views/exception/noauthorization.jsp";
+		return "/WEB-INF/views/exception/no-authorization.jsp";
 	}
 }
