@@ -22,8 +22,9 @@
   </head>
   <body class="p-0">
 	<div class="w-100p h-100v flex flex-col justify-center items-center">
-		<img src="/img/noauthorization.svg" >
-		<span class="mt-24 text-16 title-font-color">접근할 권한이 없습니다.</span>
+		<img src="/img/not-found.svg" >
+		<span class="mt-24 text-16 title-font-color">존재하지 않는 페이지입니다.</span>
 	</div>
   </body>
 </html>
+    
