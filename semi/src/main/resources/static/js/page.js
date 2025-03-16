@@ -5,7 +5,7 @@ export function page(res) {
     $("<button>")
       .attr("data-id", res.pageId)
       .addClass(
-        "date-tab trans-color border-none outline-none flex justify-between w-100p px-8 py-9 mt-8 brand-light round-6"
+        "date-tab brand-medium border-none outline-none flex justify-between w-100p px-8 py-9 mt-8 brand-light round-6"
       )
       .append(
         $("<div>")

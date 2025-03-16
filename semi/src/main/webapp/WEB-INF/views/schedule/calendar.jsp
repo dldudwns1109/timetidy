@@ -27,7 +27,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
     <script
       type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${appkey}&libraries=services"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${appkey}&autoload=false&libraries=services"
     ></script>
     <script type="text/javascript">
       $(function () {
@@ -80,32 +80,37 @@
             $(".event-location").text(event.location);
             $(".event-description").text(event.description);
 
-            var container = $(".map")[0];
-
-            var options = {
-              center: new kakao.maps.LatLng(37.566395, 126.987778),
-              level: 3,
-            };
-
-            var map = new kakao.maps.Map(container, options);
-
             var address = $(".event-location").text();
 
-            var geocoder = new kakao.maps.services.Geocoder();
+            if (event.location != "" && event.location != null) {
+              $(".job-place-tab").show();
+              kakao.maps.load(() => {
+                var container = $(".map")[0];
 
-            geocoder.addressSearch(address, function (res, status) {
-              if (status === kakao.maps.services.Status.OK) {
-                var location = new kakao.maps.LatLng(res[0].y, res[0].x);
-                var marker = new kakao.maps.Marker({
-                  map: map,
-                  position: location,
+                var options = {
+                  center: new kakao.maps.LatLng(37.566395, 126.987778),
+                  level: 3,
+                };
+
+                var map = new kakao.maps.Map(container, options);
+
+                var geocoder = new kakao.maps.services.Geocoder();
+
+                geocoder.addressSearch(event.location, function (res, status) {
+                  if (status === kakao.maps.services.Status.OK) {
+                    var location = new kakao.maps.LatLng(res[0].y, res[0].x);
+                    var marker = new kakao.maps.Marker({
+                      map: map,
+                      position: location,
+                    });
+
+                    map.setCenter(location);
+                  }
                 });
-
-                map.setCenter(location);
-              } else {
-                $(".job-place-tab").remove();
-              }
-            });
+              });
+            } else {
+              $(".job-place-tab").hide();
+            }
 
             $(".organizer").empty();
             $.ajax({
@@ -227,4 +232,5 @@
     <jsp:include page="/WEB-INF/views/template/search-modal.jsp" />
   </body>
 </html>
+
     
