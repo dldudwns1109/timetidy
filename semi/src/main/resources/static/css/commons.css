@@ -324,6 +324,9 @@ textarea {
 .mb-16 {
   margin-bottom: 16px;
 }
+.mb-32 {
+  margin-bottom: 32px;
+}
 .my-80 {
   margin-top: 80px;
   margin-bottom: 80px;
@@ -397,11 +400,17 @@ textarea {
 .pb-16 {
   padding-bottom: 16px;
 }
+.pt-64 {
+  padding-top: 64px;
+}
 .pb-26 {
   padding-bottom: 26px;
 }
 .pb-64 {
   padding-bottom: 64px;
+}
+.pb-240 {
+  padding-bottom: 240px;
 }
 .py-4 {
   padding-top: 4px;
@@ -472,20 +481,13 @@ textarea {
 }
 .modal-close-btn:hover,
 .social-tab-btn:hover,
-.datetime-tab-btn:hover {
-  background-color: #e0e0e0;
-}
-.job-add-btn:hover,
-.social-add-btn:hover {
-  background-color: #00a6fb;
-  color: #ffffff;
-}
-.job-add-btn:hover img {
-  filter: invert(30%) sepia(50%) saturate(500%) hue-rotate(180deg);
-}
+.datetime-tab-btn:hover,
 .search-hist-btn:hover,
 .page-result-btn:hover {
   background-color: #e0e0e0;
+}
+.job-add-btn:hover img {
+  filter: invert(30%) sepia(50%) saturate(500%) hue-rotate(180deg);
 }
 .search-hist-delete-btn:hover {
   background-color: #f1f1f1;
@@ -496,12 +498,11 @@ textarea {
 .accept-btn:hover span {
   color: #ffffff;
 }
-.job-update-btn:hover {
+.job-update-btn:hover,
+.save-btn:hover,
+.job-add-btn:hover,
+.social-add-btn:hover {
   background-color: #00a6fb;
-  color: #ffffff;
-}
-.job-delete-btn:hover {
-  background-color: #c1121f;
   color: #ffffff;
 }
 .reject-btn:hover {
@@ -510,7 +511,9 @@ textarea {
 .reject-btn:hover span {
   color: #ffffff;
 }
-.social-delete-btn:hover {
+.social-delete-btn:hover,
+.cancel-btn:hover,
+.job-delete-btn:hover {
   background-color: #c1121f;
   color: #ffffff;
 }
