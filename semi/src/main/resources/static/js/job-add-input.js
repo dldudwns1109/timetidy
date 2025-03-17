@@ -417,6 +417,7 @@ export function jobAddInput(pageId) {
                   )
               )
               .click(function () {
+				$(".back-margin").hide();
                 var isDelete = true;
                 var jobInput = $(this).closest(".job-input");
                 if (
@@ -447,6 +448,7 @@ export function jobAddInput(pageId) {
                       .addClass("text-16 subtext-font-color")
                   )
                   .click(function (e) {
+					$(".back-margin").hide();
                     e.stopPropagation();
                     if ($(".job-title-input").val() == "") {
                       alert("제목을 추가해주세요");

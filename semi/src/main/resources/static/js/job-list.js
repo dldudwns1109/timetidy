@@ -35,142 +35,142 @@ export function jobList(res, pageId) {
               .closest(".job-tab")
               .append(
                 $("<div>")
-//                  .append(
-//                    $("<button>")
-//                      .text("수정")
-//                      .addClass(
-//                        "job-update-btn trans-color border-1 brand-b px-8 py-6 text-16 subtext-font-color round-6 mr-8"
-//                      )
-//                      .click(function () {
-//                        var jobTab = $(this).closest(".job-tab");
-//                        $.ajax({
-//                          url: "/rest/job/find",
-//                          beforeSend: function (xhr) {
-//                            xhr.setRequestHeader(header, token);
-//                          },
-//                          method: "GET",
-//                          data: { jobId: jobTab.data("id") },
-//                          success: function (res) {
-//                            jobTab.hide();
-//                            jobUpdateInput(jobTab, res, pageId);
-//                            if (res.jobPlace != null) {
-//                              $('[data-id="' + res.jobId + '"] .job-place')
-//                                .append(
-//                                  $("<span>")
-//                                    .text("장소")
-//                                    .addClass("text-12 subtitle-font-color")
-//                                )
-//                                .append(
-//                                  $("<input>")
-//                                    .val(res.jobPlace)
-//                                    .addClass(
-//                                      "job-place-address border-1 line-base outline-none round-6 px-8 py-4 text-12 text-font-color mt-8"
-//                                    )
-//                                )
-//                                .append($("<div>").addClass("map mt-8 round-6"))
-//                                .addClass("mt-8");
-//
-//                              var container = $(
-//                                '[data-id="' + res.jobId + '"].job-input .map'
-//                              )[0];
-//
-//                              var options = {
-//                                center: new kakao.maps.LatLng(
-//                                  37.566395,
-//                                  126.987778
-//                                ),
-//                                level: 3,
-//                              };
-//
-//                              var map = new kakao.maps.Map(container, options);
-//
-//                              var address = res.jobPlace;
-//
-//                              var geocoder = new kakao.maps.services.Geocoder();
-//
-//                              geocoder.addressSearch(
-//                                address,
-//                                function (res, status) {
-//                                  if (
-//                                    status === kakao.maps.services.Status.OK
-//                                  ) {
-//                                    var location = new kakao.maps.LatLng(
-//                                      res[0].y,
-//                                      res[0].x
-//                                    );
-//                                    var marker = new kakao.maps.Marker({
-//                                      map: map,
-//                                      position: location,
-//                                    });
-//
-//                                    map.setCenter(location);
-//                                  } else {
-//                                    $('[data-id="' + res.jobId + '"] .job-place').remove();
-//                                  }
-//                                }
-//                              );
-//                            }
-//                            var participants = [
-//                              res.jobParticipant1Id,
-//                              res.jobParticipant2Id,
-//                              res.jobParticipant3Id,
-//                            ];
-//                            $.each(participants, function (idx, val3) {
-//                              $.ajax({
-//                                url: "/rest/social/find",
-//                                beforeSend: function (xhr) {
-//                                  xhr.setRequestHeader(header, token);
-//                                },
-//                                method: "GET",
-//                                data: { socialId: val3 },
-//                                success: function (res) {
-//                                  $(".job-participant")
-//                                    .append(
-//                                      $("<div>")
-//                                        .attr("data-id", res.socialRelativeId)
-//                                        .addClass(
-//                                          "participant-tab px-8 py-9 mr-8 light-dark inline-block round-6"
-//                                        )
-//                                        .append(
-//                                          $("<img>")
-//                                            .attr("src", res.socialProfile)
-//                                            .addClass(
-//                                              "w-26 h-26 round-full mr-8 vertical-center"
-//                                            )
-//                                        )
-//                                        .append(
-//                                          $("<span>")
-//                                            .text(res.socialName)
-//                                            .addClass(
-//                                              "text-16 title-font-color vertical-center mr-4"
-//                                            )
-//                                        )
-//                                        .append(
-//                                          $("<button>")
-//                                            .addClass(
-//                                              "trans-color border-none outline-none vertical-center w-24 h-24 p-0"
-//                                            )
-//                                            .append(
-//                                              $("<img>").attr(
-//                                                "src",
-//                                                "/img/close.svg"
-//                                              )
-//                                            )
-//                                            .click(function () {
-//                                              $(this)
-//                                                .closest(".participant-tab")
-//                                                .remove();
-//                                            })
-//                                        )
-//                                    )
-//                                    .addClass("mt-8");
-//                                },
-//                              });
-//                            });
-//                          },
-//                        });
-//                      })
-//                  )
+                  .append(
+                    $("<button>")
+                      .text("수정")
+                      .addClass(
+                        "job-update-btn trans-color border-1 brand-b px-8 py-6 text-16 subtext-font-color round-6 mr-8"
+                      )
+                      .click(function () {
+                        var jobTab = $(this).closest(".job-tab");
+                        $.ajax({
+                          url: "/rest/job/find",
+                          beforeSend: function (xhr) {
+                            xhr.setRequestHeader(header, token);
+                          },
+                          method: "GET",
+                          data: { jobId: jobTab.data("id") },
+                          success: function (res2) {
+                            jobTab.hide();
+                            jobUpdateInput(jobTab, res2, pageId);
+                            if (res2.jobPlace != null) {
+                              $('[data-id="' + res2.jobId + '"] .job-place')
+                                .append(
+                                  $("<span>")
+                                    .text("장소")
+                                    .addClass("text-12 subtitle-font-color")
+                                )
+                                .append(
+                                  $("<input>")
+                                    .val(res2.jobPlace)
+                                    .addClass(
+                                      "job-place-address border-1 line-base outline-none round-6 px-8 py-4 text-12 text-font-color mt-8"
+                                    )
+                                )
+                                .append($("<div>").addClass("map mt-8 round-6"))
+                                .addClass("mt-8");
+
+                              var container = $(
+                                '[data-id="' + res2.jobId + '"].job-input .map'
+                              )[0];
+
+                              var options = {
+                                center: new kakao.maps.LatLng(
+                                  37.566395,
+                                  126.987778
+                                ),
+                                level: 3,
+                              };
+
+                              var map = new kakao.maps.Map(container, options);
+
+                              var address = res2.jobPlace;
+
+                              var geocoder = new kakao.maps.services.Geocoder();
+
+                              geocoder.addressSearch(
+                                address,
+                                function (res3, status) {
+                                  if (
+                                    status === kakao.maps.services.Status.OK
+                                  ) {
+                                    var location = new kakao.maps.LatLng(
+                                      res3[0].y,
+                                      res3[0].x
+                                    );
+                                    var marker = new kakao.maps.Marker({
+                                      map: map,
+                                      position: location,
+                                    });
+
+                                    map.setCenter(location);
+                                  } else {
+                                    $('[data-id="' + res3.jobId + '"] .job-place').remove();
+                                  }
+                                }
+                              );
+                            }
+                            var participants = [
+                              res.jobParticipant1Id,
+                              res.jobParticipant2Id,
+                              res.jobParticipant3Id,
+                            ];
+                            $.each(participants, function (idx, val3) {
+                              $.ajax({
+                                url: "/rest/social/find",
+                                beforeSend: function (xhr) {
+                                  xhr.setRequestHeader(header, token);
+                                },
+                                method: "GET",
+                                data: { socialId: val3 },
+                                success: function (res) {
+                                  $(".job-participant")
+                                    .append(
+                                      $("<div>")
+                                        .attr("data-id", res.socialRelativeId)
+                                        .addClass(
+                                          "participant-tab px-8 py-9 mr-8 light-dark inline-block round-6"
+                                        )
+                                        .append(
+                                          $("<img>")
+                                            .attr("src", res.socialProfile)
+                                            .addClass(
+                                              "w-26 h-26 round-full mr-8 vertical-center"
+                                            )
+                                        )
+                                        .append(
+                                          $("<span>")
+                                            .text(res.socialName)
+                                            .addClass(
+                                              "text-16 title-font-color vertical-center mr-4"
+                                            )
+                                        )
+                                        .append(
+                                          $("<button>")
+                                            .addClass(
+                                              "trans-color border-none outline-none vertical-center w-24 h-24 p-0"
+                                            )
+                                            .append(
+                                              $("<img>").attr(
+                                                "src",
+                                                "/img/close.svg"
+                                              )
+                                            )
+                                            .click(function () {
+                                              $(this)
+                                                .closest(".participant-tab")
+                                                .remove();
+                                            })
+                                        )
+                                    )
+                                    .addClass("mt-8");
+                                },
+                              });
+                            });
+                          },
+                        });
+                      })
+                  )
                   .append(
                     $("<button>")
                       .text("삭제")
