@@ -78,6 +78,8 @@ pageEncoding="UTF-8"%>
           )
           .click(function () {
             $(".job-add-area").hide();
+			$(".back-margin").show();
+			$(".back-margin").addClass("h-24 mt-80");
             jobAddInput(pageId);
           });
       });
@@ -87,7 +89,7 @@ pageEncoding="UTF-8"%>
     <div class="flex items-start">
       <jsp:include page="/WEB-INF/views/template/aside.jsp" />
       <div
-        class="content anim overflow-auto flex flex-1 justify-center w-100p h-100v mb-240"
+        class="content anim overflow-auto flex flex-1 justify-center w-100p h-100v"
       >
         <div class="page-content w-620 pt-64">
           <input
@@ -104,6 +106,7 @@ pageEncoding="UTF-8"%>
               <span class="text-16">일정 추가</span>
             </button>
           </div>
+          <div class="back-margin none w-100p"></div>
         </div>
       </div>
     </div>

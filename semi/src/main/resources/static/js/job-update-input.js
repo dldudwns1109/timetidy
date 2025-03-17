@@ -448,6 +448,7 @@ export function jobUpdateInput(jobTab, res, pageId) {
               )
               .click(function () {
                 jobTab.show();
+				$(".back-margin").hide();
                 $('[data-id="' + res.jobId + '"].job-input').hide();
               })
               .append(
@@ -457,6 +458,7 @@ export function jobUpdateInput(jobTab, res, pageId) {
                     "save-btn flex items-center border-1 brand-b round-6 trans-color outline-none px-8 py-6 text-16 subtext-font-color"
                   )
                   .click(function (e) {
+					$(".back-margin").hide();
                     e.stopPropagation();
                     if ($(".job-title-input").val() == "") {
                       alert("제목을 추가해주세요");
@@ -533,7 +535,7 @@ export function jobUpdateInput(jobTab, res, pageId) {
                           jobParticipant3Id: participantsId[2],
                           jobStartTime: startTimestamp,
                           jobEndTime: endTimestamp,
-                          jobPlace: $(".place-input").val(),
+                          jobPlace: $('input.job-place-address').val(),
                           jobDescription: $(".job-content-input").val(),
                         },
                         success: function (res) {
