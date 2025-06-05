@@ -84,8 +84,34 @@ TimeTidy는 사용자에게 쉬운 일정 관리와 직관적인 일정 공유�
 </tr>
 <tr>
   <td>
-   <img src="https://github.com/user-attachments/assets/16009103-3f2f-40f2-80fb-c340ad8433d1">
+   <img src="https://github.com/user-attachments/assets/72f2b894-f2ec-4c8e-b0c5-193f52f4e4bc" width="600px">
   </td>
 </tr>
 </tbody>
 </table>
+
+### 페이지 검색
+- **페이지**: 한 개의 페이지에 여러 일정들을 관리할 수 있습니다.
+- 특정 페이지 검색 및 검색 기록이 저장됩니다.
+- 검색 기록을 클릭 시 해당 페이지로 이동됩니다.
+<table align="center">
+<tbody>
+<tr>
+  <td align="center">
+    <strong>페이지 검색</strong>
+  </td>
+  <td align="center">
+    <strong>검색 결과</strong>
+  </td>
+</tr>
+<tr>
+  <td>
+   <img src="https://github.com/user-attachments/assets/4a695065-4ad7-495c-b427-6d0dd1b9704f">
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/86acbe5b-a122-4efb-b699-61924b19b8b0">
+  </td>
+</tr>
+</tbody>
+</table>
+
