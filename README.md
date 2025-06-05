@@ -140,3 +140,29 @@ TimeTidy는 사용자에게 쉬운 일정 관리와 직관적인 일정 공유�
 </tr>
 </tbody>
 </table>
+
+### 알림
+- **알림**: 소셜 추가 요청 및 일정 공유 요청 알림을 수신할 수 있습니다.
+- 소셜 추가 요청 알림을 수신하지 않을 시 대기 상태로 유지됩니다.
+- 소셜 추가 요청 알림 수락 시 소셜 추가 상태로 변경됩니다.
+- 일정 공유 요청 알림 수락 시 일정이 공유됩니다.
+<table align="center">
+<tbody>
+<tr>
+  <td align="center">
+    <strong>소셜 추가 요청 알림</strong>
+  </td>
+  <td align="center">
+    <strong>일정 공유 요청 알림</strong>
+  </td>
+</tr>
+<tr>
+  <td>
+   <img src="https://github.com/user-attachments/assets/f9c3b902-eca3-4bf3-8ab7-4acc8c34ffbf">
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/d0bbd3c9-574f-4cb7-8677-4b66e9327b7f">
+  </td>
+</tr>
+</tbody>
+</table>
