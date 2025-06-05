@@ -166,3 +166,29 @@ TimeTidy는 사용자에게 쉬운 일정 관리와 직관적인 일정 공유�
 </tr>
 </tbody>
 </table>
+
+### 일정
+- **일정**: 페이지에 여러 일정들을 추가하여 일정을 카테고리에 맞게 분리할 수 있습니다.
+- 소셜 현재 목록에 있는 회원과 일정을 공유할 수 있습니다.
+- 시간을 시각, 날짜, 기간으로 폭 넓게 설정할 수 있습니다.
+- 장소의 주소를 입력할 시 카카오맵으로 현재의 장소가 자동으로 임베드됩니다.
+<table align="center">
+<tbody>
+<tr>
+  <td align="center">
+    <strong>일정 작성</strong>
+  </td>
+  <td align="center">
+    <strong>일정 작성 후</strong>
+  </td>
+</tr>
+<tr>
+  <td>
+   <img src="https://github.com/user-attachments/assets/78e16862-ae99-4572-a60a-68d4a7de17db">
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/93cdcb31-949b-4edb-b420-1914f1eb7848">
+  </td>
+</tr>
+</tbody>
+</table>
