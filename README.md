@@ -115,3 +115,28 @@ TimeTidy는 사용자에게 쉬운 일정 관리와 직관적인 일정 공유�
 </tbody>
 </table>
 
+### 소셜
+- **소셜**: 일정을 공유할 수 있는 친구입니다.
+- 소셜 목록 페이지에서는 현재 소셜 목록에 있는 회원 목록이 나옵니다.
+- 소셜 추가 페이지에서는 현재 소셜 목록에 없는 가입한 회원 목록이 나옵니다.
+- 소셜 추가에서 추가와 대기중 상태로 현재 소셜 상태를 확인 가능합니다.
+<table align="center">
+<tbody>
+<tr>
+  <td align="center">
+    <strong>소셜 목록</strong>
+  </td>
+  <td align="center">
+    <strong>소셜 추가</strong>
+  </td>
+</tr>
+<tr>
+  <td>
+   <img src="https://github.com/user-attachments/assets/c5fd2ef2-7623-440c-97f1-41d68cea9750">
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/029320be-5554-467b-879d-3be0ecca6cb5">
+  </td>
+</tr>
+</tbody>
+</table>
