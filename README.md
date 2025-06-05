@@ -84,7 +84,7 @@ TimeTidy는 사용자에게 쉬운 일정 관리와 직관적인 일정 공유�
 </tr>
 <tr>
   <td>
-   <img src="https://github.com/user-attachments/assets/72f2b894-f2ec-4c8e-b0c5-193f52f4e4bc" width="600px">
+   <img width="1710" alt="Image" src="https://github.com/user-attachments/assets/70d0c0e3-f2c0-4413-8dcc-9340f216a46d" />
   </td>
 </tr>
 </tbody>
