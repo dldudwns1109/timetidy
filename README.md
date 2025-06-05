@@ -27,16 +27,17 @@ TimeTidy는 사용자에게 쉬운 일정 관리와 직관적인 일정 공유�
 </div>
 
 ## ⚙ 기능
-<table>
-  <tbody><tr>
-    <td align="center">
-      <strong>소셜 로그인</strong>
-    </td>    
-  </tr>
+### 메인 페이지
+- 로그인 페이지로 이동이 가능하고 TimeTidy의 기능들을 간략하게 볼 수 있습니다.
+<table align="center">
   <tr>
-    <td>
-    ![Image](https://github.com/user-attachments/assets/4d4bc6ba-03a0-44e4-aedb-303ee779927e)
+    <td align="center" style="padding: 10px;">
+      <strong>메인 페이지</strong><br/>
+      <img src="https://github.com/user-attachments/assets/4d4bc6ba-03a0-44e4-aedb-303ee779927e" width="300"/>
+    </td>
+    <td align="center" style="padding: 10px;">
+      <strong>메인 페이지</strong><br/>
+      <img src="https://github.com/user-attachments/assets/45504872-906e-4ea6-924c-df61149b11dd" width="300"/>
     </td>
   </tr>
-  </tbody>
 </table>
