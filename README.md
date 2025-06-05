@@ -192,3 +192,27 @@ TimeTidy는 사용자에게 쉬운 일정 관리와 직관적인 일정 공유�
 </tr>
 </tbody>
 </table>
+
+### 캘린더
+- **캘린더**: 작성한 일정과 공유받은 일정 모두 한번에 조회할 수 있습니다.
+- 캘린더에 일정을 클릭 시 모달로 상세 조회가 가능합니다.
+<table align="center">
+<tbody>
+<tr>
+  <td align="center">
+    <strong>캘린더</strong>
+  </td>
+  <td align="center">
+    <strong>일정 상세 조회</strong>
+  </td>
+</tr>
+<tr>
+  <td>
+   <img src="https://github.com/user-attachments/assets/05fc70fa-cb21-48fd-b48b-3a36d0a750c6">
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/50f941c6-7883-4508-875b-f46068865ebf">
+  </td>
+</tr>
+</tbody>
+</table>
