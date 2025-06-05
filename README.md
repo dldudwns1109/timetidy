@@ -27,5 +27,4 @@ TimeTidy는 사용자에게 쉬운 일정 관리와 직관적인 일정 공유�
 </div>
 
 ## ⚙ 기능
-추후 작성 예정
-<img src="C:\Users\dldudwns1109\Downloads\세미 프로젝트\1.png"  width="700" height="370">
+![Image](https://github.com/user-attachments/assets/4d4bc6ba-03a0-44e4-aedb-303ee779927e)
