@@ -30,14 +30,62 @@ TimeTidy는 사용자에게 쉬운 일정 관리와 직관적인 일정 공유�
 ### 메인 페이지
 - 로그인 페이지로 이동이 가능하고 TimeTidy의 기능들을 간략하게 볼 수 있습니다.
 <table align="center">
-  <tr>
-    <td align="center" style="padding: 10px;">
-      <strong>메인 페이지</strong><br/>
-      <img src="https://github.com/user-attachments/assets/4d4bc6ba-03a0-44e4-aedb-303ee779927e" width="300"/>
-    </td>
-    <td align="center" style="padding: 10px;">
-      <strong>메인 페이지</strong><br/>
-      <img src="https://github.com/user-attachments/assets/45504872-906e-4ea6-924c-df61149b11dd" width="300"/>
-    </td>
-  </tr>
+<tbody>
+<tr>
+  <td align="center">
+    <strong>메인 페이지</strong>
+  </td>
+  <td align="center">
+    <strong>기능 캐러셀</strong>
+  </td>  
+</tr>
+<tr>
+  <td>
+   <img src="https://github.com/user-attachments/assets/4d4bc6ba-03a0-44e4-aedb-303ee779927e">
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/45504872-906e-4ea6-924c-df61149b11dd">
+  </td>
+</tr>
+</tbody>
+</table>
+
+### 소셜 로그인
+- 구글 소셜 로그인을 지원합니다.
+<table align="center">
+<tbody>
+<tr>
+  <td align="center">
+    <strong>소셜 로그인</strong>
+  </td>
+  <td align="center">
+    <strong>구글 로그인</strong>
+  </td>  
+</tr>
+<tr>
+  <td>
+   <img src="https://github.com/user-attachments/assets/cb14f661-0d02-4ab8-917e-6dabb636e4b8">
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/655bb968-f88b-44a9-9e45-ae26a0cc7629">
+  </td>
+</tr>
+</tbody>
+</table>
+
+### 스케줄 관리 홈
+- 스케줄 관리 홈 화면입니다.
+<table align="center">
+<tbody>
+<tr>
+  <td align="center">
+    <strong>스케줄 관리 홈</strong>
+  </td>
+</tr>
+<tr>
+  <td>
+   <img src="https://github.com/user-attachments/assets/16009103-3f2f-40f2-80fb-c340ad8433d1">
+  </td>
+</tr>
+</tbody>
 </table>
